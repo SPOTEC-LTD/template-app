@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/module/home/views/cubit_demo_page.dart';
+import 'package:template/module/cubit_demo/views/cubit_demo_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
