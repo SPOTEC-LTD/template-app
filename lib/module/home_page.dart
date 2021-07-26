@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/module/cubit_demo/views/cubit_demo_page.dart';
+import 'package:template/widgets/base/base_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,8 +8,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
+      appBar: BaseAppBar(
+        titleText: 'Home',
       ),
       body: ListView(
         children: [

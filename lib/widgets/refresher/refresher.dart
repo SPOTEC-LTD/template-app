@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:template/widgets/placeholder/loading_placeholder.dart';
+import 'package:template/widgets/placeholder/no_data_placeholder.dart';
 
 import 'normal_refresh_footer.dart';
 import 'normal_refresh_header.dart';
+import 'refresh_status.dart';
 
 export 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class Refresher extends StatelessWidget {
   final Widget child;
   final EasyRefreshController controller;
+  final RefreshStatus status;
+  final bool isListEmpty;
   final ScrollController? scrollController;
   final bool firstRefresh;
   final Color? headerTextColor;
@@ -25,6 +30,8 @@ class Refresher extends StatelessWidget {
     Key? key,
     required this.child,
     required this.controller,
+    required this.status,
+    required this.isListEmpty,
     this.scrollController,
     this.firstRefresh = false,
     this.headerTextColor,
@@ -47,6 +54,21 @@ class Refresher extends StatelessWidget {
           enableInfiniteLoad: enableInfiniteLoad,
           padding: EdgeInsets.only(bottom: bottomPadding),
         );
+    var emptyWidget = this.emptyWidget ??
+        () {
+          switch (status) {
+            case RefreshStatus.initial:
+              return LoadingPlaceholder();
+            case RefreshStatus.failure:
+              controller.finishRefresh(success: false);
+              return NoDataPlaceholder();
+            case RefreshStatus.success:
+              controller.finishRefresh(success: !isListEmpty);
+              if (isListEmpty) {
+                return NoDataPlaceholder();
+              }
+          }
+        }();
 
     return EasyRefresh(
       firstRefresh: firstRefresh,

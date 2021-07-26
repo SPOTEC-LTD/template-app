@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template/module/cubit_demo/cubits/cubit_demo_cubit.dart';
 import 'package:template/module/cubit_demo/models/post_entity.dart';
+import 'package:template/widgets/base/base_app_bar.dart';
 import 'package:template/widgets/refresher/refresher.dart';
 
 class CubitDemoPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class CubitDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CubitDemoCubit(),
+      create: (context) => CubitDemoCubit()..refresh(),
       child: CubitDemoView(),
     );
   }
@@ -22,53 +23,20 @@ class CubitDemoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<CubitDemoCubit>();
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cubit'),
+      appBar: BaseAppBar(
+        titleText: 'Cubit Demo',
       ),
       body: BlocBuilder<CubitDemoCubit, CubitDemoState>(
           builder: (context, state) {
         return Refresher(
           controller: _refreshController,
+          child: _listView(state.posts),
+          status: state.status,
+          isListEmpty: state.posts.isEmpty,
           onRefresh: () async => cubit.refresh(),
-          child: () {
-            switch (state.status) {
-              case PostStatus.initial:
-                return _loadingView();
-              case PostStatus.failure:
-                _refreshController.finishRefresh(success: false);
-                return _failureView();
-              case PostStatus.success:
-                _refreshController.finishRefresh(
-                    success: state.posts.isNotEmpty);
-                if (state.posts.isEmpty) {
-                  return _emptyView();
-                } else {
-                  return _listView(state.posts);
-                }
-            }
-          }(),
         );
       }),
-    );
-  }
-
-  Widget _loadingView() {
-    return Center(
-      child: Text('loading...'),
-    );
-  }
-
-  Widget _failureView() {
-    return Center(
-      child: Text('request failure...'),
-    );
-  }
-
-  Widget _emptyView() {
-    return Center(
-      child: Text('no data'),
     );
   }
 
