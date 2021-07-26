@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/module/home/view/cubit_home_page.dart';
+import 'package:template/module/home/views/cubit_demo_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
   void _pushCubitPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) {
-        return CubitHomePage();
+        return CubitDemoPage();
       }),
     );
   }
