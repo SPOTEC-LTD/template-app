@@ -34,6 +34,10 @@ dependencies:
   json_annotation: ^4.0.1
   equatable: ^2.0.3
   loading_indicator: ^3.0.1
+  intl: ^0.17.0
+  shared_preferences: ^2.0.6
+  path_provider: ^2.0.2
+  flutter_easyloading: ^3.0.0
 
 dev_dependencies:
   flutter_test:
