@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:template/extensions/string_extension.dart';
 import 'package:template/module/cubit_demo/views/cubit_demo_page.dart';
+import 'package:template/routes/common/common_routes.dart';
+import 'package:template/routes/f_router.dart';
 import 'package:template/widgets/base/base_app_bar.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,8 +17,12 @@ class HomePage extends StatelessWidget {
       body: ListView(
         children: [
           _ListItem(
-            title: 'CubitDemo',
+            title: 'Cubit Demo',
             onTap: () => _pushCubitPage(context),
+          ),
+          _ListItem(
+            title: 'Common Web Page',
+            onTap: () => _pushWebPage(context),
           ),
         ],
       ),
@@ -28,6 +35,18 @@ class HomePage extends StatelessWidget {
         return CubitDemoPage();
       }),
     );
+  }
+
+  void _pushWebPage(BuildContext context) {
+    // FRouter.push(context, CommonRoutes.webViewPage,routeSettings: RouteSettings(
+    //     arguments: WebViewPageParam(
+    //       title: 'Common Web Page',
+    //       typeIndex: WebViewPageType.url.index,
+    //       url: aboutUrl,
+    //     ),
+    //   ),);
+    var page = FRouter().webViewPage(context);
+    FRouter().push2(page: page, context: context);
   }
 }
 

@@ -1,6 +1,6 @@
 import 'package:template/extensions/num_format_extension.dart';
 
-extension StringExtension on String? {
+extension StringFormateExtension on String? {
   String? formatFinancialString(
     int maxDigits, {
     int minDigits = 0,
