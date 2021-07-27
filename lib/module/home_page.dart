@@ -44,11 +44,16 @@ class _ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        child: Text(title),
-        color: Colors.cyan,
-        height: 60,
-        alignment: Alignment.centerLeft,
+      behavior: HitTestBehavior.opaque,
+      child: Column(
+        children: [
+          Container(
+            child: Text(title),
+            height: 60,
+            alignment: Alignment.centerLeft,
+          ),
+          Divider(),
+        ],
       ),
       onTap: onTap,
     );

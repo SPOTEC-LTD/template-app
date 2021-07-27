@@ -31,16 +31,18 @@ class CubitDemoView extends StatelessWidget {
           builder: (context, state) {
         return Refresher(
           controller: _refreshController,
-          child: _listView(state.posts),
-          status: state.status,
+          child: _buildListView(state.posts),
+          status: state.refreshStatus,
           isListEmpty: state.posts.isEmpty,
+          noMore: state.noMore,
           onRefresh: () async => cubit.refresh(),
+          onLoad: () async => cubit.loadMore(),
         );
       }),
     );
   }
 
-  Widget _listView(List<PostEntity> posts) {
+  Widget _buildListView(List<PostEntity> posts) {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {
@@ -60,11 +62,15 @@ class _CubitListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(title),
-      color: Colors.cyan,
-      height: 60,
-      alignment: Alignment.centerLeft,
+    return Column(
+      children: [
+        Container(
+          child: Text(title),
+          height: 60,
+          alignment: Alignment.centerLeft,
+        ),
+        Divider(),
+      ],
     );
   }
 }

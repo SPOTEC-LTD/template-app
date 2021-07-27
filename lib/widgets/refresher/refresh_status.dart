@@ -1,5 +1,7 @@
 enum RefreshStatus {
   initial,
-  success,
-  failure,
+  refreshSuccess,
+  refreshFailure,
+  loadMoreSuccess,
+  loadMoreFailure,
 }

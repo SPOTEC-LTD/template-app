@@ -29,7 +29,8 @@ class HttpService {
     dio.options.connectTimeout = 30000;
     dio.options.sendTimeout = 30000;
     dio.options.receiveTimeout = 30000;
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors
+        .add(LogInterceptor(requestBody: true, responseBody: false));
     return dio;
   }();
 

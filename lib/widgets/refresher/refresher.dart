@@ -14,6 +14,7 @@ class Refresher extends StatelessWidget {
   final EasyRefreshController controller;
   final RefreshStatus status;
   final bool isListEmpty;
+  final bool noMore;
   final ScrollController? scrollController;
   final bool firstRefresh;
   final Color? headerTextColor;
@@ -32,6 +33,7 @@ class Refresher extends StatelessWidget {
     required this.controller,
     required this.status,
     required this.isListEmpty,
+    this.noMore = false,
     this.scrollController,
     this.firstRefresh = false,
     this.headerTextColor,
@@ -47,6 +49,8 @@ class Refresher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _finishAnimate();
+
     var header = this.header ?? NormalRefreshHedaer(textColor: headerTextColor);
     var footer = this.footer ??
         NormalRefreshFooter(
@@ -54,21 +58,7 @@ class Refresher extends StatelessWidget {
           enableInfiniteLoad: enableInfiniteLoad,
           padding: EdgeInsets.only(bottom: bottomPadding),
         );
-    var emptyWidget = this.emptyWidget ??
-        () {
-          switch (status) {
-            case RefreshStatus.initial:
-              return LoadingPlaceholder();
-            case RefreshStatus.failure:
-              controller.finishRefresh(success: false);
-              return NoDataPlaceholder();
-            case RefreshStatus.success:
-              controller.finishRefresh(success: !isListEmpty);
-              if (isListEmpty) {
-                return NoDataPlaceholder();
-              }
-          }
-        }();
+    var emptyWidget = this.emptyWidget ?? _buildEmptyWidget();
 
     return EasyRefresh(
       firstRefresh: firstRefresh,
@@ -83,5 +73,50 @@ class Refresher extends StatelessWidget {
       onLoad: onLoad,
       child: child,
     );
+  }
+
+  void _finishAnimate() {
+    switch (status) {
+      case RefreshStatus.refreshSuccess:
+        controller.finishRefresh();
+        if (onLoad != null) {
+          controller.resetLoadState();
+          controller.finishLoad(noMore: noMore);
+        }
+        break;
+      case RefreshStatus.refreshFailure:
+        controller.finishRefresh(success: false);
+        if (onLoad != null) {
+          controller.resetLoadState();
+          controller.finishLoad(noMore: noMore);
+        }
+        break;
+      case RefreshStatus.loadMoreSuccess:
+        controller.finishLoad(noMore: noMore);
+        break;
+      case RefreshStatus.loadMoreFailure:
+        controller.finishRefresh(success: false);
+        break;
+      default:
+        break;
+    }
+  }
+
+  Widget? _buildEmptyWidget() {
+    switch (status) {
+      case RefreshStatus.initial:
+        return LoadingPlaceholder();
+      case RefreshStatus.refreshSuccess:
+        controller.finishRefresh();
+        if (isListEmpty) {
+          return NoDataPlaceholder();
+        }
+        return null;
+      case RefreshStatus.refreshFailure:
+        controller.finishRefresh(success: false);
+        return NoDataPlaceholder();
+      default:
+        return null;
+    }
   }
 }

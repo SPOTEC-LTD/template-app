@@ -1,29 +1,36 @@
 part of 'cubit_demo_cubit.dart';
 
-class CubitDemoState {
-  final int requestCount;
+class CubitDemoState implements Refreshable {
   final int index;
-  final RefreshStatus status;
   final List<PostEntity> posts;
 
+  @override
+  bool get isListEmpty => posts.isEmpty;
+
+  @override
+  bool noMore;
+
+  @override
+  RefreshStatus refreshStatus;
+
   CubitDemoState({
-    this.requestCount = 0,
     this.index = 0,
-    this.status = RefreshStatus.initial,
     this.posts = const [],
+    this.refreshStatus = RefreshStatus.initial,
+    this.noMore = false,
   });
 
-  CubitDemoState copyWith(
-    int index,
-    int requestCount,
-    RefreshStatus status,
-    List<PostEntity> posts,
-  ) {
+  CubitDemoState copyWith({
+    int? index,
+    RefreshStatus? refreshStatus,
+    List<PostEntity>? posts,
+    bool? noMore,
+  }) {
     return CubitDemoState(
-      requestCount: requestCount,
-      index: index,
-      status: status,
-      posts: posts,
+      index: index ?? this.index,
+      refreshStatus: refreshStatus ?? this.refreshStatus,
+      posts: posts ?? this.posts,
+      noMore: noMore ?? this.noMore,
     );
   }
 }
