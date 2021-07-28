@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:template/module/cubit_demo/apis/cubit_apis.dart';
 import 'package:template/module/cubit_demo/models/post_entity.dart';
-import 'package:template/widgets/refresher/refresh_mixin.dart';
-import 'package:template/widgets/refresher/refresh_status.dart';
+import 'package:template/basic_views/refresher/refresh_mixin.dart';
+import 'package:template/basic_views/refresher/refresh_status.dart';
 
 part 'cubit_demo_state.dart';
 

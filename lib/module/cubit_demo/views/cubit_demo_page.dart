@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template/module/cubit_demo/cubits/cubit_demo_cubit.dart';
 import 'package:template/module/cubit_demo/models/post_entity.dart';
-import 'package:template/widgets/base/base_app_bar.dart';
-import 'package:template/widgets/refresher/refresher.dart';
+import 'package:template/basic_views/base/base_app_bar.dart';
+import 'package:template/basic_views/refresher/refresher.dart';
 
 class CubitDemoPage extends StatelessWidget {
   const CubitDemoPage({Key? key}) : super(key: key);

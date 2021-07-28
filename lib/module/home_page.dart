@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:template/module/cubit_demo/views/cubit_demo_page.dart';
 import 'package:template/routes/common/f_router_common.dart.dart';
 import 'package:template/routes/f_router.dart';
-import 'package:template/widgets/base/base_app_bar.dart';
+import 'package:template/basic_views/base/base_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

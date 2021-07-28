@@ -5,8 +5,8 @@ import 'package:template/extensions/string_extension.dart';
 import 'package:template/managers/color_manager.dart';
 import 'package:template/managers/icon_manager.dart';
 import 'package:template/module/common/views/easy_web_view.dart';
-import 'package:template/utils/screen_util.dart';
-import 'package:template/widgets/base/base_app_bar.dart';
+import 'package:template/basic_utils/screen_util.dart';
+import 'package:template/basic_views/base/base_app_bar.dart';
 
 export 'package:template/module/common/views/easy_web_view.dart';
 
