@@ -2,8 +2,8 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:template/basic/utils/intl_util.dart';
 import 'package:template/basic/utils/sp_util.dart';
-import 'package:template/business/tools/intl_tool.dart';
 import 'package:template/routes/f_router.dart';
 import 'package:template/routes/f_router_setup.dart';
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp(
           key: state.key,
-          locale: IntlTools.getLocale(),
+          locale: IntlUtil.getLocale(),
           localizationsDelegates: [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
