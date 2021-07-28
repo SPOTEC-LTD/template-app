@@ -105,16 +105,16 @@ class Refresher extends StatelessWidget {
   Widget? _buildEmptyWidget() {
     switch (status) {
       case RefreshStatus.initial:
-        return LoadingPlaceholder();
+        return const LoadingPlaceholder();
       case RefreshStatus.refreshSuccess:
         controller.finishRefresh();
         if (isListEmpty) {
-          return NoDataPlaceholder();
+          return const NoDataPlaceholder();
         }
         return null;
       case RefreshStatus.refreshFailure:
         controller.finishRefresh(success: false);
-        return NoDataPlaceholder();
+        return const NoDataPlaceholder();
       default:
         return null;
     }

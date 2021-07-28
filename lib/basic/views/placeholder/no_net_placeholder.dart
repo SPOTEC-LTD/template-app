@@ -26,21 +26,21 @@ class NoNetPlaceholder extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(flex: 1),
+          const Spacer(flex: 1),
           Image.asset(
             ImageNames.common_img_no_net,
             width: 178,
             height: 151,
           ),
-          SizedBox(height: 21),
-          Text(
+          const SizedBox(height: 21),
+          const Text(
             'S.of(context).noNet',
             style: TextStyle(
               color: Colors.black,
               fontSize: 18,
             ),
           ),
-          SizedBox(height: 17),
+          const SizedBox(height: 17),
           // InkGradientButton(
           //   width: 143,
           //   height: 37,

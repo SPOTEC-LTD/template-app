@@ -13,6 +13,6 @@ class NormalRefreshHedaer extends ClassicalHeader {
           refreshFailedText: '刷新失败',
           noMoreText: '',
           textColor: textColor ?? Colors.black,
-          completeDuration: Duration(milliseconds: 250),
+          completeDuration: const Duration(milliseconds: 250),
         );
 }

@@ -2,13 +2,13 @@
 enum DateFormat {
   def, // yyyy-MM-dd HH:mm:ss.SSS
   normal, // yyyy-MM-dd HH:mm:ss
-  year_month_day_hour_minute, // yyyy-MM-dd HH:mm
-  year_month_day, // yyyy-MM-dd
-  year_month, // yyyy-MM
-  month_day, // MM-dd
-  month_day_hour_minute, // MM-dd HH:mm
-  hour_minute_second, // HH:mm:ss
-  hour_minute, // HH:mm
+  yearMonthDayHourMinute, // yyyy-MM-dd HH:mm
+  yearMonthDay, // yyyy-MM-dd
+  yearMonth, // yyyy-MM
+  monthDay, // MM-dd
+  monthDayHourMinute, // MM-dd HH:mm
+  hourMinuteSecond, // HH:mm:ss
+  hourMinute, // HH:mm
 }
 
 /// 对1970-01-01T00:00:00Z 类似格式进行扩展
@@ -28,25 +28,25 @@ extension DateExtension on String {
       case DateFormat.normal: // yyyy-MM-dd HH:mm:ss
         time = substring(0, 'yyyy-MM-dd HH:mm:ss'.length);
         break;
-      case DateFormat.year_month_day_hour_minute: // yyyy-MM-dd HH:mm
+      case DateFormat.yearMonthDayHourMinute: // yyyy-MM-dd HH:mm
         time = substring(0, 'yyyy-MM-dd HH:mm'.length);
         break;
-      case DateFormat.year_month_day: // yyyy-MM-dd
+      case DateFormat.yearMonthDay: // yyyy-MM-dd
         time = substring(0, 'yyyy-MM-dd'.length);
         break;
-      case DateFormat.year_month: // yyyy-MM
+      case DateFormat.yearMonth: // yyyy-MM
         time = substring(0, 'yyyy-MM'.length);
         break;
-      case DateFormat.month_day: // MM-dd
+      case DateFormat.monthDay: // MM-dd
         time = substring('yyyy-'.length, 'yyyy-MM-dd'.length);
         break;
-      case DateFormat.month_day_hour_minute: // MM-dd HH:mm
+      case DateFormat.monthDayHourMinute: // MM-dd HH:mm
         time = substring('yyyy-'.length, 'yyyy-MM-dd HH:mm'.length);
         break;
-      case DateFormat.hour_minute_second: // HH:mm:ss
+      case DateFormat.hourMinuteSecond: // HH:mm:ss
         time = substring('yyyy-MM-dd '.length, 'yyyy-MM-dd HH:mm:ss'.length);
         break;
-      case DateFormat.hour_minute: // HH:mm
+      case DateFormat.hourMinute: // HH:mm
         time = substring('yyyy-MM-dd '.length, 'yyyy-MM-dd HH:mm'.length);
         break;
       default:
