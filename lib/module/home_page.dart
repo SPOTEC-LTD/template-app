@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/extensions/string_extension.dart';
 import 'package:template/module/cubit_demo/views/cubit_demo_page.dart';
-import 'package:template/routes/common/common_routes.dart';
+import 'package:template/routes/common/f_router_common.dart.dart';
 import 'package:template/routes/f_router.dart';
 import 'package:template/widgets/base/base_app_bar.dart';
 
@@ -13,6 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: BaseAppBar(
         titleText: 'Home',
+        leading: Container(),
       ),
       body: ListView(
         children: [
@@ -21,8 +21,16 @@ class HomePage extends StatelessWidget {
             onTap: () => _pushCubitPage(context),
           ),
           _ListItem(
-            title: 'Common Web Page',
+            title: 'Push Web Page',
             onTap: () => _pushWebPage(context),
+          ),
+          _ListItem(
+            title: 'Present Web Page',
+            onTap: () => _presentWebPage(context),
+          ),
+          _ListItem(
+            title: 'Page Sheet Web Page',
+            onTap: () => _pageSheetWebPage(context),
           ),
         ],
       ),
@@ -38,15 +46,34 @@ class HomePage extends StatelessWidget {
   }
 
   void _pushWebPage(BuildContext context) {
-    // FRouter.push(context, CommonRoutes.webViewPage,routeSettings: RouteSettings(
-    //     arguments: WebViewPageParam(
-    //       title: 'Common Web Page',
-    //       typeIndex: WebViewPageType.url.index,
-    //       url: aboutUrl,
-    //     ),
-    //   ),);
-    var page = FRouter().webViewPage(context);
-    FRouter().push2(page: page, context: context);
+    var params = FRouter()
+        .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
+    FRouter().push(
+      context,
+      FRouter().webViewPage,
+      routeSettings: RouteSettings(arguments: params),
+    );
+  }
+
+  void _presentWebPage(BuildContext context) {
+    var params = FRouter()
+        .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
+    FRouter().present(
+      context,
+      FRouter().webViewPage,
+      routeSettings: RouteSettings(arguments: params),
+    );
+  }
+
+  void _pageSheetWebPage(BuildContext context) {
+    var params = FRouter()
+        .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
+    FRouter().present(
+      context,
+      'FRouter().webViewPage',
+      isFullScreen: false,
+      routeSettings: RouteSettings(arguments: params),
+    );
   }
 }
 

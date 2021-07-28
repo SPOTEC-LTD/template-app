@@ -101,7 +101,7 @@ class WebViewPageState extends State<WebViewPage> {
 
   PreferredSizeWidget _buildAppBar() {
     var appBar = BaseAppBar(
-      backgroundColor: ColorManager.background0E1D34,
+      backgroundColor: ColorManager.lineD8D8D8,
       brightness: Brightness.dark,
       titleText: _title,
       isCenter: true,

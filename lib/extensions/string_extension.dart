@@ -11,6 +11,9 @@ extension StringExtension on String {
 
   /// 获取国际化的url地址
   String get intlUrlString {
+    if (isEmpty) {
+      return this;
+    }
     var queryParameters = Uri.parse(this).queryParameters;
     var linkSymbol = '&';
     if (queryParameters.isEmpty) {

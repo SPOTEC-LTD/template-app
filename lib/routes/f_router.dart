@@ -14,43 +14,6 @@ class FRouter {
   factory FRouter() => _getInstance();
   FRouter._();
 
-  Future<T?> push2<T>({
-    required Widget page,
-    required BuildContext context,
-    bool animated = true,
-    bool replace = false,
-    bool clearStack = false,
-  }) {
-    var route = CupertinoPageRoute<T>(
-      builder: (BuildContext context) {
-        return page;
-      },
-    );
-    final navigator = Navigator.of(context);
-    if (clearStack) {
-      return navigator.pushAndRemoveUntil<T>(route, (check) => false);
-    } else {
-      return replace ? navigator.pushReplacement(route) : navigator.push(route);
-    }
-  }
-
-  Widget matchPage(
-    BuildContext? context,
-    String? path, {
-    RouteSettings? routeSettings,
-    RouteTransitionsBuilder? transitionsBuilder,
-    bool maintainState = true,
-  }) {
-    var appRouter = FluroRouter.appRouter;
-    AppRouteMatch? match = appRouter.match(path!);
-    AppRoute? route = match?.route;
-    Handler handler =
-        (route != null ? route.handler : appRouter.notFoundHandler);
-    Map<String, List<String>> parameters =
-        match?.parameters ?? <String, List<String>>{};
-    return handler.handlerFunc(context, parameters) ?? SizedBox.shrink();
-  }
-
   /// 从右往左推出
   Future<T?> push<T>(
     BuildContext context,
@@ -129,9 +92,7 @@ class FRouter {
 
     FocusManager.instance.primaryFocus?.unfocus();
     return showCupertinoModalBottomSheet<T>(
-      expand: true,
       context: context,
-      useRootNavigator: true,
       settings: routeSettings,
       duration: animated ? Duration(milliseconds: 250) : Duration.zero,
       builder: (realContext) {
