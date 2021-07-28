@@ -1,4 +1,4 @@
-import 'package:template/module/cubit_demo/models/post_entity.dart';
+import 'package:template/modules/cubit_demo/models/post_entity.dart';
 import 'package:template/services/http/http_service.dart';
 
 class CubitApis {

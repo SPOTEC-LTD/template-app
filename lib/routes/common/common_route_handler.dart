@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:template/module/common/views/web_view_page.dart';
-import 'package:template/basic_views/base/base_app_bar.dart';
+import 'package:template/modules/common/views/web_view_page.dart';
+import 'package:template/basic/views/base/base_app_bar.dart';
 
 class CommonRoutesHandler {
   static void configureRouter() {
