@@ -2,14 +2,19 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:template/business/extension/string_business.dart';
 
 class FRouter {
+  static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static FRouter? _instance;
 
   static FRouter _getInstance() {
     _instance ??= FRouter._();
     return _instance!;
   }
+
+  static BuildContext get rootContext =>
+      rootNavigatorKey.currentState!.overlay!.context;
 
   factory FRouter() => _getInstance();
   FRouter._();
@@ -119,8 +124,10 @@ class FRouter {
     Navigator.of(context, rootNavigator: rootNavigator).pop(result);
   }
 
-  void navigateRemote(BuildContext context, String url) {
-    if (url.startsWith('http') || url.startsWith('https')) {
+  void navigateRemote(String url) {
+    if (url.isInnerUrl) {
+      // todo
+    } else if (url.startsWith('http') || url.startsWith('https')) {
       // todo
     } else if (url.startsWith('flutter')) {
       // todo
