@@ -1,6 +1,5 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:template/managers/color_manager.dart';
-import 'package:template/services/http/http_service.dart';
+import 'package:template/business/consts/color_names.dart';
 
 class HudUtil {
   static void setup() {
@@ -10,8 +9,8 @@ class HudUtil {
       ..indicatorSize = 60
       ..radius = 8
       // ..backgroundColor = ColorManager.toastBackgroundColor
-      ..indicatorColor = ColorManager.backgroundWhite
-      ..textColor = ColorManager.textWhite
+      ..indicatorColor = ColorNames.backgroundWhite
+      ..textColor = ColorNames.textWhite
       ..userInteractions = false;
     // ..successWidget = Image.asset(ImageManager.common_icon_toast_info)
     // ..infoWidget = Image.asset(ImageManager.common_icon_toast_info)
@@ -36,11 +35,5 @@ class HudUtil {
 
   static void showError(String status, {Duration? duration}) {
     EasyLoading.showError(status, duration: duration);
-  }
-
-  static void showHttpError(dynamic error, {Duration? duration}) {
-    if (error is HttpError) {
-      EasyLoading.showError(error.message, duration: duration);
-    }
   }
 }

@@ -9,7 +9,7 @@ import 'package:template/generated/l10n.dart';
 class LocaleCubit extends Cubit<LocaleState> {
   LocaleCubit()
       : super(LocaleState(
-          locale: IntlTools.getLocale(),
+          locale: IntlUtil.getLocale(),
           key: UniqueKey(),
         ));
 
@@ -38,7 +38,7 @@ class LocaleState {
   }
 }
 
-class IntlTools {
+class IntlUtil {
   static final _languageCodeKey = 'languageCodeKey';
 
   static Locale getLocale() {

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:template/basic/utils/hud_util.dart';
 
 import 'http_error_handler.dart';
 import 'http_wrap_entity.dart';
@@ -22,7 +23,7 @@ class HttpError {
 }
 
 class HttpService {
-  static final baseAPIURL = '';
+  static final baseAPIURL = 'xxx';
   static final Dio _dio = () {
     var dio = Dio();
     dio.options.baseUrl = baseAPIURL;
@@ -148,6 +149,13 @@ class HttpService {
       var isCancel = e.type == DioErrorType.cancel;
       return Future.error(HttpError(
           e.response?.statusCode?.toString() ?? '', e.message, isCancel));
+    }
+  }
+
+  /// 显示HttpError
+  void showHttpError(dynamic error, {Duration? duration}) {
+    if (error is HttpError) {
+      HudUtil.showError(error.message, duration: duration);
     }
   }
 }
