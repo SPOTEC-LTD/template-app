@@ -72,7 +72,7 @@ class _EasyWebViewState extends State<EasyWebView> {
     _webViewController?.addJavaScriptHandler(
       handlerName: 'navigate',
       callback: (args) {
-        FRouter().navigateRemote(context, args.first);
+        FRouter().navigateRemote(args.first);
       },
     );
   }

@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp(
           key: state.key,
+          navigatorKey: FRouter.rootNavigatorKey,
           locale: IntlUtil.getLocale(),
           localizationsDelegates: const [
             S.delegate,
