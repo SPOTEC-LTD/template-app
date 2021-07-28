@@ -1,17 +1,31 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:template/module/cubit_demo/views/cubit_demo_page.dart';
+import 'package:template/generated/l10n.dart';
+import 'package:template/modules/cubit_demo/views/cubit_demo_page.dart';
+import 'package:template/modules/language_setting/views/language_setting_page.dart';
 import 'package:template/routes/common/f_router_common.dart.dart';
 import 'package:template/routes/f_router.dart';
-import 'package:template/basic_views/base/base_app_bar.dart';
+import 'package:template/basic/views/base/base_app_bar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    print('Home Pahe Init');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        titleText: 'Home',
+        titleText: S.of(context).homeTitle,
         leading: Container(),
       ),
       body: ListView(
@@ -31,6 +45,10 @@ class HomePage extends StatelessWidget {
           _ListItem(
             title: 'Page Sheet Web Page',
             onTap: () => _pageSheetWebPage(context),
+          ),
+          _ListItem(
+            title: 'Language Setting',
+            onTap: () => _pushLanguageSettingPage(context),
           ),
         ],
       ),
@@ -74,6 +92,12 @@ class HomePage extends StatelessWidget {
       isFullScreen: false,
       routeSettings: RouteSettings(arguments: params),
     );
+  }
+
+  void _pushLanguageSettingPage(BuildContext context) {
+    Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
+      return LanguageSettingPage();
+    }));
   }
 }
 

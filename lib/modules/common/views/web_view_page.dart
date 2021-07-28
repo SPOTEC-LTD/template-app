@@ -4,11 +4,11 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:template/extensions/string_extension.dart';
 import 'package:template/managers/color_manager.dart';
 import 'package:template/managers/icon_manager.dart';
-import 'package:template/module/common/views/easy_web_view.dart';
-import 'package:template/basic_utils/screen_util.dart';
-import 'package:template/basic_views/base/base_app_bar.dart';
+import 'package:template/modules/common/views/easy_web_view.dart';
+import 'package:template/basic/utils/screen_util.dart';
+import 'package:template/basic/views/base/base_app_bar.dart';
 
-export 'package:template/module/common/views/easy_web_view.dart';
+export 'package:template/modules/common/views/easy_web_view.dart';
 
 class WebViewPage extends StatefulWidget {
   final WebViewPageType type;

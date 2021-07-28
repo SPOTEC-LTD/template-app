@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:template/basic_views/placeholder/loading_placeholder.dart';
-import 'package:template/basic_views/placeholder/no_data_placeholder.dart';
+import 'package:template/basic/views/placeholder/loading_placeholder.dart';
+import 'package:template/basic/views/placeholder/no_data_placeholder.dart';
 
 import 'normal_refresh_footer.dart';
 import 'normal_refresh_header.dart';
