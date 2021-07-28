@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/extensions/string_extension.dart';
+import 'package:template/basic/extensions/string_extension.dart';
 import 'package:template/routes/f_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 

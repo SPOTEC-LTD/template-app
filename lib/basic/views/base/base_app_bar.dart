@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/managers/color_manager.dart';
-import 'package:template/managers/icon_manager.dart';
+import 'package:template/business/consts/color_names.dart';
+import 'package:template/business/consts/icon_names.dart';
 import 'package:template/basic/utils/screen_util.dart';
 
 // 后续可能添加webView导航
@@ -49,13 +49,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       switch (leadingType) {
         case AppBarLeadingType.back:
           leadingImage = brightness == Brightness.dark
-              ? IconManager.nav_icon_back_white
-              : IconManager.nav_icon_back_gray;
+              ? IconNames.nav_icon_back_white
+              : IconNames.nav_icon_back_gray;
           break;
         case AppBarLeadingType.close:
           leadingImage = brightness == Brightness.dark
-              ? IconManager.nav_icon_close_white
-              : IconManager.nav_icon_close_gray;
+              ? IconNames.nav_icon_close_white
+              : IconNames.nav_icon_close_gray;
           break;
       }
       leading = IconButton(
@@ -71,13 +71,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     var backColorFormBrightness = brightness == Brightness.dark
-        ? ColorManager.background0E1D34
-        : ColorManager.backgroundWhite;
+        ? ColorNames.background0E1D34
+        : ColorNames.backgroundWhite;
     var realBackgroundColor = backgroundColor ?? backColorFormBrightness;
 
     var textColor = brightness == Brightness.dark
-        ? ColorManager.textWhite
-        : ColorManager.text242424;
+        ? ColorNames.textWhite
+        : ColorNames.text242424;
 
     var title = titleText != null
         ? Text(
@@ -101,7 +101,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       bottom: showLine == true
           ? PreferredSize(
               child: Container(
-                color: ColorManager.lineD8D8D8,
+                color: ColorNames.lineD8D8D8,
                 height: 1,
               ),
               preferredSize: Size.fromHeight(1),

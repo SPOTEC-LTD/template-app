@@ -1,4 +1,4 @@
-import 'package:template/extensions/num_format_extension.dart';
+import 'package:template/basic/extensions/num_format_extension.dart';
 
 extension StringFormateExtension on String? {
   String? formatFinancialString(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/managers/image_manager.dart';
+import 'package:template/business/consts/image_names.dart';
 
 class NoDataSmallPlaceholder extends StatelessWidget {
   final Color? color;
@@ -21,7 +21,7 @@ class NoDataSmallPlaceholder extends StatelessWidget {
       height: height,
       alignment: Alignment.center,
       child: Image.asset(
-        ImageManager.common_img_no_data_small,
+        ImageNames.common_img_no_data_small,
         width: 63,
         height: 64,
       ),

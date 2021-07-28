@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/managers/image_manager.dart';
+import 'package:template/business/consts/image_names.dart';
 
 class NoNetPlaceholder extends StatelessWidget {
   final Color? color;
@@ -28,7 +28,7 @@ class NoNetPlaceholder extends StatelessWidget {
         children: [
           Spacer(flex: 1),
           Image.asset(
-            ImageManager.common_img_no_net,
+            ImageNames.common_img_no_net,
             width: 178,
             height: 151,
           ),

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/extensions/string_extension.dart';
-import 'package:template/managers/color_manager.dart';
-import 'package:template/managers/icon_manager.dart';
+import 'package:template/basic/extensions/string_extension.dart';
+import 'package:template/business/consts/color_names.dart';
+import 'package:template/business/consts/icon_names.dart';
 import 'package:template/modules/common/views/easy_web_view.dart';
 import 'package:template/basic/utils/screen_util.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
@@ -47,7 +47,7 @@ class WebViewPageState extends State<WebViewPage> {
   @override
   void initState() {
     super.initState();
-    _title = widget.title ?? 'S.of(Global.context).webDefaultTitle';
+    _title = widget.title ?? 'WebView';
   }
 
   void _share(String url) {
@@ -101,12 +101,12 @@ class WebViewPageState extends State<WebViewPage> {
 
   PreferredSizeWidget _buildAppBar() {
     var appBar = BaseAppBar(
-      backgroundColor: ColorManager.lineD8D8D8,
+      backgroundColor: ColorNames.lineD8D8D8,
       brightness: Brightness.dark,
       titleText: _title,
       isCenter: true,
       leading: GestureDetector(
-        child: Image.asset(IconManager.nav_icon_back_white),
+        child: Image.asset(IconNames.nav_icon_back_white),
         onTap: _popIfNeeded,
       ),
       actions: [
@@ -128,8 +128,8 @@ class WebViewPageState extends State<WebViewPage> {
               child: LinearProgressIndicator(
                 value: _progress,
                 minHeight: 2,
-                valueColor: AlwaysStoppedAnimation(ColorManager.lineD8D8D8),
-                backgroundColor: ColorManager.backgroundWhite,
+                valueColor: AlwaysStoppedAnimation(ColorNames.lineD8D8D8),
+                backgroundColor: ColorNames.backgroundWhite,
               ),
             ),
           )

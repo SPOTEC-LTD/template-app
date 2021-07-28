@@ -1,33 +1,18 @@
 import 'package:flutter/material.dart';
 
-class sssss extends StatefulWidget {
-  sssss({Key? key}) : super(key: key);
-
-  @override
-  _sssssState createState() => _sssssState();
-}
-
-class _sssssState extends State<sssss> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: null,
-    );
-  }
-}
-
 /// 弹窗的动画view
 // ignore: must_be_immutable
 class DialogAnimationView extends StatefulWidget {
   final Widget child;
   // 弹窗消失回调
-  late VoidCallback easeOutCompletion;
+  VoidCallback? easeOutCompletion;
 
   late _DialogAnimationViewState _state;
 
   DialogAnimationView({
     Key? key,
     required this.child,
+    this.easeOutCompletion,
   }) : super(key: key);
 
   @override
@@ -90,9 +75,8 @@ class _DialogAnimationViewState extends State<DialogAnimationView>
         print(status);
         if (status == AnimationStatus.completed) {
           print('结束了');
-          if (widget.easeOutCompletion != null) {
-            widget.easeOutCompletion();
-          }
+
+          widget.easeOutCompletion?.call();
         }
       });
   }
