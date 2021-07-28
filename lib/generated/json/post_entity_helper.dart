@@ -20,7 +20,7 @@ postEntityFromJson(PostEntity data, Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> postEntityToJson(PostEntity entity) {
-  final Map<String, dynamic> data = new Map<String, dynamic>();
+  final Map<String, dynamic> data = <String, dynamic>{};
   data['userId'] = entity.userId;
   data['id'] = entity.id;
   data['title'] = entity.title;

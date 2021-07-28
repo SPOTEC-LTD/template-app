@@ -20,6 +20,8 @@ class CubitDemoPage extends StatelessWidget {
 class CubitDemoView extends StatelessWidget {
   final _refreshController = EasyRefreshController();
 
+  CubitDemoView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<CubitDemoCubit>();
@@ -46,7 +48,7 @@ class CubitDemoView extends StatelessWidget {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {
-        return _CubitListItem(title: '${posts[index].title}');
+        return _CubitListItem(title: posts[index].title);
       },
     );
   }
@@ -69,7 +71,7 @@ class _CubitListItem extends StatelessWidget {
           height: 60,
           alignment: Alignment.centerLeft,
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }

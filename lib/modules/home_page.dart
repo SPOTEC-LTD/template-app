@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   void _pushCubitPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) {
-        return CubitDemoPage();
+        return const CubitDemoPage();
       }),
     );
   }
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
 
   void _pushLanguageSettingPage(BuildContext context) {
     Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
-      return LanguageSettingPage();
+      return const LanguageSettingPage();
     }));
   }
 }
@@ -122,7 +122,7 @@ class _ListItem extends StatelessWidget {
             height: 60,
             alignment: Alignment.centerLeft,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
       onTap: onTap,

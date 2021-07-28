@@ -18,6 +18,6 @@ class NormalRefreshFooter extends ClassicalFooter {
           textColor: textColor ?? Colors.black,
           showInfo: false,
           padding: padding,
-          completeDuration: Duration(milliseconds: 250),
+          completeDuration: const Duration(milliseconds: 250),
         );
 }

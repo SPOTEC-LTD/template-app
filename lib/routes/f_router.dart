@@ -70,7 +70,7 @@ class FRouter {
           transition: animated
               ? TransitionType.cupertinoFullScreenDialog
               : TransitionType.none,
-          transitionDuration: Duration(milliseconds: 250),
+          transitionDuration: const Duration(milliseconds: 250),
           routeSettings: routeSettings,
         )
         .then((value) => value as T?);
@@ -94,7 +94,7 @@ class FRouter {
     return showCupertinoModalBottomSheet<T>(
       context: context,
       settings: routeSettings,
-      duration: animated ? Duration(milliseconds: 250) : Duration.zero,
+      duration: animated ? const Duration(milliseconds: 250) : Duration.zero,
       builder: (realContext) {
         return handler.handlerFunc(realContext, parameters) ?? Container();
       },

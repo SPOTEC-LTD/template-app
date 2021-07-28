@@ -5,6 +5,8 @@ import 'package:template/basic/views/base/base_app_bar.dart';
 import 'package:template/generated/l10n.dart';
 
 class LanguageSettingPage extends StatelessWidget {
+  const LanguageSettingPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var locales = S.delegate.supportedLocales.toList();
@@ -53,7 +55,7 @@ class _ListItem extends StatelessWidget {
             height: 60,
             alignment: Alignment.centerLeft,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
       onTap: onTap,

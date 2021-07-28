@@ -17,12 +17,14 @@ void main() {
   SpUtil().setup().then((value) {
     runApp(BlocProvider(
       create: (context) => LocaleCubit(),
-      child: MyApp(),
+      child: const MyApp(),
     ));
   });
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LocaleCubit, LocaleState>(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           key: state.key,
           locale: IntlUtil.getLocale(),
-          localizationsDelegates: [
+          localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
           onGenerateRoute: FluroRouter.appRouter.generator,
-          home: HomePage(),
+          home: const HomePage(),
         );
       },
     );

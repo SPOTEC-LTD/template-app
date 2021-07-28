@@ -39,7 +39,7 @@ class LocaleState {
 }
 
 class IntlUtil {
-  static final _languageCodeKey = 'languageCodeKey';
+  static const _languageCodeKey = 'languageCodeKey';
 
   static Locale getLocale() {
     var preferLanguageCode = SpUtil().getString(_languageCodeKey);

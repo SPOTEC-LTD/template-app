@@ -14,13 +14,13 @@ class LoadingPlaceholder extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Spacer(flex: 1),
-        Container(
+        const Spacer(flex: 1),
+        SizedBox(
           width: 28,
           height: 28,
           child: LoadingIndicator(
             indicatorType: Indicator.circleStrokeSpin,
-            colors: [Colors.cyan],
+            colors: const [Colors.cyan],
           ),
         ),
         Spacer(flex: bottomTopRatio),

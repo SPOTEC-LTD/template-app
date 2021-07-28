@@ -1,7 +1,7 @@
 /// @desc 正则表达式
 /// @time 2020-12-30
 /// id card province dict.
-const List<String> ID_CARD_PROVINCE_DICT = [
+const List<String> idCardProvinceDict = [
   '11=北京',
   '12=天津',
   '13=河北',
@@ -42,7 +42,7 @@ const List<String> ID_CARD_PROVINCE_DICT = [
 /// Regex Util.
 class RegexUtil {
   /// Regex of simple mobile.
-  static final String regexMobileSimple = '^[1]\\d{10}\$';
+  static const String regexMobileSimple = '^[1]\\d{10}\$';
 
   /// Regex of exact mobile.
   /// <p>china mobile: 134(0-8), 135, 136, 137, 138, 139, 147, 150, 151, 152, 157, 158, 159, 178, 182, 183, 184, 187, 188, 198</p>
@@ -50,39 +50,39 @@ class RegexUtil {
   /// <p>china telecom: 133, 153, 173, 177, 180, 181, 189, 199</p>
   /// <p>global star: 1349</p>
   /// <p>virtual operator: 170</p>
-  static final String regexMobileExact = '^[1][3,4,5,6,7,8,9][0-9]{9}\$';
+  static const String regexMobileExact = '^[1][3,4,5,6,7,8,9][0-9]{9}\$';
 
   /// Regex of telephone number.
-  static final String regexTel = '^0\\d{2,3}[- ]?\\d{7,8}';
+  static const String regexTel = '^0\\d{2,3}[- ]?\\d{7,8}';
 
   /// Regex of id card number which length is 15.
-  static final String regexIdCard15 =
+  static const String regexIdCard15 =
       '^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}\$';
 
   /// Regex of id card number which length is 18.
-  static final String regexIdCard18 =
+  static const String regexIdCard18 =
       '^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9Xx])\$';
 
   /// Regex of email.
-  static final String regexEmail =
+  static const String regexEmail =
       r'^\w+([-+.]\w+)*@[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?$';
 
   /// Regex of url.
-  static final String regexUrl = '[a-zA-z]+://[^\\s]*';
+  static const String regexUrl = '[a-zA-z]+://[^\\s]*';
 
   /// Regex of Chinese character.
-  static final String regexZh = '[\\u4e00-\\u9fa5]';
+  static const String regexZh = '[\\u4e00-\\u9fa5]';
 
   /// Regex of date which pattern is "yyyy-MM-dd".
-  static final String regexDate =
+  static const String regexDate =
       '^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)\$';
 
   /// Regex of ip address.
-  static final String regexIp =
+  static const String regexIp =
       '((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)';
 
   /// Regex of pwd
-  static final String regexPwd = '^(?=.*[0-9].*)(?=.*[a-zA-Z].*).{6,18}';
+  static const String regexPwd = '^(?=.*[0-9].*)(?=.*[a-zA-Z].*).{6,18}';
 
   static final Map<String, String> cityMap = {};
 
@@ -145,7 +145,7 @@ class RegexUtil {
         '2'
       ];
       if (cityMap.isEmpty) {
-        var list = ID_CARD_PROVINCE_DICT;
+        var list = idCardProvinceDict;
         var mapEntryList = <MapEntry<String, String>>[];
         for (var i = 0, length = list.length; i < length; i++) {
           var tokens = list[i].trim().split('=');

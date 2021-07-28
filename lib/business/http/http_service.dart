@@ -23,7 +23,7 @@ class HttpError {
 }
 
 class HttpService {
-  static final baseAPIURL = 'xxx';
+  static const baseAPIURL = 'xxx';
   static final Dio _dio = () {
     var dio = Dio();
     dio.options.baseUrl = baseAPIURL;

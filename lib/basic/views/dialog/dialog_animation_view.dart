@@ -30,7 +30,7 @@ class DialogAnimationView extends StatefulWidget {
 class _DialogAnimationViewState extends State<DialogAnimationView>
     with TickerProviderStateMixin {
   /// 动画持续时间
-  Duration duration = Duration(milliseconds: 300);
+  Duration duration = const Duration(milliseconds: 300);
 
   // 入场动画
   late Animation<double> inAnimation;

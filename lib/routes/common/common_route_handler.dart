@@ -17,7 +17,7 @@ class CommonRoutesHandler {
           titleText: 'Not Found Page',
           brightness: Brightness.light,
         ),
-        body: Center(
+        body: const Center(
           child: Text('Please Check'),
         ),
       );

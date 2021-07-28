@@ -45,7 +45,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     var leading = this.leading;
     if (leading == null) {
-      var leadingImage;
+      String leadingImage;
       switch (leadingType) {
         case AppBarLeadingType.back:
           leadingImage = brightness == Brightness.dark
@@ -104,7 +104,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: ColorNames.lineD8D8D8,
                 height: 1,
               ),
-              preferredSize: Size.fromHeight(1),
+              preferredSize: const Size.fromHeight(1),
             )
           : null,
     );

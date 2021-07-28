@@ -17,7 +17,7 @@ class EasyWebView extends StatefulWidget {
   final Function(InAppWebViewController)? onWebViewCreated;
   final Function(InAppWebViewController, int)? onProgressChanged;
 
-  EasyWebView({
+  const EasyWebView({
     Key? key,
     required this.type,
     this.url,

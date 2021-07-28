@@ -128,7 +128,7 @@ class WebViewPageState extends State<WebViewPage> {
               child: LinearProgressIndicator(
                 value: _progress,
                 minHeight: 2,
-                valueColor: AlwaysStoppedAnimation(ColorNames.lineD8D8D8),
+                valueColor: const AlwaysStoppedAnimation(ColorNames.lineD8D8D8),
                 backgroundColor: ColorNames.backgroundWhite,
               ),
             ),
