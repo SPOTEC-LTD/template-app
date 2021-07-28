@@ -126,7 +126,12 @@ class FRouter {
 
   void navigateRemote(String url) {
     if (url.isInnerUrl) {
-      // todo
+      var uri = Uri.parse(url);
+      push(
+        rootContext,
+        uri.path,
+        routeSettings: RouteSettings(arguments: uri.queryParameters),
+      );
     } else if (url.startsWith('http') || url.startsWith('https')) {
       // todo
     } else if (url.startsWith('flutter')) {

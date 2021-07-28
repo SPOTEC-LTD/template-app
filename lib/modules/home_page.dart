@@ -47,6 +47,10 @@ class _HomePageState extends State<HomePage> {
             onTap: () => _pageSheetWebPage(context),
           ),
           _ListItem(
+            title: 'Remote Web Page',
+            onTap: () => _pushRemoteWebPage(context),
+          ),
+          _ListItem(
             title: 'Language Setting',
             onTap: () => _pushLanguageSettingPage(context),
           ),
@@ -92,6 +96,20 @@ class _HomePageState extends State<HomePage> {
       isFullScreen: false,
       routeSettings: RouteSettings(arguments: params),
     );
+  }
+
+  void _pushRemoteWebPage(BuildContext context) {
+    var params = FRouter()
+        .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
+    params.removeWhere((key, value) => value == null);
+    params.updateAll((key, value) => value.toString());
+    var uri = Uri(
+      scheme: 'http',
+      host: 'app.template.com',
+      path: 'webView/webViewPage',
+      queryParameters: params,
+    );
+    FRouter().navigateRemote(uri.toString());
   }
 
   void _pushLanguageSettingPage(BuildContext context) {
