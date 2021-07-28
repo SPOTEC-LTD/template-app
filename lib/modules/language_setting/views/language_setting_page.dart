@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:template/basic/utils/intl_util.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
-import 'package:template/business/tools/intl_tool.dart';
 import 'package:template/generated/l10n.dart';
 
 class LanguageSettingPage extends StatelessWidget {
@@ -23,7 +23,7 @@ class LanguageSettingPage extends StatelessWidget {
           return _ListItem(
             title: titles[index],
             onTap: () {
-              IntlTools.setLocal(context, locales[index]);
+              IntlUtil.setLocal(context, locales[index]);
             },
           );
         },
