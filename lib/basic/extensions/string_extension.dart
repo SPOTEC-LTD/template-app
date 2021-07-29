@@ -9,6 +9,11 @@ extension StringExtension on String {
     return replaceAll('', '\u200B');
   }
 
+  /// string 转 bool
+  bool toBool() {
+    return toLowerCase() == true.toString();
+  }
+
   /// 获取国际化的url地址
   String get intlUrlString {
     if (isEmpty) {
