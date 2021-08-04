@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:template/basic/global_instances.dart';
 import 'package:template/generated/l10n.dart';
 import 'package:template/modules/cubit_demo/views/cubit_demo_page.dart';
 import 'package:template/modules/language_setting/views/language_setting_page.dart';
@@ -18,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    print('Home Pahe Init');
+    logger.i('Home Pahe Init');
   }
 
   @override

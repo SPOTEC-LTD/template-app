@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 extension NumFormatExtension on num? {
   /// 根据规定小数点格式化为金融数值
   ///
-  /// maxDigits 最大小数位数
-  /// minDigits 最小小数位数
-  /// needNumSign 是否强制显示+、-号
-  /// placeholder number为null的返回值，占位符
+  /// [maxDigits] 最大小数位数
+  /// [minDigits] 最小小数位数
+  /// [needNumSign] 是否强制显示+、-号
+  /// [placeholder] number为null的返回值，占位符
   String formatFinancialNumber(
     int maxDigits, {
     int? minDigits,
@@ -29,11 +29,11 @@ extension NumFormatExtension on num? {
 
   /// 根据规定小数点格式化为百分数
   ///
-  /// maxDigits 最大小数位数
-  /// minDigits 最小小数位数
-  /// needNumSign 是否强制显示+、-号
-  /// placeholder number为null的返回值，占位符
-  /// needPercentSign bool 为true是的需要百分号
+  /// [maxDigits] 最大小数位数
+  /// [minDigits] 最小小数位数
+  /// [needNumSign] 是否强制显示+、-号
+  /// [placeholder] number为null的返回值，占位符
+  /// [needPercentSign] bool 为true是的需要百分号
   String formatPercentNumber(
     int maxDigits, {
     int? minDigits,
@@ -58,6 +58,11 @@ extension NumFormatExtension on num? {
   }
 
   /// 根据规定小数点格式化为普通数值
+  ///
+  /// [maxDigits] 最大小数位数
+  /// [minDigits] 最小小数位数
+  /// [needNumSign] 是否强制显示+、-号
+  /// [placeholder] number为null的返回值，占位符
   String formatNormalNumber(
     int maxDigits, {
     int? minDigits,
@@ -80,7 +85,7 @@ extension NumFormatExtension on num? {
 
   /// num 不四舍五入
   ///
-  /// digits 保留digits位小数位
+  /// [digits] 保留digits位小数位
   String noRoundDownNum(int digits) {
     if (this == null) {
       return '';
@@ -92,6 +97,10 @@ extension NumFormatExtension on num? {
   }
 
   /// 相乘返回规定小数点
+  ///
+  /// [multiplier] 被乘数
+  /// [maxDigits] 最大小数位数
+  /// [minDigits] 最小小数位数
   String multiply(num multiplier, int maxDigits, {int minDigits = 0}) {
     if (this == null) {
       return '';
@@ -101,6 +110,10 @@ extension NumFormatExtension on num? {
   }
 
   /// 相除返回规定小数点
+  ///
+  /// [divisor] 被除数
+  /// [maxDigits] 最大小数位数
+  /// [minDigits] 最小小数位数
   String divide(num divisor, int maxDigits, {int minDigits = 0}) {
     if (this == null) {
       return '';
