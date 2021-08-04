@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:template/basic/extensions/string_extension.dart';
+import 'package:template/basic/global_instances.dart';
 import 'package:template/routes/f_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,12 +12,6 @@ enum WebViewPageType {
 }
 
 class EasyWebView extends StatefulWidget {
-  final WebViewPageType type;
-  final String? url;
-  final String? richText;
-  final Function(InAppWebViewController)? onWebViewCreated;
-  final Function(InAppWebViewController, int)? onProgressChanged;
-
   const EasyWebView({
     Key? key,
     required this.type,
@@ -26,12 +21,45 @@ class EasyWebView extends StatefulWidget {
     this.onProgressChanged,
   }) : super(key: key);
 
+  final WebViewPageType type;
+  final String? url;
+  final String? richText;
+  final Function(InAppWebViewController)? onWebViewCreated;
+  final Function(InAppWebViewController, int)? onProgressChanged;
+
   @override
   _EasyWebViewState createState() => _EasyWebViewState();
 }
 
 class _EasyWebViewState extends State<EasyWebView> {
   InAppWebViewController? _webViewController;
+
+  @override
+  Widget build(BuildContext context) {
+    late Widget webView;
+    if (widget.type == WebViewPageType.url && widget.url != null) {
+      var url = widget.url?.intlUrlString ?? '';
+      logger.i(url);
+
+      webView = InAppWebView(
+        initialUrlRequest: URLRequest(url: Uri.parse(url)),
+        onWebViewCreated: _onWebViewCreated,
+        onProgressChanged: _onProgressChanged,
+        initialOptions: InAppWebViewGroupOptions(
+          crossPlatform: InAppWebViewOptions(
+            useShouldOverrideUrlLoading: true,
+          ),
+        ),
+        shouldOverrideUrlLoading: _shouldOverrideUrlLoading,
+      );
+    }
+    if (widget.type == WebViewPageType.richText && widget.richText != null) {
+      webView = Html(
+        data: widget.richText,
+      );
+    }
+    return webView;
+  }
 
   void _onWebViewCreated(InAppWebViewController controller) {
     _webViewController = controller;
@@ -75,32 +103,5 @@ class _EasyWebViewState extends State<EasyWebView> {
         FRouter().navigateRemote(args.first);
       },
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    late Widget webView;
-    if (widget.type == WebViewPageType.url && widget.url != null) {
-      var url = widget.url?.intlUrlString ?? '';
-      print(url);
-
-      webView = InAppWebView(
-        initialUrlRequest: URLRequest(url: Uri.parse(url)),
-        onWebViewCreated: _onWebViewCreated,
-        onProgressChanged: _onProgressChanged,
-        initialOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(
-            useShouldOverrideUrlLoading: true,
-          ),
-        ),
-        shouldOverrideUrlLoading: _shouldOverrideUrlLoading,
-      );
-    }
-    if (widget.type == WebViewPageType.richText && widget.richText != null) {
-      webView = Html(
-        data: widget.richText,
-      );
-    }
-    return webView;
   }
 }

@@ -1,108 +1,124 @@
-/// 日期格式化
-enum DateFormat {
-  def, // yyyy-MM-dd HH:mm:ss.SSS
-  normal, // yyyy-MM-dd HH:mm:ss
-  yearMonthDayHourMinute, // yyyy-MM-dd HH:mm
-  yearMonthDay, // yyyy-MM-dd
-  yearMonth, // yyyy-MM
-  monthDay, // MM-dd
-  monthDayHourMinute, // MM-dd HH:mm
-  hourMinuteSecond, // HH:mm:ss
-  hourMinute, // HH:mm
+import 'package:intl/intl.dart';
+
+/// 日期的格式化类型
+enum DateFormatType {
+  ymdhmss, // yyyy-MM-dd HH:mm:ss.SSS
+  ymdhms, // yyyy-MM-dd HH:mm:ss
+  ymdhm, // yyyy-MM-dd HH:mm
+  ymd, // yyyy-MM-dd
+  ym, // yyyy-MM
+  mdhm, // MM-dd HH:mm
+  md, // MM-dd
+  hms, // HH:mm:ss
+  hm, // HH:mm
 }
 
-/// 对1970-01-01T00:00:00Z 类似格式进行扩展
-extension DateExtension on String {
-  /// format DateTime.
-  /// this            time string. 格式yyyy-MM-dd HH:mm:ss
-  /// format          DateFormat type.
-  /// dateSeparate    date separate.
-  /// timeSeparate    time separate.
-  String? formatDateTime({
-    required DateFormat? format,
-    required String? dateSeparate,
-    required String? timeSeparate,
-  }) {
-    String time = '';
-    switch (format) {
-      case DateFormat.normal: // yyyy-MM-dd HH:mm:ss
-        time = substring(0, 'yyyy-MM-dd HH:mm:ss'.length);
-        break;
-      case DateFormat.yearMonthDayHourMinute: // yyyy-MM-dd HH:mm
-        time = substring(0, 'yyyy-MM-dd HH:mm'.length);
-        break;
-      case DateFormat.yearMonthDay: // yyyy-MM-dd
-        time = substring(0, 'yyyy-MM-dd'.length);
-        break;
-      case DateFormat.yearMonth: // yyyy-MM
-        time = substring(0, 'yyyy-MM'.length);
-        break;
-      case DateFormat.monthDay: // MM-dd
-        time = substring('yyyy-'.length, 'yyyy-MM-dd'.length);
-        break;
-      case DateFormat.monthDayHourMinute: // MM-dd HH:mm
-        time = substring('yyyy-'.length, 'yyyy-MM-dd HH:mm'.length);
-        break;
-      case DateFormat.hourMinuteSecond: // HH:mm:ss
-        time = substring('yyyy-MM-dd '.length, 'yyyy-MM-dd HH:mm:ss'.length);
-        break;
-      case DateFormat.hourMinute: // HH:mm
-        time = substring('yyyy-MM-dd '.length, 'yyyy-MM-dd HH:mm'.length);
-        break;
-      default:
-        break;
+extension DateFormatTypeExtension on DateFormatType {
+  String get name {
+    switch (this) {
+      case DateFormatType.ymdhmss:
+        return 'yyyy-MM-dd HH:mm:ss.SSS';
+      case DateFormatType.ymdhms: // yyyy-MM-dd HH:mm:ss
+        return 'yyyy-MM-dd HH:mm:ss';
+      case DateFormatType.ymdhm: // yyyy-MM-dd HH:mm
+        return 'yyyy-MM-dd HH:mm';
+      case DateFormatType.ymd: // yyyy-MM-dd
+        return 'yyyy-MM-dd';
+      case DateFormatType.ym: // yyyy-MM
+        return 'yyyy-MM';
+      case DateFormatType.mdhm: // MM-dd HH:mm
+        return 'MM-dd HH:mm';
+      case DateFormatType.md: // MM-dd
+        return 'MM-dd';
+      case DateFormatType.hms: // HH:mm:ss
+        return 'HH:mm:ss';
+      case DateFormatType.hm: // HH:mm
+        return 'HH:mm';
     }
-    return dateTimeSeparate(time, dateSeparate, timeSeparate);
-  }
-
-  /// date Time Separate.
-  String? dateTimeSeparate(
-      String? time, String? dateSeparate, String? timeSeparate) {
-    if (dateSeparate != null) {
-      time = time!.replaceAll('-', dateSeparate);
-    }
-    if (timeSeparate != null) {
-      time = time!.replaceAll(':', timeSeparate);
-    }
-    return time;
   }
 }
 
-/// 对时间戳进行扩展 int
-extension IntTimeStampExtension on int {
-  /// format DateTime.
-  /// this            time string. 格式yyyy-MM-dd HH:mm:ss
-  /// format          DateFormat type.
-  /// dateSeparate    date separate.
-  /// timeSeparate    time separate.
-  String? formatTimeStamp({
-    required DateFormat format,
-    required String dateSeparate,
-    required String timeSeparate,
+extension StringDateExtension on String? {
+  /// 将日期字符串转换为DateTime对象
+  DateTime? toDateTime() {
+    if (this == null) {
+      return null;
+    }
+    return DateTime.parse(this!);
+  }
+
+  /// 格式化日期字符串
+  ///
+  /// [type] 格式化的类型
+  /// [dateSeparater] 年月日之间的分隔符
+  /// [timeSeparater] 时分秒之间的分隔符
+  /// [placeholder] 当前字符串无法转为日期时的占位符
+  String toFormattedDateTime({
+    DateFormatType type = DateFormatType.ymdhms,
+    String? dateSeparater,
+    String? timeSeparater,
+    String placeholder = '',
   }) {
-    //转换成1970-01-01T00:00:00Z 格式
-    var date = DateTime.fromMillisecondsSinceEpoch(this).toString();
-    return date.formatDateTime(
-        format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
+    final dateTime = toDateTime();
+    if (dateTime == null) {
+      return placeholder;
+    }
+    var pattern = type.name;
+    if (dateSeparater != null) {
+      pattern = pattern.replaceAll('-', dateSeparater);
+    }
+    if (timeSeparater != null) {
+      pattern = pattern.replaceAll(':', timeSeparater);
+    }
+    return DateFormat(pattern).format(dateTime);
   }
 }
 
-/// 对时间戳进行扩展 String
-extension StringTimeStampExtension on String {
-  /// format DateTime.
-  /// this            time string. 格式yyyy-MM-dd HH:mm:ss
-  /// format          DateFormat type.
-  /// dateSeparate    date separate.
-  /// timeSeparate    time separate.
-  String? formatTimeStamp({
-    required DateFormat format,
-    required String dateSeparate,
-    required String timeSeparate,
+/// 时间戳的格式类型
+enum TimestampType {
+  milli,
+  micro,
+}
+
+extension IntDateTimeExtension on int? {
+  /// 将时间戳转换为DateTime对象
+  DateTime? toDateTime({TimestampType type = TimestampType.milli}) {
+    if (this == null) {
+      return null;
+    }
+    switch (type) {
+      case TimestampType.milli:
+        return DateTime.fromMillisecondsSinceEpoch(this!);
+      case TimestampType.micro:
+        return DateTime.fromMicrosecondsSinceEpoch(this!);
+    }
+  }
+
+  /// 将时间戳格式化为字符串
+  ///
+  /// [formateType] 格式化的类型
+  /// [stampType] 时间戳是毫秒还是微秒
+  /// [dateSeparater] 年月日之间的分隔符
+  /// [timeSeparater] 时分秒之间的分隔符
+  /// [placeholder] 当前字符串无法转为日期时的占位符
+  String? toFormattedDateTime({
+    DateFormatType formateType = DateFormatType.ymdhms,
+    TimestampType stampType = TimestampType.milli,
+    String? dateSeparater,
+    String? timeSeparater,
+    String placeholder = '',
   }) {
-    var time = int.tryParse(this) ?? 0;
-    // 转换成1970-01-01T00:00:00Z 格式
-    var date = DateTime.fromMillisecondsSinceEpoch(time).toString();
-    return date.formatDateTime(
-        format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
+    final dateTime = toDateTime(type: stampType);
+    if (dateTime == null) {
+      return placeholder;
+    }
+    var pattern = formateType.name;
+    if (dateSeparater != null) {
+      pattern = pattern.replaceAll('-', dateSeparater);
+    }
+    if (timeSeparater != null) {
+      pattern = pattern.replaceAll(':', timeSeparater);
+    }
+    return DateFormat(pattern).format(dateTime);
   }
 }
