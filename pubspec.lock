@@ -224,6 +224,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fluttertoast:
+    dependency: "direct main"
+    description:
+      name: fluttertoast
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "8.0.8"
   html:
     dependency: transitive
     description:
@@ -585,35 +592,35 @@ packages:
       name: wakelock
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.5.2"
+    version: "0.5.3+3"
   wakelock_macos:
     dependency: transitive
     description:
       name: wakelock_macos
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.0+1"
+    version: "0.1.0+2"
   wakelock_platform_interface:
     dependency: transitive
     description:
       name: wakelock_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.1+1"
+    version: "0.2.1+2"
   wakelock_web:
     dependency: transitive
     description:
       name: wakelock_web
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.0+1"
+    version: "0.2.0+2"
   wakelock_windows:
     dependency: transitive
     description:
       name: wakelock_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.0+1"
   webview_flutter:
     dependency: transitive
     description:

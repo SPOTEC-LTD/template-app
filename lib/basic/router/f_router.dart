@@ -2,7 +2,6 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:template/business/extension/string_business.dart';
 
 class FRouter {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -13,11 +12,18 @@ class FRouter {
     return _instance!;
   }
 
-  static BuildContext get rootContext =>
-      rootNavigatorKey.currentState!.overlay!.context;
+  static BuildContext? get rootContext =>
+      rootNavigatorKey.currentState?.overlay?.context;
 
   factory FRouter() => _getInstance();
   FRouter._();
+
+  /// 远程路由以该字段开头的，将会传递给本地路由
+  String? _innerUrl;
+
+  void setup(String innerUrl) {
+    _innerUrl = innerUrl;
+  }
 
   /// 从右往左推出
   Future<T?> push<T>(
@@ -125,13 +131,15 @@ class FRouter {
   }
 
   void navigateRemote(String url) {
-    if (url.isInnerUrl) {
+    /// 判断远程路由是否以_innerUrl开头，确定是否传递给本地路由
+    final isUrlInner = _innerUrl != null && url.startsWith(_innerUrl!);
+    if (isUrlInner) {
       var uri = Uri.parse(url);
-      push(
-        rootContext,
-        uri.path,
-        routeSettings: RouteSettings(arguments: uri.queryParameters),
-      );
+      if (rootContext == null) {
+        return;
+      }
+      push(rootContext!, uri.path,
+          routeSettings: RouteSettings(arguments: uri.queryParameters));
     } else if (url.startsWith('http') || url.startsWith('https')) {
       // todo
     } else if (url.startsWith('flutter')) {

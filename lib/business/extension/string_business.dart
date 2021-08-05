@@ -1,30 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:template/basic/utils/intl_util.dart';
 import 'package:template/business/consts/service_urls.dart';
 
-const String lang = '';
-
-extension StringBusiness on String {
-  /// 判断远程路由是否可以打开本地页面
-  bool get isInnerUrl {
-    return startsWith(innerUrl);
-  }
-
+extension StringBusiness on String? {
   /// 获取国际化的url地址
-  String get intlUrlString {
-    if (isEmpty) {
-      return this;
+  String getIntlUrlString(BuildContext context) {
+    if (this == null || this!.isEmpty) {
+      return '';
     }
-    var queryParameters = Uri.parse(this).queryParameters;
+    var queryParameters = Uri.parse(this!).queryParameters;
     var linkSymbol = '&';
     if (queryParameters.isEmpty) {
       linkSymbol = '?';
     }
     // 首先是内部链接
-    if (contains(baseWebURL)) {
+    if (this!.contains(baseWebURL)) {
       // 其次没有国际化参数
-      if (!contains('locale=')) {
-        return this + '${linkSymbol}locale=$lang';
+      if (!this!.contains('locale=')) {
+        final lang = IntlUtil.getFullLocaleCode(context);
+        return this! + '${linkSymbol}locale=$lang';
       }
     }
-    return this;
+    return this!;
   }
 }

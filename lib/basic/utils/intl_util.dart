@@ -41,6 +41,15 @@ class LocaleState {
 class IntlUtil {
   static const _languageCodeKey = 'languageCodeKey';
 
+  static String getFullLocaleCode(BuildContext context) {
+    var locale = Localizations.localeOf(context);
+    if (locale.countryCode == null) {
+      return locale.languageCode;
+    } else {
+      return locale.languageCode + '_' + locale.countryCode!;
+    }
+  }
+
   static Locale getLocale() {
     var preferLanguageCode = SpUtil().getString(_languageCodeKey);
     var languageCode = Intl.getCurrentLocale();

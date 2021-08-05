@@ -1,28 +1,53 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:template/business/consts/color_names.dart';
 
 class HudUtil {
-  static void setup() {
+  /// 初始化hud
+  ///
+  /// 设置[indicatorWidget]后，[indicatorSize]将失效
+  static void setup({
+    Color backgroundColor = Colors.black,
+    Widget? indicatorWidget,
+    double indicatorSize = 60,
+    Color indicatorColor = Colors.white,
+    Color? textColor = Colors.white,
+    double radius = 8,
+    Duration displayDuration = const Duration(milliseconds: 1500),
+    Widget? successWidget,
+    Widget? errorWidget,
+    Widget? infoWidget,
+  }) {
     EasyLoading.instance
-      ..displayDuration = const Duration(milliseconds: 2000)
       ..loadingStyle = EasyLoadingStyle.custom
-      ..indicatorSize = 60
-      ..radius = 8
-      // ..backgroundColor = ColorManager.toastBackgroundColor
-      ..indicatorColor = ColorNames.backgroundWhite
-      ..textColor = ColorNames.textWhite
-      ..userInteractions = false;
-    // ..successWidget = Image.asset(ImageManager.common_icon_toast_info)
-    // ..infoWidget = Image.asset(ImageManager.common_icon_toast_info)
-    // ..errorWidget = Image.asset(ImageManager.common_icon_toast_info);
+      ..userInteractions = false
+      ..indicatorWidget = indicatorWidget
+      ..indicatorSize = indicatorSize
+      ..radius = radius
+      ..backgroundColor = backgroundColor
+      ..indicatorColor = indicatorColor
+      ..textColor = textColor
+      ..displayDuration = displayDuration
+      ..successWidget = successWidget
+      ..errorWidget = errorWidget
+      ..infoWidget = infoWidget;
   }
 
-  static void show() {
-    EasyLoading.show();
+  static void show({
+    String? status,
+    Widget? indicator,
+    bool dismissOnTap = false,
+  }) {
+    EasyLoading.show(
+      status: status,
+      indicator: indicator,
+      dismissOnTap: dismissOnTap,
+    );
   }
 
-  static void dismiss() {
-    EasyLoading.dismiss();
+  static void dismiss({bool animation = true}) {
+    EasyLoading.dismiss(animation: animation);
   }
 
   static void showSuccess(String status, {Duration? duration}) {

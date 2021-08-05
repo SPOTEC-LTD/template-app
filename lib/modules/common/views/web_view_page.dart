@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/basic/extensions/string_extension.dart';
 import 'package:template/business/consts/color_names.dart';
 import 'package:template/business/consts/icon_names.dart';
+import 'package:template/business/extension/string_business.dart';
 import 'package:template/modules/common/views/easy_web_view.dart';
 import 'package:template/basic/utils/screen_util.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
@@ -42,7 +42,7 @@ class WebViewPageState extends State<WebViewPage> {
   InAppWebViewController? _webViewController;
   double _progress = 0;
 
-  String get _localUrl => widget.url?.intlUrlString ?? '';
+  String get _localUrl => widget.url?.getIntlUrlString(context) ?? '';
 
   @override
   void initState() {
