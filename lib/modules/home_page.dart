@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:template/basic/global_instances.dart';
+import 'package:template/business/views/title_action_item.dart';
 import 'package:template/generated/l10n.dart';
 import 'package:template/modules/cubit_demo/views/cubit_demo_page.dart';
 import 'package:template/modules/language_setting/views/language_setting_page.dart';
+import 'package:template/modules/util_demo/utils_page.dart';
 import 'package:template/routes/common/f_router_common.dart.dart';
-import 'package:template/routes/f_router.dart';
+import 'package:template/basic/router/f_router.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,32 +34,44 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: [
-          _ListItem(
+          TitleActionItem(
+            title: 'Utils Demo',
+            onTap: () => _pushUtilsPage(context),
+          ),
+          TitleActionItem(
             title: 'Cubit Demo',
             onTap: () => _pushCubitPage(context),
           ),
-          _ListItem(
+          TitleActionItem(
             title: 'Push Web Page',
             onTap: () => _pushWebPage(context),
           ),
-          _ListItem(
+          TitleActionItem(
             title: 'Present Web Page',
             onTap: () => _presentWebPage(context),
           ),
-          _ListItem(
+          TitleActionItem(
             title: 'Page Sheet Web Page',
             onTap: () => _pageSheetWebPage(context),
           ),
-          _ListItem(
+          TitleActionItem(
             title: 'Remote Web Page',
             onTap: () => _pushRemoteWebPage(context),
           ),
-          _ListItem(
+          TitleActionItem(
             title: 'Language Setting',
             onTap: () => _pushLanguageSettingPage(context),
           ),
         ],
       ),
+    );
+  }
+
+  void _pushUtilsPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) {
+        return const UtilsPage();
+      }),
     );
   }
 
@@ -118,34 +132,5 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
       return const LanguageSettingPage();
     }));
-  }
-}
-
-class _ListItem extends StatelessWidget {
-  final String title;
-  final VoidCallback onTap;
-
-  const _ListItem({
-    Key? key,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      child: Column(
-        children: [
-          Container(
-            child: Text(title),
-            height: 60,
-            alignment: Alignment.centerLeft,
-          ),
-          const Divider(),
-        ],
-      ),
-      onTap: onTap,
-    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:template/routes/f_router.dart';
+import 'package:template/basic/router/f_router.dart';
 
 extension FRouterCommonExtension on FRouter {
   String get webViewPage => '/webView/webViewPage';

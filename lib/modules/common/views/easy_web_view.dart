@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/basic/extensions/string_extension.dart';
 import 'package:template/basic/global_instances.dart';
-import 'package:template/routes/f_router.dart';
+import 'package:template/business/extension/string_business.dart';
+import 'package:template/basic/router/f_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 enum WebViewPageType {
@@ -38,7 +38,7 @@ class _EasyWebViewState extends State<EasyWebView> {
   Widget build(BuildContext context) {
     late Widget webView;
     if (widget.type == WebViewPageType.url && widget.url != null) {
-      var url = widget.url?.intlUrlString ?? '';
+      var url = widget.url?.getIntlUrlString(context) ?? '';
       logger.i(url);
 
       webView = InAppWebView(
