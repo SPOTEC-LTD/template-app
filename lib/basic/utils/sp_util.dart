@@ -1,155 +1,106 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:template/generated/json/base/json_convert_content.dart';
 
 /// 用来做shared_preferences的存储
 class SpUtil {
-  static final SpUtil _spUtils = SpUtil._();
-  factory SpUtil() => _spUtils;
+  static SharedPreferences? _spf;
 
-  SpUtil._();
-
-  SharedPreferences? _spf;
-
-  // 初始化，必须要初始化
-  Future<SharedPreferences?> setup() async {
+  /// 配置util，为异步函数
+  static Future<SharedPreferences?> setup() async {
     _spf = await SharedPreferences.getInstance();
     return _spf;
   }
 
-  // 检查内部存储库是否初始化
-  bool get _isSpfNull {
-    return _spf == null;
+  /// 获取存储的所有keys
+  static Set<String>? getKeys() {
+    return _spf?.getKeys();
   }
 
-  // 判断是否存在数据
-  bool hasKey(String key) {
-    Set<String>? keys = getKeys();
-    return keys!.contains(key);
+  /// 判断shared_preferences的keys是否包含[key]
+  static bool containsKey(String key) {
+    return _spf?.containsKey(key) ?? false;
   }
 
-  Set<String>? getKeys() {
-    if (_isSpfNull) return null;
-    return _spf!.getKeys();
+  /// 根据[key]获取字符串
+  static String? getString(String key) {
+    return _spf?.getString(key);
   }
 
-  String? getString(String key) {
-    if (_isSpfNull) return null;
-    return _spf!.getString(key);
+  /// 根据[key]存储字符串[value]
+  static Future<bool>? putString(String key, String value) {
+    return _spf?.setString(key, value);
   }
 
-  Future<bool>? putString(String key, String value) {
-    if (_isSpfNull) return null;
-    return _spf!.setString(key, value);
+  /// 根据[key]获取布尔值
+  static bool? getBool(String key) {
+    return _spf?.getBool(key);
   }
 
-  bool? getBool(String key) {
-    if (_isSpfNull) return null;
-    return _spf!.getBool(key);
+  /// 根据[key]存储布尔值[value]
+  static Future<bool>? putBool(String key, bool value) {
+    return _spf?.setBool(key, value);
   }
 
-  Future<bool>? putBool(String key, bool value) {
-    if (_isSpfNull) return null;
-    return _spf!.setBool(key, value);
+  /// 根据[key]获取整数
+  static int? getInt(String key) {
+    return _spf?.getInt(key);
   }
 
-  int? getInt(String key) {
-    if (_isSpfNull) return null;
-    return _spf!.getInt(key);
+  /// 根据[key]存储整数[value]
+  static Future<bool>? putInt(String key, int value) {
+    return _spf?.setInt(key, value);
   }
 
-  Future<bool>? putInt(String key, int value) {
-    if (_isSpfNull) return null;
-    return _spf!.setInt(key, value);
+  /// 根据[key]获取浮点数
+  static double? getDouble(String key) {
+    return _spf?.getDouble(key);
   }
 
-  double? getDouble(String key) {
-    if (_isSpfNull) return null;
-    return _spf!.getDouble(key);
+  /// 根据[key]存储浮点数[value]
+  static Future<bool>? putDouble(String key, double value) {
+    return _spf?.setDouble(key, value);
   }
 
-  Future<bool>? putDouble(String key, double value) {
-    if (_isSpfNull) return null;
-    return _spf!.setDouble(key, value);
+  /// 根据[key]获取字符串数组
+  static List<String>? getStringList(String key) {
+    return _spf?.getStringList(key);
   }
 
-  List<String>? getStringList(String key) {
-    if (_isSpfNull) return null;
-    return _spf!.getStringList(key);
+  /// 根据[key]存储字符串数组[value]
+  static Future<bool>? putStringList(String key, List<String> value) {
+    return _spf?.setStringList(key, value);
   }
 
-  Future<bool>? putStringList(String key, List<String> value) {
-    if (_isSpfNull) return null;
-
-    return _spf!.setStringList(key, value);
-  }
-
-  // // 保存范型模型
-  // Future<bool>? putBean<T>(T bean, String key) async {
-  //   if (bean == null) {
-  //     return this!.putString(key, null);
-  //   } else if (bean is JsonConvert) {
-  //     var editedJonStr = json.encode(bean.toJson());
-  //     return SpUtil().putString(key, editedJonStr);
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // // 获取范型模型
-  // T? getBean<T>(String key) {
-  //   if (SpUtil().getString(key) == null) {
-  //     return null;
-  //   }
-  //   return JsonConvert.fromJsonAsT<T>(json.decode(SpUtil().getString(key)));
-  // }
-
-  dynamic getDynamic(String key) {
-    if (_isSpfNull) return null;
-    return _spf!.get(key);
-  }
-
-  Future<bool> remove(String key) {
-    return _spf!.remove(key);
-  }
-
-  Future<bool> clear() {
-    return _spf!.clear();
-  }
-
-  ///sp储存合集 保存数据 基础类型
-  ///
-  ///@param key   key
-  ///@param param param
-  Future<dynamic>? saveParam(String key, dynamic param) {
-    if (_isSpfNull) return null;
-    if (param is String) {
-      return _spf!.setString(key, param);
-    } else if (param is int) {
-      return _spf!.setInt(key, param);
-    } else if (param is bool) {
-      return _spf!.setBool(key, param);
-    } else if (param is double) {
-      return _spf!.setDouble(key, param);
+  /// 根据[key]存储泛型对象[entity]
+  static Future<bool>? putEntity<T>(String key, T entity) async {
+    if (entity == null) {
+      return remove(key) ?? Future.value(false);
+    } else if (entity is JsonConvert) {
+      final encodeString = json.encode(entity.toJson());
+      return putString(key, encodeString) ?? Future.value(false);
     } else {
-      throw UnsupportedError('Unknown Type');
+      return false;
     }
   }
 
-  ///sp储存合集 获取数据 基础类型
-  ///
-  ///@param key   key
-  ///@param param defaultParam
-  dynamic getParam(String key, Object defaultParam) {
-    if (_isSpfNull) return null;
-    if (defaultParam is String) {
-      return _spf!.getString(key);
-    } else if (defaultParam is int) {
-      return _spf!.getInt(key);
-    } else if (defaultParam is bool) {
-      return _spf!.getBool(key);
-    } else if (defaultParam is double) {
-      return _spf!.getDouble(key);
-    } else {
-      throw UnsupportedError('Unknown Type');
+  /// 根据[key]获取存储泛型对象
+  static T? getEntity<T>(String key) {
+    final string = getString(key);
+    if (string == null) {
+      return null;
     }
+    return JsonConvert.fromJsonAsT<T>(json.decode(string));
+  }
+
+  /// 根据[key]删除存储对象
+  static Future<bool>? remove(String key) {
+    return _spf?.remove(key);
+  }
+
+  /// 清除所有shared_preferences的本地存储
+  static Future<bool>? clear() {
+    return _spf?.clear();
   }
 }

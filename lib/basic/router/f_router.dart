@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+export 'package:fluro/fluro.dart';
+
 class FRouter {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static FRouter? _instance;

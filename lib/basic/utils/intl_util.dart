@@ -51,7 +51,7 @@ class IntlUtil {
   }
 
   static Locale getLocale() {
-    var preferLanguageCode = SpUtil().getString(_languageCodeKey);
+    var preferLanguageCode = SpUtil.getString(_languageCodeKey);
     var languageCode = Intl.getCurrentLocale();
     if (preferLanguageCode != null) {
       languageCode = preferLanguageCode;
@@ -61,7 +61,7 @@ class IntlUtil {
 
   static void setLocal(BuildContext context, Locale locale) {
     S.load(locale);
-    SpUtil().putString(_languageCodeKey, locale.languageCode)?.then((value) {
+    SpUtil.putString(_languageCodeKey, locale.languageCode)?.then((value) {
       context.read<LocaleCubit>().load(locale);
     });
   }

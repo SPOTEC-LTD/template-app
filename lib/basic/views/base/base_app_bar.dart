@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:template/business/consts/color_names.dart';
 import 'package:template/business/consts/icon_names.dart';
-import 'package:template/basic/utils/screen_util.dart';
+import 'package:template/basic/utils/size_util.dart';
 
 // 后续可能添加webView导航
 enum AppBarLeadingType {
@@ -39,7 +39,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showLine = false,
   }) : super(key: key);
 
-  static double preferredHeight = ScreenUtil.appBarHeight;
+  static double preferredHeight = SizeUtil.appBarHeight;
 
   @override
   Widget build(BuildContext context) {
