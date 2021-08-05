@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:template/basic/global_instances.dart';
-import 'package:template/business/extension/string_business.dart';
+import 'package:template/common/extension/string_business.dart';
 import 'package:template/basic/router/f_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 

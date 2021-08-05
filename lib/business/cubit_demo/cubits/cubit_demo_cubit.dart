@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:template/modules/cubit_demo/apis/cubit_apis.dart';
-import 'package:template/modules/cubit_demo/models/post_entity.dart';
+import 'package:template/business/cubit_demo/apis/cubit_apis.dart';
+import 'package:template/business/cubit_demo/models/post_entity.dart';
 import 'package:template/basic/views/refresher/refresh_mixin.dart';
 import 'package:template/basic/views/refresher/refresh_status.dart';
 

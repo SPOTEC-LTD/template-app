@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/business/consts/color_names.dart';
-import 'package:template/business/consts/icon_names.dart';
+import 'package:template/common/consts/color_names.dart';
+import 'package:template/common/consts/icon_names.dart';
 import 'package:template/basic/utils/size_util.dart';
 
 // 后续可能添加webView导航

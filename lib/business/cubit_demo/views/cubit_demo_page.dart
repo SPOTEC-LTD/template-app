@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/modules/cubit_demo/cubits/cubit_demo_cubit.dart';
-import 'package:template/modules/cubit_demo/models/post_entity.dart';
+import 'package:template/business/cubit_demo/cubits/cubit_demo_cubit.dart';
+import 'package:template/business/cubit_demo/models/post_entity.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
 import 'package:template/basic/views/refresher/refresher.dart';
 
