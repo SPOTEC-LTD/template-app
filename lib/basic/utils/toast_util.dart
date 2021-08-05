@@ -47,6 +47,14 @@ class ToastUtil {
     }
   }
 
+  static void removeCurrentToast() {
+    _fToast.removeCustomToast();
+  }
+
+  static void removeQueuedToasts() {
+    _fToast.removeQueuedCustomToasts();
+  }
+
   static Widget _buildToast(String message) {
     return Container(
       padding: _padding ??

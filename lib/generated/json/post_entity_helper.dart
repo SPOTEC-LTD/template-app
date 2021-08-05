@@ -1,4 +1,4 @@
-import 'package:template/modules/cubit_demo/models/post_entity.dart';
+import 'package:template/business/cubit_demo/models/post_entity.dart';
 
 postEntityFromJson(PostEntity data, Map<String, dynamic> json) {
   if (json['userId'] != null) {

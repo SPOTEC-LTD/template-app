@@ -7,7 +7,7 @@ import 'basic/router/f_router.dart';
 import 'basic/utils/intl_util.dart';
 import 'basic/utils/size_util.dart';
 import 'generated/l10n.dart';
-import 'modules/home_page.dart';
+import 'business/home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

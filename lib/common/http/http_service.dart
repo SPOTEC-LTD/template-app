@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:template/basic/utils/hud_util.dart';
-import 'package:template/business/consts/service_urls.dart';
+import 'package:template/common/consts/service_urls.dart';
 
 import 'http_error_handler.dart';
 import 'http_wrap_entity.dart';

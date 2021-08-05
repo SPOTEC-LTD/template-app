@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/business/consts/image_names.dart';
+import 'package:template/common/consts/image_names.dart';
 
 class NoDataPlaceholder extends StatelessWidget {
   final int bottomTopRatio;

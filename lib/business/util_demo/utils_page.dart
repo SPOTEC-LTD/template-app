@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
-import 'package:template/business/views/title_action_item.dart';
-import 'package:template/modules/util_demo/hud_page.dart';
-import 'package:template/modules/util_demo/toast_page.dart';
+import 'package:template/common/views/title_action_item.dart';
+import 'package:template/business/util_demo/hud_page.dart';
+import 'package:template/business/util_demo/toast_page.dart';
 
 class UtilsPage extends StatelessWidget {
   const UtilsPage({Key? key}) : super(key: key);

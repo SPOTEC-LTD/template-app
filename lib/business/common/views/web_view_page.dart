@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/business/consts/color_names.dart';
-import 'package:template/business/consts/icon_names.dart';
-import 'package:template/business/extension/string_business.dart';
-import 'package:template/modules/common/views/easy_web_view.dart';
+import 'package:template/common/consts/color_names.dart';
+import 'package:template/common/consts/icon_names.dart';
+import 'package:template/common/extension/string_business.dart';
+import 'package:template/business/common/views/easy_web_view.dart';
 import 'package:template/basic/utils/size_util.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
 
-export 'package:template/modules/common/views/easy_web_view.dart';
+export 'package:template/business/common/views/easy_web_view.dart';
 
 class WebViewPage extends StatefulWidget {
   final WebViewPageType type;
