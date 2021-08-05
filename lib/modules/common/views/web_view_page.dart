@@ -5,7 +5,7 @@ import 'package:template/business/consts/color_names.dart';
 import 'package:template/business/consts/icon_names.dart';
 import 'package:template/business/extension/string_business.dart';
 import 'package:template/modules/common/views/easy_web_view.dart';
-import 'package:template/basic/utils/screen_util.dart';
+import 'package:template/basic/utils/size_util.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
 
 export 'package:template/modules/common/views/easy_web_view.dart';
@@ -71,7 +71,7 @@ class WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     var url = widget.url;
     if (widget.url != null && widget.showAppBar == false) {
-      url = widget.url! + '&topPadding=${ScreenUtil.topPadding}';
+      url = widget.url! + '&topPadding=${SizeUtil.topPadding}';
     }
 
     return Scaffold(
@@ -115,7 +115,7 @@ class WebViewPageState extends State<WebViewPage> {
     );
 
     return PreferredSize(
-      preferredSize: Size.fromHeight(ScreenUtil.appBarHeight),
+      preferredSize: Size.fromHeight(SizeUtil.appBarHeight),
       child: Stack(
         children: [
           appBar,
