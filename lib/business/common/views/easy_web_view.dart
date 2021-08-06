@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:template/basic/global_instances.dart';
+import 'package:template/basic/utils/type_util.dart';
 import 'package:template/common/extension/string_business.dart';
 import 'package:template/basic/router/f_router.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,7 +39,7 @@ class _EasyWebViewState extends State<EasyWebView> {
   Widget build(BuildContext context) {
     late Widget webView;
     if (widget.type == WebViewPageType.url && widget.url != null) {
-      var url = widget.url?.getIntlUrlString(context) ?? '';
+      final url = widget.url?.getIntlUrlString(context) ?? '';
       logger.i(url);
 
       webView = InAppWebView(
@@ -77,19 +78,18 @@ class _EasyWebViewState extends State<EasyWebView> {
   Future<NavigationActionPolicy> _shouldOverrideUrlLoading(
       InAppWebViewController controller,
       NavigationAction navigationAction) async {
-    var uri = navigationAction.request.url;
-    var isHttp = uri?.scheme == 'http' || uri?.scheme == 'https';
+    final uri = navigationAction.request.url;
+    final isHttp = uri?.scheme == 'http' || uri?.scheme == 'https';
     if (isHttp) {
       return NavigationActionPolicy.ALLOW;
     }
 
-    var requestUrl = uri.toString();
+    final requestUrl = uri.toString();
     // 非http请求才执行launch操作
     if (await canLaunch(requestUrl)) {
       await launch(
         requestUrl,
         forceSafariVC: false,
-        forceWebView: false,
       );
     }
     return NavigationActionPolicy.CANCEL;
@@ -100,7 +100,8 @@ class _EasyWebViewState extends State<EasyWebView> {
     _webViewController?.addJavaScriptHandler(
       handlerName: 'navigate',
       callback: (args) {
-        FRouter().navigateRemote(args.first);
+        final url = TypeUtil.safeCast<String>(args.first) ?? '';
+        FRouter().navigateRemote(url);
       },
     );
   }

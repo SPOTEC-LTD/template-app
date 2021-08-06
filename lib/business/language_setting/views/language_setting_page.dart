@@ -9,8 +9,8 @@ class LanguageSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var locales = S.delegate.supportedLocales.toList();
-    var titles = [
+    final locales = S.delegate.supportedLocales.toList();
+    final titles = [
       S.of(context).chiness,
       S.of(context).english,
     ];
@@ -48,17 +48,17 @@ class _ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
+      onTap: onTap,
       child: Column(
         children: [
           Container(
-            child: Text(title),
             height: 60,
             alignment: Alignment.centerLeft,
+            child: Text(title),
           ),
           const Divider(),
         ],
       ),
-      onTap: onTap,
     );
   }
 }

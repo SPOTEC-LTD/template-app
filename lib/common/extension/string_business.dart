@@ -8,7 +8,7 @@ extension StringBusiness on String? {
     if (this == null || this!.isEmpty) {
       return '';
     }
-    var queryParameters = Uri.parse(this!).queryParameters;
+    final queryParameters = Uri.parse(this!).queryParameters;
     var linkSymbol = '&';
     if (queryParameters.isEmpty) {
       linkSymbol = '?';
@@ -18,7 +18,7 @@ extension StringBusiness on String? {
       // 其次没有国际化参数
       if (!this!.contains('locale=')) {
         final lang = IntlUtil.getFullLocaleCode(context);
-        return this! + '${linkSymbol}locale=$lang';
+        return '${this!}${'${linkSymbol}locale=$lang'}';
       }
     }
     return this!;

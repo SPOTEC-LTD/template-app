@@ -22,7 +22,7 @@ class CubitApis {
         return [];
       }
 
-      var posts = list.map((e) => PostEntity().fromJson(e)).toList();
+      final posts = list.map((e) => PostEntity().fromJson(e)).toList();
       return posts;
     });
   }

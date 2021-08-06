@@ -1,12 +1,13 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:template/basic/utils/type_util.dart';
 import 'package:template/business/common/views/web_view_page.dart';
 import 'package:template/basic/views/base/base_app_bar.dart';
 
 class CommonRoutesHandler {
   static void configureRouter() {
     _configureNotFoundPage();
-    var appRouter = FluroRouter.appRouter;
+    final appRouter = FluroRouter.appRouter;
     appRouter.define('/webView/webViewPage', handler: webViewPageHandler);
   }
 
@@ -25,8 +26,8 @@ class CommonRoutesHandler {
   }
 }
 
-var webViewPageHandler = Handler(handlerFunc: (context, _) {
-  var params = context?.settings?.arguments as Map;
+Handler webViewPageHandler = Handler(handlerFunc: (context, _) {
+  final params = TypeUtil.safeCast<Map>(context?.settings?.arguments) ?? {};
   return WebViewPage(
     type: WebViewPageType.values[params['typeIndex']],
     url: params['url'],

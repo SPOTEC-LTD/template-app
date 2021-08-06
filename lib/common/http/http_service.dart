@@ -25,13 +25,12 @@ class HttpError {
 
 class HttpService {
   static final Dio _dio = () {
-    var dio = Dio();
+    final dio = Dio();
     dio.options.baseUrl = baseAPIURL;
     dio.options.connectTimeout = 30000;
     dio.options.sendTimeout = 30000;
     dio.options.receiveTimeout = 30000;
-    dio.interceptors
-        .add(LogInterceptor(requestBody: true, responseBody: false));
+    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     return dio;
   }();
 
@@ -85,14 +84,14 @@ class HttpService {
       } else {
         var message = wrapper.header.message;
         if (wrapper.header.messageDetails.isNotEmpty == true) {
-          var values = wrapper.header.messageDetails.values;
-          message = values.reduce((value, element) => value + '\n' + element);
+          final values = wrapper.header.messageDetails.values;
+          message = values.reduce((value, element) => '$value\n$element');
         }
         return Future.error(HttpError(wrapper.header.code, message, false));
       }
     } on DioError catch (e) {
-      var isCancel = e.type == DioErrorType.cancel;
-      var message = HttpErrorHandler.getMessageFromHttpError(e);
+      final isCancel = e.type == DioErrorType.cancel;
+      final message = HttpErrorHandler.getMessageFromHttpError(e);
       return Future.error(HttpError(
           e.response?.statusCode?.toString() ?? '', message, isCancel));
     }
@@ -100,12 +99,12 @@ class HttpService {
 
   /// 上传单个文件
   static Future<T> uploadSingleFile<T>(String filePath, String filename) async {
-    var formData = FormData.fromMap({
+    final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(filePath, filename: filename),
     });
     try {
-      var response = await _dio.post('/oss/file/upload', data: formData);
-      var wrapper = HttpWrapEntity<T>.fromJSON(response.data);
+      final response = await _dio.post('/oss/file/upload', data: formData);
+      final wrapper = HttpWrapEntity<T>.fromJSON(response.data);
       if (wrapper.isRequestSuccess) {
         return wrapper.body!;
       } else {
@@ -113,7 +112,7 @@ class HttpService {
             HttpError(wrapper.header.code, wrapper.header.message, false));
       }
     } on DioError catch (e) {
-      var isCancel = e.type == DioErrorType.cancel;
+      final isCancel = e.type == DioErrorType.cancel;
       throw HttpError(
           e.response?.statusCode.toString() ?? '', e.message, isCancel);
     }
@@ -146,7 +145,7 @@ class HttpService {
       );
       return response.data as T;
     } on DioError catch (e) {
-      var isCancel = e.type == DioErrorType.cancel;
+      final isCancel = e.type == DioErrorType.cancel;
       return Future.error(HttpError(
           e.response?.statusCode?.toString() ?? '', e.message, isCancel));
     }

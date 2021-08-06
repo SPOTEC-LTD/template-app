@@ -14,18 +14,18 @@ class TitleActionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
+      onTap: onTap,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(title),
             height: 60,
             alignment: Alignment.centerLeft,
+            child: Text(title),
           ),
           const Divider(),
         ],
       ),
-      onTap: onTap,
     );
   }
 }

@@ -24,7 +24,7 @@ class CubitDemoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<CubitDemoCubit>();
+    final cubit = context.read<CubitDemoCubit>();
     return Scaffold(
       appBar: BaseAppBar(
         titleText: 'Cubit Demo',
@@ -33,12 +33,12 @@ class CubitDemoView extends StatelessWidget {
           builder: (context, state) {
         return Refresher(
           controller: _refreshController,
-          child: _buildListView(state.posts),
           status: state.refreshStatus,
           isListEmpty: state.posts.isEmpty,
           noMore: state.noMore,
           onRefresh: () async => cubit.refresh(),
           onLoad: () async => cubit.loadMore(),
+          child: _buildListView(state.posts),
         );
       }),
     );
@@ -67,9 +67,9 @@ class _CubitListItem extends StatelessWidget {
     return Column(
       children: [
         Container(
-          child: Text(title),
           height: 60,
           alignment: Alignment.centerLeft,
+          child: Text(title),
         ),
         const Divider(),
       ],
