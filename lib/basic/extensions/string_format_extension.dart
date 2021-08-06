@@ -13,7 +13,7 @@ extension StringFormateExtension on String? {
     bool needNumSign = false,
     String placeholder = '--',
   }) {
-    var result = double.tryParse(this ?? '');
+    final result = double.tryParse(this ?? '');
     return result.formatFinancialNumber(
       maxDigits,
       minDigits: minDigits,
@@ -36,7 +36,7 @@ extension StringFormateExtension on String? {
     String placeholder = '--%',
     bool needPercentSign = true,
   }) {
-    var result = double.tryParse(this ?? '');
+    final result = double.tryParse(this ?? '');
     return result.formatPercentNumber(
       maxDigits,
       minDigits: minDigits,
@@ -58,7 +58,7 @@ extension StringFormateExtension on String? {
     bool needNumSign = false,
     String placeholder = '--',
   }) {
-    var result = double.parse(this ?? '');
+    final result = double.parse(this ?? '');
     return result.formatNormalNumber(
       maxDigits,
       minDigits: minDigits,
@@ -71,7 +71,7 @@ extension StringFormateExtension on String? {
   ///
   /// [digits] 保留对应的小数位数
   String? noRoundDownString(int digits) {
-    var num = double.tryParse(this ?? '');
+    final num = double.tryParse(this ?? '');
     return num.noRoundDownNum(digits);
   }
 }

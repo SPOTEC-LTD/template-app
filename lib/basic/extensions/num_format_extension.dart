@@ -16,10 +16,10 @@ extension NumFormatExtension on num? {
     if (this == null) {
       return placeholder;
     }
-    var format = NumberFormat('#,##0');
+    final format = NumberFormat('#,##0');
     format.maximumFractionDigits = maxDigits;
     format.minimumFractionDigits = minDigits ?? maxDigits;
-    var result = format.format(this);
+    final result = format.format(this);
     if (needNumSign && this! > 0) {
       return '+$result';
     } else {
@@ -44,10 +44,10 @@ extension NumFormatExtension on num? {
     if (this == null) {
       return placeholder;
     }
-    var format = NumberFormat('#.#%');
+    final format = NumberFormat('#.#%');
     format.maximumFractionDigits = maxDigits;
     format.minimumFractionDigits = minDigits ?? maxDigits;
-    var result = needPercentSign
+    final result = needPercentSign
         ? format.format(this)
         : format.format(this).replaceAll('%', '');
     if (needNumSign && this! > 0) {
@@ -72,10 +72,10 @@ extension NumFormatExtension on num? {
     if (this == null) {
       return placeholder;
     }
-    var format = NumberFormat('0.#');
+    final format = NumberFormat('0.#');
     format.maximumFractionDigits = maxDigits;
     format.minimumFractionDigits = minDigits ?? maxDigits;
-    var result = format.format(this);
+    final result = format.format(this);
     if (needNumSign && this! > 0) {
       return '+$result';
     } else {
@@ -91,8 +91,8 @@ extension NumFormatExtension on num? {
       return '';
     }
     // 存在一个问题：最后一位是9的话就会出现忘上入，所以多+3位小数再截取
-    digits = digits + 3;
-    var numStr = this!.toStringAsFixed(digits);
+    digits += 3;
+    final numStr = this!.toStringAsFixed(digits);
     return numStr.substring(0, numStr.lastIndexOf('.') + digits - 2);
   }
 

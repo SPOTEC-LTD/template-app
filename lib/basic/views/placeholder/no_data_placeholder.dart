@@ -13,7 +13,7 @@ class NoDataPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Spacer(flex: 1),
+        const Spacer(),
         Image.asset(
           ImageNames.common_img_no_data,
           width: 178,

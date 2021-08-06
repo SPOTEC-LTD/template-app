@@ -15,8 +15,8 @@ class InkWidget extends StatelessWidget {
       child: Ink(
         child: InkWell(
           splashColor: Colors.black12,
-          child: content,
           onTap: () {},
+          child: content,
         ),
       ),
     );

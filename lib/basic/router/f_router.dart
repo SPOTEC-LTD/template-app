@@ -7,18 +7,12 @@ export 'package:fluro/fluro.dart';
 
 class FRouter {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
-  static FRouter? _instance;
-
-  static FRouter _getInstance() {
-    _instance ??= FRouter._();
-    return _instance!;
-  }
+  static final FRouter _instance = FRouter._();
+  factory FRouter() => _instance;
+  FRouter._();
 
   static BuildContext? get rootContext =>
       rootNavigatorKey.currentState?.overlay?.context;
-
-  factory FRouter() => _getInstance();
-  FRouter._();
 
   /// 远程路由以该字段开头的，将会传递给本地路由
   String? _innerUrl;
@@ -96,12 +90,13 @@ class FRouter {
     bool animated = true,
     RouteSettings? routeSettings,
   }) {
-    var appRouter = FluroRouter.appRouter;
-    var match = FluroRouter.appRouter.match(path);
-    var appRoute = match?.route;
-    Handler handler =
-        (appRoute != null ? appRoute.handler : appRouter.notFoundHandler);
-    var parameters = match?.parameters ?? <String, List<String>>{};
+    final appRouter = FluroRouter.appRouter;
+    final match = FluroRouter.appRouter.match(path);
+    final appRoute = match?.route;
+    final handler = appRoute != null
+        ? (appRoute.handler as Handler)
+        : appRouter.notFoundHandler;
+    final parameters = match?.parameters ?? <String, List<String>>{};
 
     FocusManager.instance.primaryFocus?.unfocus();
     return showCupertinoModalBottomSheet<T>(
@@ -109,7 +104,7 @@ class FRouter {
       settings: routeSettings,
       duration: animated ? const Duration(milliseconds: 250) : Duration.zero,
       builder: (realContext) {
-        return handler.handlerFunc(realContext, parameters) ?? Container();
+        return handler?.handlerFunc(realContext, parameters) ?? Container();
       },
     );
   }
@@ -117,7 +112,7 @@ class FRouter {
   /// 在嵌套的子路由中pop页面；根据传入的GlobalKey，获取Navigator
   /// 如果Navigator已推出非根子页面，则pop该页面，如果只有根页面，则pop整个Navigator
   Future<bool> popInNestedNavigator({required GlobalKey key}) async {
-    var state = key.currentState as NavigatorState?;
+    final state = key.currentState as NavigatorState?;
     if (state == null) return true;
     if (state.canPop()) {
       state.pop();
@@ -136,7 +131,7 @@ class FRouter {
     /// 判断远程路由是否以_innerUrl开头，确定是否传递给本地路由
     final isUrlInner = _innerUrl != null && url.startsWith(_innerUrl!);
     if (isUrlInner) {
-      var uri = Uri.parse(url);
+      final uri = Uri.parse(url);
       if (rootContext == null) {
         return;
       }

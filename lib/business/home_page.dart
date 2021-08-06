@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pushWebPage(BuildContext context) {
-    var params = FRouter()
+    final params = FRouter()
         .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
     FRouter().push(
       context,
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _presentWebPage(BuildContext context) {
-    var params = FRouter()
+    final params = FRouter()
         .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
     FRouter().present(
       context,
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pageSheetWebPage(BuildContext context) {
-    var params = FRouter()
+    final params = FRouter()
         .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
     FRouter().present(
       context,
@@ -115,11 +115,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pushRemoteWebPage(BuildContext context) {
-    var params = FRouter()
+    final params = FRouter()
         .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
     params.removeWhere((key, value) => value == null);
     params.updateAll((key, value) => value.toString());
-    var uri = Uri(
+    final uri = Uri(
       scheme: 'http',
       host: 'app.template.com',
       path: 'webView/webViewPage',

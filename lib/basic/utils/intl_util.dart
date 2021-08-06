@@ -42,16 +42,16 @@ class IntlUtil {
   static const _languageCodeKey = 'languageCodeKey';
 
   static String getFullLocaleCode(BuildContext context) {
-    var locale = Localizations.localeOf(context);
+    final locale = Localizations.localeOf(context);
     if (locale.countryCode == null) {
       return locale.languageCode;
     } else {
-      return locale.languageCode + '_' + locale.countryCode!;
+      return '${locale.languageCode}_${locale.countryCode!}';
     }
   }
 
   static Locale getLocale() {
-    var preferLanguageCode = SpUtil.getString(_languageCodeKey);
+    final preferLanguageCode = SpUtil.getString(_languageCodeKey);
     var languageCode = Intl.getCurrentLocale();
     if (preferLanguageCode != null) {
       languageCode = preferLanguageCode;

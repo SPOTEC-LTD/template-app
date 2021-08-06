@@ -71,7 +71,7 @@ class WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     var url = widget.url;
     if (widget.url != null && widget.showAppBar == false) {
-      url = widget.url! + '&topPadding=${SizeUtil.topPadding}';
+      url = '${widget.url!}${'&topPadding=${SizeUtil.topPadding}'}';
     }
 
     return Scaffold(
@@ -100,14 +100,12 @@ class WebViewPageState extends State<WebViewPage> {
   }
 
   PreferredSizeWidget _buildAppBar() {
-    var appBar = BaseAppBar(
+    final appBar = BaseAppBar(
       backgroundColor: ColorNames.lineD8D8D8,
-      brightness: Brightness.dark,
       titleText: _title,
-      isCenter: true,
       leading: GestureDetector(
-        child: Image.asset(IconNames.nav_icon_back_white),
         onTap: _popIfNeeded,
+        child: Image.asset(IconNames.nav_icon_back_white),
       ),
       actions: [
         _buildShareButton(),

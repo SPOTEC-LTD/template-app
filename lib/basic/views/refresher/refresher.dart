@@ -51,14 +51,14 @@ class Refresher extends StatelessWidget {
   Widget build(BuildContext context) {
     _finishAnimate();
 
-    var header = this.header ?? NormalRefreshHedaer(textColor: headerTextColor);
-    var footer = this.footer ??
+    final header = this.header ?? NormalRefreshHedaer(textColor: headerTextColor);
+    final footer = this.footer ??
         NormalRefreshFooter(
           textColor: footerTextColor,
           enableInfiniteLoad: enableInfiniteLoad,
           padding: EdgeInsets.only(bottom: bottomPadding),
         );
-    var emptyWidget = this.emptyWidget ?? _buildEmptyWidget();
+    final emptyWidget = this.emptyWidget ?? _buildEmptyWidget();
 
     return EasyRefresh(
       firstRefresh: firstRefresh,

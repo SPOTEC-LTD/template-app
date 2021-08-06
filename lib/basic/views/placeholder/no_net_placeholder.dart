@@ -26,7 +26,7 @@ class NoNetPlaceholder extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Spacer(flex: 1),
+          const Spacer(),
           Image.asset(
             ImageNames.common_img_no_net,
             width: 178,

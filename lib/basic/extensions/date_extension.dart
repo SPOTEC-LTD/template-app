@@ -101,7 +101,7 @@ extension IntDateTimeExtension on int? {
   /// [dateSeparater] 年月日之间的分隔符
   /// [timeSeparater] 时分秒之间的分隔符
   /// [placeholder] 当前字符串无法转为日期时的占位符
-  String? toFormattedDateTime({
+  String toFormattedDateTime({
     DateFormatType formateType = DateFormatType.ymdhms,
     TimestampType stampType = TimestampType.milli,
     String? dateSeparater,

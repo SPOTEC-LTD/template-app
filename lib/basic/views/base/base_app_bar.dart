@@ -70,16 +70,16 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    var backColorFormBrightness = brightness == Brightness.dark
+    final backColorFormBrightness = brightness == Brightness.dark
         ? ColorNames.background0E1D34
         : ColorNames.backgroundWhite;
-    var realBackgroundColor = backgroundColor ?? backColorFormBrightness;
+    final realBackgroundColor = backgroundColor ?? backColorFormBrightness;
 
-    var textColor = brightness == Brightness.dark
+    final textColor = brightness == Brightness.dark
         ? ColorNames.textWhite
         : ColorNames.text242424;
 
-    var title = titleText != null
+    final title = titleText != null
         ? Text(
             titleText!,
             style: TextStyle(
@@ -100,11 +100,11 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: isCenter,
       bottom: showLine == true
           ? PreferredSize(
+              preferredSize: const Size.fromHeight(1),
               child: Container(
                 color: ColorNames.lineD8D8D8,
                 height: 1,
               ),
-              preferredSize: const Size.fromHeight(1),
             )
           : null,
     );

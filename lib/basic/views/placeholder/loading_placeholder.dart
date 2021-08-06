@@ -14,7 +14,7 @@ class LoadingPlaceholder extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Spacer(flex: 1),
+        const Spacer(),
         SizedBox(
           width: 28,
           height: 28,

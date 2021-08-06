@@ -52,7 +52,6 @@ class InkButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget button = TextButton(
       onPressed: onPressed,
-      child: child,
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all(foregroundColor),
         backgroundColor: MaterialStateProperty.all(backgroundColor),
@@ -67,6 +66,7 @@ class InkButton extends StatelessWidget {
             enableInk ? null : MaterialStateProperty.all(Colors.transparent),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
+      child: child,
     );
 
     Gradient? currentGradient;
@@ -88,9 +88,9 @@ class InkButton extends StatelessWidget {
       // ExpandTapWidget的createRenderObject不会因为setstate方法重新调用，导致onTap方法始终为第一次传入的方法
       // 每次setstate都会重新创建一个ExpandTapWidget对象，不复用
       key: UniqueKey(),
-      child: button,
       onTap: onPressed ?? () {},
       tapPadding: tapPadding,
+      child: button,
     );
   }
 }
