@@ -15,3 +15,4 @@ linter:
     join_return_with_assignment: false
     avoid_positional_boolean_parameters: false
     sort_pub_dependencies: false
+    type_annotate_public_apis: false
