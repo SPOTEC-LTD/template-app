@@ -39,8 +39,8 @@ class ToastUtil {
         gravity: gravity,
       );
     } else {
-      if (FRouter.rootContext != null) {
-        _fToast.init(FRouter.rootContext!);
+      if (FRouter.rootOverlayContext != null) {
+        _fToast.init(FRouter.rootOverlayContext!);
         _settedContext = true;
         show(message, toastDuration: toastDuration, gravity: gravity);
       }

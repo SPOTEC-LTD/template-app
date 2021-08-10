@@ -2,15 +2,24 @@ import 'package:intl/intl.dart';
 
 /// 日期的格式化类型
 enum DateFormatType {
-  ymdhmss, // yyyy-MM-dd HH:mm:ss.SSS
-  ymdhms, // yyyy-MM-dd HH:mm:ss
-  ymdhm, // yyyy-MM-dd HH:mm
-  ymd, // yyyy-MM-dd
-  ym, // yyyy-MM
-  mdhm, // MM-dd HH:mm
-  md, // MM-dd
-  hms, // HH:mm:ss
-  hm, // HH:mm
+  // yyyy-MM-dd HH:mm:ss.SSS
+  ymdhmss,
+  // yyyy-MM-dd HH:mm:ss
+  ymdhms,
+  // yyyy-MM-dd HH:mm
+  ymdhm,
+  // yyyy-MM-dd
+  ymd,
+  // yyyy-MM
+  ym,
+  // MM-dd HH:mm
+  mdhm,
+  // MM-dd
+  md,
+  // HH:mm:ss
+  hms,
+  // HH:mm
+  hm,
 }
 
 extension DateFormatTypeExtension on DateFormatType {
@@ -18,28 +27,28 @@ extension DateFormatTypeExtension on DateFormatType {
     switch (this) {
       case DateFormatType.ymdhmss:
         return 'yyyy-MM-dd HH:mm:ss.SSS';
-      case DateFormatType.ymdhms: // yyyy-MM-dd HH:mm:ss
+      case DateFormatType.ymdhms:
         return 'yyyy-MM-dd HH:mm:ss';
-      case DateFormatType.ymdhm: // yyyy-MM-dd HH:mm
+      case DateFormatType.ymdhm:
         return 'yyyy-MM-dd HH:mm';
-      case DateFormatType.ymd: // yyyy-MM-dd
+      case DateFormatType.ymd:
         return 'yyyy-MM-dd';
-      case DateFormatType.ym: // yyyy-MM
+      case DateFormatType.ym:
         return 'yyyy-MM';
-      case DateFormatType.mdhm: // MM-dd HH:mm
+      case DateFormatType.mdhm:
         return 'MM-dd HH:mm';
-      case DateFormatType.md: // MM-dd
+      case DateFormatType.md:
         return 'MM-dd';
-      case DateFormatType.hms: // HH:mm:ss
+      case DateFormatType.hms:
         return 'HH:mm:ss';
-      case DateFormatType.hm: // HH:mm
+      case DateFormatType.hm:
         return 'HH:mm';
     }
   }
 }
 
 extension StringDateExtension on String? {
-  /// 将日期字符串转换为DateTime对象
+  /// 将日期字符串转换为 DateTime 对象
   DateTime? toDateTime() {
     if (this == null) {
       return null;
@@ -49,10 +58,10 @@ extension StringDateExtension on String? {
 
   /// 格式化日期字符串
   ///
-  /// [type] 格式化的类型
-  /// [dateSeparater] 年月日之间的分隔符
-  /// [timeSeparater] 时分秒之间的分隔符
-  /// [placeholder] 当前字符串无法转为日期时的占位符
+  /// type 格式化的类型
+  /// dateSeparater 年月日之间的分隔符
+  /// timeSeparater 时分秒之间的分隔符
+  /// placeholder 当前字符串无法转为日期时的占位符
   String toFormattedDateTime({
     DateFormatType type = DateFormatType.ymdhms,
     String? dateSeparater,
@@ -81,7 +90,7 @@ enum TimestampType {
 }
 
 extension IntDateTimeExtension on int? {
-  /// 将时间戳转换为DateTime对象
+  /// 将时间戳转换为 DateTime 对象
   DateTime? toDateTime({TimestampType type = TimestampType.milli}) {
     if (this == null) {
       return null;
@@ -96,11 +105,11 @@ extension IntDateTimeExtension on int? {
 
   /// 将时间戳格式化为字符串
   ///
-  /// [formateType] 格式化的类型
-  /// [stampType] 时间戳是毫秒还是微秒
-  /// [dateSeparater] 年月日之间的分隔符
-  /// [timeSeparater] 时分秒之间的分隔符
-  /// [placeholder] 当前字符串无法转为日期时的占位符
+  /// formateType 格式化的类型
+  /// stampType 时间戳是毫秒还是微秒
+  /// dateSeparater 年月日之间的分隔符
+  /// timeSeparater 时分秒之间的分隔符
+  /// placeholder 当前字符串无法转为日期时的占位符
   String toFormattedDateTime({
     DateFormatType formateType = DateFormatType.ymdhms,
     TimestampType stampType = TimestampType.milli,

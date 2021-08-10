@@ -6,13 +6,19 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 export 'package:fluro/fluro.dart';
 
 class FRouter {
-  static final rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final FRouter _instance = FRouter._();
   factory FRouter() => _instance;
   FRouter._();
+  static final FRouter _instance = FRouter._();
 
-  static BuildContext? get rootContext =>
+  /// 根 Navigator 对应的 key
+  static final rootNavigatorKey = GlobalKey<NavigatorState>();
+
+  /// rootNavigatorKey.currentState?.overlay?.context
+  static BuildContext? get rootOverlayContext =>
       rootNavigatorKey.currentState?.overlay?.context;
+
+  /// 导航页面的生成者，根据传入配置返回 Route
+  static RouteFactory? get generator => FluroRouter.appRouter.generator;
 
   /// 远程路由以该字段开头的，将会传递给本地路由
   String? _innerUrl;
@@ -132,10 +138,10 @@ class FRouter {
     final isUrlInner = _innerUrl != null && url.startsWith(_innerUrl!);
     if (isUrlInner) {
       final uri = Uri.parse(url);
-      if (rootContext == null) {
+      if (rootOverlayContext == null) {
         return;
       }
-      push(rootContext!, uri.path,
+      push(rootOverlayContext!, uri.path,
           routeSettings: RouteSettings(arguments: uri.queryParameters));
     } else if (url.startsWith('http') || url.startsWith('https')) {
       // todo
