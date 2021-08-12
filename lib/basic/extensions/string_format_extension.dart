@@ -1,4 +1,4 @@
-import 'package:template/basic/extensions/num_format_extension.dart';
+import 'num_format_extension.dart';
 
 extension StringFormateExtension on String? {
   /// 根据规定小数点格式化为金融数值

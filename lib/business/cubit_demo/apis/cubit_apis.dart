@@ -1,5 +1,5 @@
-import 'package:template/common/http/http_service.dart';
-import 'package:template/business/cubit_demo/models/post_entity.dart';
+import '../../../common/http/http_service.dart';
+import '../models/post_entity.dart';
 
 class CubitApis {
   static const _getPostsUrl = 'https://jsonplaceholder.typicode.com/posts';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:template/basic/utils/toast_util.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
-import 'package:template/common/views/title_action_item.dart';
+import '../../basic/utils/toast_util.dart';
+import '../../basic/views/base/base_app_bar.dart';
+import '../../common/views/title_action_item.dart';
 
 class ToastPage extends StatelessWidget {
   const ToastPage({Key? key}) : super(key: key);

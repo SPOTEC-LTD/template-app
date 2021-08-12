@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/basic/utils/intl_util.dart';
-import 'package:template/common/consts/service_urls.dart';
+import '../../basic/utils/intl_util.dart';
+import '../consts/service_urls.dart';
 
 extension StringBusiness on String? {
   /// 获取国际化的url地址

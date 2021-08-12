@@ -1,8 +1,9 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:template/basic/utils/type_util.dart';
-import 'package:template/business/common/views/web_view_page.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
+
+import '../../basic/utils/type_util.dart';
+import '../../basic/views/base/base_app_bar.dart';
+import '../../business/common/views/web_view_page.dart';
 
 class CommonRoutesHandler {
   static void configureRouter() {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/basic/utils/hud_util.dart';
-import 'package:template/basic/utils/intl_util.dart';
-import 'package:template/basic/utils/sp_util.dart';
-import 'package:template/basic/router/f_router.dart';
-import 'package:template/routes/f_router_setup.dart';
 
+import 'basic/router/f_router.dart';
+import 'basic/utils/hud_util.dart';
+import 'basic/utils/intl_util.dart';
+import 'basic/utils/sp_util.dart';
 import 'common/consts/service_urls.dart';
 import 'my_app.dart';
+import 'routes/f_router_setup.dart';
 
 void main() {
   HudUtil.setup(backgroundColor: Colors.greenAccent);

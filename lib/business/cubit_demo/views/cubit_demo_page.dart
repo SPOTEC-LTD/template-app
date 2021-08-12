@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/business/cubit_demo/cubits/cubit_demo_cubit.dart';
-import 'package:template/business/cubit_demo/models/post_entity.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
-import 'package:template/basic/views/refresher/refresher.dart';
+
+import '../../../basic/views/base/base_app_bar.dart';
+import '../../../basic/views/refresher/refresher.dart';
+import '../cubits/cubit_demo_cubit.dart';
+import '../models/post_entity.dart';
 
 class CubitDemoPage extends StatelessWidget {
   const CubitDemoPage({Key? key}) : super(key: key);

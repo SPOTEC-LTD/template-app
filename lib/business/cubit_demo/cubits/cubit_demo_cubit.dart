@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:template/business/cubit_demo/apis/cubit_apis.dart';
-import 'package:template/business/cubit_demo/models/post_entity.dart';
-import 'package:template/basic/views/refresher/refresh_mixin.dart';
-import 'package:template/basic/views/refresher/refresh_status.dart';
+
+import '../../../basic/views/refresher/refresh_mixin.dart';
+import '../../../basic/views/refresher/refresh_status.dart';
+import '../apis/cubit_apis.dart';
+import '../models/post_entity.dart';
 
 part 'cubit_demo_state.dart';
 
