@@ -1,4 +1,4 @@
-import 'package:template/generated/json/base/json_convert_content.dart';
+import '../../generated/json/base/json_convert_content.dart';
 
 import 'http_status_code.dart';
 

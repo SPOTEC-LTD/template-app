@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:template/basic/utils/hud_util.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
-import 'package:template/common/views/title_action_item.dart';
+import '../../basic/utils/hud_util.dart';
+import '../../basic/views/base/base_app_bar.dart';
+import '../../common/views/title_action_item.dart';
 
 class HudPage extends StatelessWidget {
   const HudPage({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:template/basic/utils/type_util.dart';
+import '../../basic/utils/type_util.dart';
 
 class HttpErrorHandler {
   // static Future handlerError(DioError error) {}

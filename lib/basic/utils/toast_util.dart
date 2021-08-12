@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:template/basic/router/f_router.dart';
+import '../router/f_router.dart';
 
 class ToastUtil {
   static final _fToast = FToast();

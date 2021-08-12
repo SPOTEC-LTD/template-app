@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/common/consts/color_names.dart';
-import 'package:template/common/consts/icon_names.dart';
-import 'package:template/common/extension/string_business.dart';
-import 'package:template/business/common/views/easy_web_view.dart';
-import 'package:template/basic/utils/size_util.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
+
+import '../../../basic/utils/size_util.dart';
+import '../../../basic/views/base/base_app_bar.dart';
+import '../../../common/consts/color_names.dart';
+import '../../../common/consts/icon_names.dart';
+import '../../../common/extension/string_business.dart';
+import 'easy_web_view.dart';
 
 export 'package:template/business/common/views/easy_web_view.dart';
 

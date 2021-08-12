@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:template/basic/utils/intl_util.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
-import 'package:template/generated/l10n.dart';
+import '../../../basic/utils/intl_util.dart';
+import '../../../basic/views/base/base_app_bar.dart';
+import '../../../generated/l10n.dart';
 
 class LanguageSettingPage extends StatelessWidget {
   const LanguageSettingPage({Key? key}) : super(key: key);

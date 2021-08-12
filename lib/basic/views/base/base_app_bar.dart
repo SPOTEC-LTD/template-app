@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:template/common/consts/color_names.dart';
-import 'package:template/common/consts/icon_names.dart';
-import 'package:template/basic/utils/size_util.dart';
+import '../../../common/consts/color_names.dart';
+import '../../../common/consts/icon_names.dart';
+import '../../utils/size_util.dart';
 
 // 后续可能添加webView导航
 enum AppBarLeadingType {

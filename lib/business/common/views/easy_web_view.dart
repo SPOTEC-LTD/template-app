@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:template/basic/global_instances.dart';
-import 'package:template/basic/utils/type_util.dart';
-import 'package:template/common/extension/string_business.dart';
-import 'package:template/basic/router/f_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../basic/global_instances.dart';
+import '../../../basic/router/f_router.dart';
+import '../../../basic/utils/type_util.dart';
+import '../../../common/extension/string_business.dart';
 
 enum WebViewPageType {
   richText,

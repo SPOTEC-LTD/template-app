@@ -3,8 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:template/basic/utils/sp_util.dart';
-import 'package:template/generated/l10n.dart';
+
+import '../../generated/l10n.dart';
+import 'sp_util.dart';
 
 class LocaleCubit extends Cubit<LocaleState> {
   LocaleCubit()

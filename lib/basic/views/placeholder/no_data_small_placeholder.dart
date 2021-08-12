@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/common/consts/image_names.dart';
+import '../../../common/consts/image_names.dart';
 
 class NoDataSmallPlaceholder extends StatelessWidget {
   final Color? color;

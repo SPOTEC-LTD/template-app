@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:template/basic/global_instances.dart';
-import 'package:template/common/views/title_action_item.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/business/cubit_demo/views/cubit_demo_page.dart';
-import 'package:template/business/language_setting/views/language_setting_page.dart';
-import 'package:template/business/util_demo/utils_page.dart';
-import 'package:template/routes/common/f_router_common.dart.dart';
-import 'package:template/basic/router/f_router.dart';
-import 'package:template/basic/views/base/base_app_bar.dart';
+
+import '../basic/global_instances.dart';
+import '../basic/router/f_router.dart';
+import '../basic/views/base/base_app_bar.dart';
+import '../common/views/title_action_item.dart';
+import '../generated/l10n.dart';
+import '../routes/common/f_router_common.dart.dart';
+import 'cubit_demo/views/cubit_demo_page.dart';
+import 'language_setting/views/language_setting_page.dart';
+import 'util_demo/utils_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

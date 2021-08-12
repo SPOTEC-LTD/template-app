@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/generated/json/base/json_convert_content.dart';
+import '../../generated/json/base/json_convert_content.dart';
 
 /// 用来做shared_preferences的存储
 class SpUtil {
