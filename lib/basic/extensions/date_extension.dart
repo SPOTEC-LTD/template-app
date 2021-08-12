@@ -1,3 +1,7 @@
+// Author: Dean.Liu
+// DateTime: 2021/08/12 18:44
+// Description: 将 int、String 转化为日期的分类
+
 import 'package:intl/intl.dart';
 
 /// 日期的格式化类型
@@ -85,7 +89,9 @@ extension StringDateExtension on String? {
 
 /// 时间戳的格式类型
 enum TimestampType {
+  // 毫秒
   milli,
+  // 微秒
   micro,
 }
 
