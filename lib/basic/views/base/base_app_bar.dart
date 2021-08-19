@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../common/consts/color_names.dart';
 import '../../../common/consts/icon_names.dart';
 import '../../utils/size_util.dart';
 
-// 后续可能添加webView导航
+/// 后续可能添加webView导航
 enum AppBarLeadingType {
   back,
   close,
@@ -21,6 +22,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Brightness brightness;
   final bool? isCenter;
   final bool? showLine;
+
   @override
   final Size preferredSize = Size.fromHeight(preferredHeight);
 

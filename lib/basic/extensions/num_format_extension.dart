@@ -1,12 +1,16 @@
+// Author: Dean.Liu
+// DateTime: 2021/08/12 18:45
+
 import 'package:intl/intl.dart';
 
+/// 格式化数值
 extension NumFormatExtension on num? {
   /// 根据规定小数点格式化为金融数值
   ///
   /// [maxDigits] 最大小数位数
   /// [minDigits] 最小小数位数
-  /// [needNumSign] 是否强制显示+、-号
-  /// [placeholder] number为null的返回值，占位符
+  /// [needNumSign] 是否显示 +、- 号
+  /// [placeholder] number 为 null 的返回值，占位符
   String formatFinancialNumber(
     int maxDigits, {
     int? minDigits,
@@ -31,8 +35,8 @@ extension NumFormatExtension on num? {
   ///
   /// [maxDigits] 最大小数位数
   /// [minDigits] 最小小数位数
-  /// [needNumSign] 是否强制显示+、-号
-  /// [placeholder] number为null的返回值，占位符
+  /// [needNumSign] 是否显示 +、- 号
+  /// [placeholder] number 为 null 的返回值，占位符
   /// [needPercentSign] bool 为true是的需要百分号
   String formatPercentNumber(
     int maxDigits, {
@@ -61,8 +65,8 @@ extension NumFormatExtension on num? {
   ///
   /// [maxDigits] 最大小数位数
   /// [minDigits] 最小小数位数
-  /// [needNumSign] 是否强制显示+、-号
-  /// [placeholder] number为null的返回值，占位符
+  /// [needNumSign] 是否显示 +、- 号
+  /// [placeholder] number 为 null 的返回值，占位符
   String formatNormalNumber(
     int maxDigits, {
     int? minDigits,
@@ -85,12 +89,12 @@ extension NumFormatExtension on num? {
 
   /// num 不四舍五入
   ///
-  /// [digits] 保留digits位小数位
+  /// [digits] 保留的小数位数
   String noRoundDownNum(int digits) {
     if (this == null) {
       return '';
     }
-    // 存在一个问题：最后一位是9的话就会出现忘上入，所以多+3位小数再截取
+    // 存在一个问题：最后一位是 9 的话就会出现忘上入，所以多 +3 位小数再截取
     digits += 3;
     final numStr = this!.toStringAsFixed(digits);
     return numStr.substring(0, numStr.lastIndexOf('.') + digits - 2);

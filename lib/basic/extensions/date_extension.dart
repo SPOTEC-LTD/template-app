@@ -1,6 +1,5 @@
 // Author: Dean.Liu
 // DateTime: 2021/08/12 18:44
-// Description: 将 int、String 转化为日期的分类
 
 import 'package:intl/intl.dart';
 
@@ -26,7 +25,7 @@ enum DateFormatType {
   hm,
 }
 
-extension DateFormatTypeExtension on DateFormatType {
+extension _DateFormatTypeExtension on DateFormatType {
   String get name {
     switch (this) {
       case DateFormatType.ymdhmss:
@@ -51,6 +50,7 @@ extension DateFormatTypeExtension on DateFormatType {
   }
 }
 
+/// 将 String 转化为日期
 extension StringDateExtension on String? {
   /// 将日期字符串转换为 DateTime 对象
   DateTime? toDateTime() {
@@ -62,10 +62,9 @@ extension StringDateExtension on String? {
 
   /// 格式化日期字符串
   ///
-  /// type 格式化的类型
-  /// dateSeparater 年月日之间的分隔符
-  /// timeSeparater 时分秒之间的分隔符
-  /// placeholder 当前字符串无法转为日期时的占位符
+  /// [type] 格式化的类型
+  /// [timeSeparater] 时分秒之间的分隔符
+  /// [placeholder] 当前字符串无法转为日期时的占位符
   String toFormattedDateTime({
     DateFormatType type = DateFormatType.ymdhms,
     String? dateSeparater,
@@ -95,6 +94,7 @@ enum TimestampType {
   micro,
 }
 
+/// 将 int 转化为日期
 extension IntDateTimeExtension on int? {
   /// 将时间戳转换为 DateTime 对象
   DateTime? toDateTime({TimestampType type = TimestampType.milli}) {
@@ -109,13 +109,13 @@ extension IntDateTimeExtension on int? {
     }
   }
 
-  /// 将时间戳格式化为字符串
+  /// 将时间戳格式化为日期字符串
   ///
-  /// formateType 格式化的类型
-  /// stampType 时间戳是毫秒还是微秒
-  /// dateSeparater 年月日之间的分隔符
-  /// timeSeparater 时分秒之间的分隔符
-  /// placeholder 当前字符串无法转为日期时的占位符
+  /// [formateType] 格式化的类型
+  /// [stampType] 时间戳是毫秒还是微秒
+  /// [dateSeparater] 年月日之间的分隔符
+  /// [timeSeparater] 时分秒之间的分隔符
+  /// [placeholder] 当前字符串无法转为日期时的占位符
   String toFormattedDateTime({
     DateFormatType formateType = DateFormatType.ymdhms,
     TimestampType stampType = TimestampType.milli,

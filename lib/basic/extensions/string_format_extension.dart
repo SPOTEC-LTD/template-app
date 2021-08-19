@@ -1,12 +1,16 @@
+// Author: Dean.Liu
+// DateTime: 2021/08/12 18:45
+
 import 'num_format_extension.dart';
 
+/// 格式化字符串
 extension StringFormateExtension on String? {
   /// 根据规定小数点格式化为金融数值
   ///
   /// [maxDigits] 最大小数位数
   /// [minDigits] 最小小数位数
-  /// [needNumSign] 是否强制显示+、-号
-  /// [placeholder] number为null的返回值，占位符
+  /// [needNumSign] 是否显示 +、- 号
+  /// [placeholder] number 为 null 的返回值，占位符
   String? formatFinancialString(
     int maxDigits, {
     int minDigits = 0,
@@ -26,9 +30,9 @@ extension StringFormateExtension on String? {
   ///
   /// [maxDigits] 最大小数位数
   /// [minDigits] 最小小数位数
-  /// [needNumSign] 是否强制显示+、-号
-  /// [placeholder] number为null的返回值，占位符
-  /// [needPercentSign] bool 为true是的需要百分号
+  /// [needNumSign] 是否显示 +、- 号
+  /// [placeholder] number 为 null 的返回值，占位符
+  /// [needPercentSign] bool 为 true 是的需要百分号
   String? formatPercentString(
     int maxDigits, {
     int minDigits = 0,
@@ -50,8 +54,8 @@ extension StringFormateExtension on String? {
   ///
   /// [maxDigits] 最大小数位数
   /// [minDigits] 最小小数位数
-  /// [needNumSign] 是否强制显示+、-号
-  /// [placeholder] number为null的返回值，占位符
+  /// [needNumSign] 是否显示 +、- 号
+  /// [placeholder] number 为 null 的返回值，占位符
   String? formatNormalString(
     int maxDigits, {
     int minDigits = 0,

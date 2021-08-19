@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           key: state.key,
           navigatorKey: FRouter.rootNavigatorKey,
-          locale: IntlUtil.getLocale(),
+          locale: IntlUtil.getCurrentLocale(),
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

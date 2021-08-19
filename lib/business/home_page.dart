@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../basic/global_instances.dart';
+import '../basic/basic_instances.dart';
 import '../basic/router/f_router.dart';
 import '../basic/views/base/base_app_bar.dart';
 import '../common/views/title_action_item.dart';
