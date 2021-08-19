@@ -1,10 +1,9 @@
 // Author: Dean.Liu
 // DateTime: 2021/08/12 18:44
-// Description: 通过 Duration 计算剩余的天、时、分、秒、毫秒、微秒，类似取余操作
 
 /// 通过 Duration 计算剩余的天、时、分、秒、毫秒、微秒，类似取余操作
 ///
-/// 如 123 秒，inMinutesRest 为 2 分，inSecondsRest 为 3 秒
+/// 如 123 秒，[inMinutesRest] 为 2 分，[inSecondsRest] 为 3 秒
 extension RestTimeOnDuration on Duration {
   /// 还剩多少天
   int get inDaysRest => inDays;
