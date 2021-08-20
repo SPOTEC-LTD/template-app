@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: BaseAppBar(
         titleText: S.of(context).homeTitle,
-        leading: Container(),
       ),
       body: ListView(
         children: [

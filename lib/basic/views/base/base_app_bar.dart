@@ -1,114 +1,147 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/consts/color_names.dart';
-import '../../../common/consts/icon_names.dart';
 import '../../utils/size_util.dart';
 
-/// 后续可能添加webView导航
-enum AppBarLeadingType {
-  back,
-  close,
-}
-
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Color? backgroundColor;
-  final Widget? leading;
-  final AppBarLeadingType leadingType;
-  final VoidCallback? leadingAction;
-  final Widget? title;
-  final String? titleText;
-  final List<Widget>? actions;
-  final double? elevation;
-  final Brightness brightness;
-  final bool? isCenter;
-  final bool? showLine;
-
-  @override
-  final Size preferredSize = Size.fromHeight(preferredHeight);
-
+  /// 创建安卓风格的导航栏
+  ///
+  /// 设置 [backgroundColor] 后 [lightBackgroundColor]、[darkBackgroundColor] 都会失效
+  /// 设置 [backButton] 后 [backImage]、[backCallback] 都会失效
+  /// 设置 [title] 后 [titleText]、[lightTitleColor]、[darkTitleColor] 都会失效
   BaseAppBar({
     Key? key,
+    this.brightness,
     this.backgroundColor,
+    this.lightBackgroundColor,
+    this.darkBackgroundColor,
+    this.elevation,
+    this.backButton,
+    this.backImage,
+    this.backCallback,
     this.leading,
-    this.leadingType = AppBarLeadingType.back,
-    this.leadingAction,
     this.title,
     this.titleText,
+    this.lightTitleColor,
+    this.darkTitleColor,
     this.actions,
-    this.elevation,
-    this.brightness = Brightness.dark,
-    this.isCenter = true,
-    this.showLine = false,
+    this.bottomLine,
   }) : super(key: key);
 
-  static double preferredHeight = SizeUtil.appBarHeight;
+  /// 设置状态栏文字颜色，[Brightness.dark] 对应白色文字，[Brightness.light] 对应黑色文字
+  final Brightness? brightness;
+
+  /// 背景色
+  final Color? backgroundColor;
+
+  /// 默认的浅色背景色，对应 [Brightness.dark]
+  final Color? lightBackgroundColor;
+
+  /// 默认的深色背景色，对应 [Brightness.light]
+  final Color? darkBackgroundColor;
+
+  /// 设置导航栏底部阴影范围
+  final double? elevation;
+
+  /// 返回按钮
+  final Widget? backButton;
+
+  /// 返回按钮图片地址
+  final String? backImage;
+
+  /// 返回按钮事件
+  final VoidCallback? backCallback;
+
+  /// 左侧额外的组件，位于返回按钮后
+  final Widget? leading;
+
+  /// 标题控件
+  final Widget? title;
+
+  /// 标题文本
+  final String? titleText;
+
+  /// 默认的浅色文字颜色，对应 [Brightness.dark]
+  final Color? lightTitleColor;
+
+  /// 默认的深色文字颜色，对应 [Brightness.light]
+  final Color? darkTitleColor;
+
+  /// 导航栏右侧按钮
+  final List<Widget>? actions;
+
+  /// 导航栏底部分割线
+  final PreferredSize? bottomLine;
+
+  @override
+  final Size preferredSize = Size.fromHeight(SizeUtil.appBarHeight);
+
+  bool canPop(BuildContext context) {
+    final parentRoute = ModalRoute.of(context);
+    return parentRoute?.canPop ?? false;
+  }
+
+  Widget _buildBackWidget(BuildContext context) {
+    if (backButton != null) {
+      return backButton!;
+    }
+    if (!canPop(context)) {
+      return const SizedBox.shrink();
+    }
+    return IconButton(
+      padding: EdgeInsets.zero,
+      icon: backImage == null
+          ? const Icon(Icons.arrow_back_ios)
+          : Image.asset(backImage!),
+      onPressed: () {
+        if (backCallback == null) {
+          Navigator.maybePop(context);
+        } else {
+          backCallback?.call();
+        }
+      },
+    );
+  }
+
+  Widget? _buildTitleWidget(BuildContext context) {
+    if (title != null) {
+      return title;
+    }
+    if (titleText == null) {
+      return null;
+    }
+    final textColor =
+        brightness == Brightness.dark ? lightTitleColor : darkTitleColor;
+    return Text(
+      titleText!,
+      style: TextStyle(
+        color: textColor,
+        fontSize: 18,
+        fontWeight: FontWeight.normal,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    var leading = this.leading;
-    if (leading == null) {
-      String leadingImage;
-      switch (leadingType) {
-        case AppBarLeadingType.back:
-          leadingImage = brightness == Brightness.dark
-              ? IconNames.nav_icon_back_white
-              : IconNames.nav_icon_back_gray;
-          break;
-        case AppBarLeadingType.close:
-          leadingImage = brightness == Brightness.dark
-              ? IconNames.nav_icon_close_white
-              : IconNames.nav_icon_close_gray;
-          break;
-      }
-      leading = IconButton(
-        icon: Image.asset(leadingImage),
-        onPressed: () {
-          if (leadingAction == null) {
-            Navigator.maybePop(context);
-          } else {
-            leadingAction?.call();
-          }
-        },
-      );
-    }
+    final leftWidgets = Row(children: [
+      _buildBackWidget(context),
+      leading ?? const SizedBox.shrink(),
+    ]);
 
     final backColorFormBrightness = brightness == Brightness.dark
-        ? ColorNames.background0E1D34
-        : ColorNames.backgroundWhite;
-    final realBackgroundColor = backgroundColor ?? backColorFormBrightness;
-
-    final textColor = brightness == Brightness.dark
-        ? ColorNames.textWhite
-        : ColorNames.text242424;
-
-    final title = titleText != null
-        ? Text(
-            titleText!,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
-            ),
-          )
-        : this.title;
+        ? lightBackgroundColor
+        : darkBackgroundColor;
+    final backgroundColor = this.backgroundColor ?? backColorFormBrightness;
 
     return AppBar(
-      backgroundColor: realBackgroundColor,
-      leading: leading,
-      title: title,
+      backgroundColor: backgroundColor,
+      leading: leftWidgets,
+      title: _buildTitleWidget(context),
       actions: actions,
-      elevation: elevation ?? 0,
+      elevation: elevation,
       brightness: brightness,
-      centerTitle: isCenter,
-      bottom: showLine == true
-          ? PreferredSize(
-              preferredSize: const Size.fromHeight(1),
-              child: Container(
-                color: ColorNames.lineD8D8D8,
-                height: 1,
-              ),
-            )
-          : null,
+      centerTitle: true,
+      bottom: bottomLine,
     );
   }
 }
