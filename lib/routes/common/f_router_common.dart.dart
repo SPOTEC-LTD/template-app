@@ -3,7 +3,9 @@ import '../../basic/router/f_router.dart';
 extension FRouterCommonExtension on FRouter {
   String get webViewPage => '/webView/webViewPage';
 
-  /// 0-富文本 1-url
+  /// 返回网页参数 map
+  ///
+  /// [typeIndex] 网页加载数据的类型 0-富文本 1-url
   Map<String, Object?> webViewPageParams({
     required int typeIndex,
     String? url,
@@ -13,7 +15,7 @@ extension FRouterCommonExtension on FRouter {
     bool showShareButton = true,
   }) {
     return {
-      'typeIndex': typeIndex,
+      'typeIndex': typeIndex.toString(),
       'url': url,
       'richText': richText,
       'title': title,

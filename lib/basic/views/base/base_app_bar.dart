@@ -5,9 +5,7 @@ import '../../utils/size_util.dart';
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// 创建安卓风格的导航栏
   ///
-  /// 设置 [backgroundColor] 后 [lightBackgroundColor]、[darkBackgroundColor] 都会失效
-  /// 设置 [backButton] 后 [backImage]、[backCallback] 都会失效
-  /// 设置 [title] 后 [titleText]、[lightTitleColor]、[darkTitleColor] 都会失效
+  /// 设置 [title] 后 [titleText]、[titleColor] 都会失效
   BaseAppBar({
     Key? key,
     this.brightness,
@@ -60,24 +58,28 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize = Size.fromHeight(SizeUtil.appBarHeight);
 
   Widget _buildBackWidget(BuildContext context) {
-    // 是否可以 pop，即是否是 navigator 的根 widget
     final canPop = ModalRoute.of(context)?.canPop ?? false;
     final currentNavigator = Navigator.of(context);
     final rootNavigator = Navigator.of(context, rootNavigator: true);
     final isInRootNavigator = currentNavigator == rootNavigator;
+    // 当前 route 在根 navigator 的堆栈中，且不可以执行 pop 操作，则不显示返回、关闭按钮
     if (!canPop && isInRootNavigator) {
       return const SizedBox.shrink();
     }
+    // 当前 route 是否是嵌套 navigator 的 根路由
+    // 是嵌套 navigator 的根路由，则显示关闭图标，点击时使用 rootNavigator pop
+    // 不是嵌套 navigator 的根路由，则显示返回图标，点击时使用 currentNavigator pop
+    final isNestedNavigatorFirstRoute = !isInRootNavigator && !canPop;
     return IconButton(
       padding: EdgeInsets.zero,
       icon: backImage == null
-          ? isInRootNavigator
-              ? const Icon(Icons.arrow_back_ios)
-              : const Icon(Icons.close)
+          ? isNestedNavigatorFirstRoute
+              ? const Icon(Icons.close)
+              : const Icon(Icons.arrow_back_ios)
           : Image.asset(backImage!),
       onPressed: () {
         if (backCallback == null) {
-          if (!isInRootNavigator && !canPop) {
+          if (isNestedNavigatorFirstRoute) {
             rootNavigator.maybePop();
           } else {
             currentNavigator.maybePop();
