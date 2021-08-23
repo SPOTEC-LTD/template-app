@@ -31,8 +31,9 @@ class CommonRoutesHandler {
 
 Handler webViewPageHandler = Handler(handlerFunc: (context, _) {
   final params = TypeUtil.safeCast<Map>(context?.settings?.arguments) ?? {};
+
   return WebViewPage(
-    type: WebViewPageType.values[params['typeIndex']],
+    type: WebViewPageType.values[int.tryParse(params['typeIndex']) ?? 0],
     url: params['url'],
     richText: params['richText'],
     title: params['title'],
