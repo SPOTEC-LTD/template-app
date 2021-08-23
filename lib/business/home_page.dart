@@ -10,6 +10,7 @@ import '../generated/l10n.dart';
 import '../routes/common/f_router_common.dart.dart';
 import 'cubit_demo/views/cubit_demo_page.dart';
 import 'language_setting/views/language_setting_page.dart';
+import 'route_demo/route_home_page.dart';
 import 'util_demo/utils_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,6 +42,10 @@ class _HomePageState extends State<HomePage> {
           TitleActionItem(
             title: 'Cubit Demo',
             onTap: () => _pushCubitPage(context),
+          ),
+          TitleActionItem(
+            title: 'Route Demo',
+            onTap: () => _pushRouteDemoPage(context),
           ),
           TitleActionItem(
             title: 'Push Web Page',
@@ -81,6 +86,12 @@ class _HomePageState extends State<HomePage> {
         return const CubitDemoPage();
       }),
     );
+  }
+
+  void _pushRouteDemoPage(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return const RouteHomePage();
+    }));
   }
 
   void _pushWebPage(BuildContext context) {
@@ -129,7 +140,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pushLanguageSettingPage(BuildContext context) {
-    Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return const LanguageSettingPage();
     }));
   }

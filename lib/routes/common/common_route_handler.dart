@@ -1,15 +1,17 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
+import '../../basic/router/f_router.dart';
 import '../../basic/utils/type_util.dart';
 import '../../basic/views/base/base_app_bar.dart';
 import '../../business/common/views/web_view_page.dart';
+import 'f_router_common.dart.dart';
 
 class CommonRoutesHandler {
   static void configureRouter() {
     _configureNotFoundPage();
     final appRouter = FluroRouter.appRouter;
-    appRouter.define('/webView/webViewPage', handler: webViewPageHandler);
+    appRouter.define(FRouter().webViewPage, handler: webViewPageHandler);
   }
 
   static void _configureNotFoundPage() {
