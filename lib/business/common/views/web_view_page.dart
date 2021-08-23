@@ -104,10 +104,8 @@ class WebViewPageState extends State<WebViewPage> {
     final appBar = BaseAppBar(
       backgroundColor: ColorNames.lineD8D8D8,
       titleText: _title,
-      backButton: GestureDetector(
-        onTap: _popIfNeeded,
-        child: Image.asset(IconNames.nav_icon_back_white),
-      ),
+      backImage: IconNames.nav_icon_back_white,
+      backCallback: _popIfNeeded,
       actions: [
         _buildShareButton(),
       ],

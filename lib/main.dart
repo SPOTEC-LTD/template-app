@@ -11,14 +11,13 @@ import 'routes/f_router_setup.dart';
 
 void main() {
   HudUtil.setup(backgroundColor: Colors.greenAccent);
-  // 基础组件的配置
   FRouter().setup(innerUrl);
-  // 通用组件的配置
-  FRouter().configureRoutes();
   // 必须要添加这个进行初始化 否则SpUtil.setup()报错
   WidgetsFlutterBinding.ensureInitialized();
   // 确保后续步骤可以正常存取shared_preferences的数据
   SpUtil.setup().then((value) {
+    // 各模块路由路径配置
+    FRouter().configureRoutes();
     runApp(BlocProvider(
       create: (context) => LocaleCubit(),
       child: const MyApp(),

@@ -12,17 +12,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     this.brightness,
     this.backgroundColor,
-    this.lightBackgroundColor,
-    this.darkBackgroundColor,
     this.elevation,
-    this.backButton,
     this.backImage,
     this.backCallback,
     this.leading,
     this.title,
     this.titleText,
-    this.lightTitleColor,
-    this.darkTitleColor,
+    this.titleColor,
     this.actions,
     this.bottomLine,
   }) : super(key: key);
@@ -33,17 +29,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// 背景色
   final Color? backgroundColor;
 
-  /// 默认的浅色背景色，对应 [Brightness.dark]
-  final Color? lightBackgroundColor;
-
-  /// 默认的深色背景色，对应 [Brightness.light]
-  final Color? darkBackgroundColor;
-
   /// 设置导航栏底部阴影范围
   final double? elevation;
-
-  /// 返回按钮
-  final Widget? backButton;
 
   /// 返回按钮图片地址
   final String? backImage;
@@ -60,11 +47,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// 标题文本
   final String? titleText;
 
-  /// 默认的浅色文字颜色，对应 [Brightness.dark]
-  final Color? lightTitleColor;
-
-  /// 默认的深色文字颜色，对应 [Brightness.light]
-  final Color? darkTitleColor;
+  /// 标题文本颜色
+  final Color? titleColor;
 
   /// 导航栏右侧按钮
   final List<Widget>? actions;
@@ -75,26 +59,29 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize = Size.fromHeight(SizeUtil.appBarHeight);
 
-  bool canPop(BuildContext context) {
-    final parentRoute = ModalRoute.of(context);
-    return parentRoute?.canPop ?? false;
-  }
-
   Widget _buildBackWidget(BuildContext context) {
-    if (backButton != null) {
-      return backButton!;
-    }
-    if (!canPop(context)) {
+    // 是否可以 pop，即是否是 navigator 的根 widget
+    final canPop = ModalRoute.of(context)?.canPop ?? false;
+    final currentNavigator = Navigator.of(context);
+    final rootNavigator = Navigator.of(context, rootNavigator: true);
+    final isInRootNavigator = currentNavigator == rootNavigator;
+    if (!canPop && isInRootNavigator) {
       return const SizedBox.shrink();
     }
     return IconButton(
       padding: EdgeInsets.zero,
       icon: backImage == null
-          ? const Icon(Icons.arrow_back_ios)
+          ? isInRootNavigator
+              ? const Icon(Icons.arrow_back_ios)
+              : const Icon(Icons.close)
           : Image.asset(backImage!),
       onPressed: () {
         if (backCallback == null) {
-          Navigator.maybePop(context);
+          if (!isInRootNavigator && !canPop) {
+            rootNavigator.maybePop();
+          } else {
+            currentNavigator.maybePop();
+          }
         } else {
           backCallback?.call();
         }
@@ -109,12 +96,10 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (titleText == null) {
       return null;
     }
-    final textColor =
-        brightness == Brightness.dark ? lightTitleColor : darkTitleColor;
     return Text(
       titleText!,
       style: TextStyle(
-        color: textColor,
+        color: titleColor,
         fontSize: 18,
         fontWeight: FontWeight.normal,
       ),
@@ -127,11 +112,6 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       _buildBackWidget(context),
       leading ?? const SizedBox.shrink(),
     ]);
-
-    final backColorFormBrightness = brightness == Brightness.dark
-        ? lightBackgroundColor
-        : darkBackgroundColor;
-    final backgroundColor = this.backgroundColor ?? backColorFormBrightness;
 
     return AppBar(
       backgroundColor: backgroundColor,
