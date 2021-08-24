@@ -1,6 +1,10 @@
 import '../../basic/router/f_router.dart';
 
 extension FRouterCommonExtension on FRouter {
+  /// 参数为空的时候，显示的异常页面
+  String get routeParamNullPage => '/routeParamNullPage';
+
+  /// 通用内部网页
   String get webViewPage => '/webView/webViewPage';
 
   /// 返回网页参数 map
@@ -15,7 +19,7 @@ extension FRouterCommonExtension on FRouter {
     bool showShareButton = true,
   }) {
     return {
-      'typeIndex': typeIndex.toString(),
+      'typeIndex': typeIndex,
       'url': url,
       'richText': richText,
       'title': title,

@@ -62,13 +62,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     final currentNavigator = Navigator.of(context);
     final rootNavigator = Navigator.of(context, rootNavigator: true);
     final isInRootNavigator = currentNavigator == rootNavigator;
-    // 当前 route 在根 navigator 的堆栈中，且不可以执行 pop 操作，则不显示返回、关闭按钮
-    if (!canPop && isInRootNavigator) {
+    // 当前 Route 在根 Navigator 的堆栈中，且不可以执行 pop 操作，则不显示返回、关闭按钮
+    if (isInRootNavigator && !canPop) {
       return const SizedBox.shrink();
     }
-    // 当前 route 是否是嵌套 navigator 的 根路由
-    // 是嵌套 navigator 的根路由，则显示关闭图标，点击时使用 rootNavigator pop
-    // 不是嵌套 navigator 的根路由，则显示返回图标，点击时使用 currentNavigator pop
+    // 当前 Route 是否是嵌套 Navigator 的 根路由
+    // 是根路由，则显示关闭图标，点击时使用 rootNavigator pop
+    // 不是根路由，则显示返回图标，点击时使用 currentNavigator pop
     final isNestedNavigatorFirstRoute = !isInRootNavigator && !canPop;
     return IconButton(
       padding: EdgeInsets.zero,

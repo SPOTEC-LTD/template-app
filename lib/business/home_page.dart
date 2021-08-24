@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../basic/basic_instances.dart';
+import '../basic/router/f_router.dart';
 import '../basic/views/base/base_app_bar.dart';
 import '../common/views/title_action_item.dart';
 import '../generated/l10n.dart';
@@ -55,30 +56,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pushUtilsPage(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) {
-        return const UtilsPage();
-      }),
-    );
+    FRouter().pushPage(context, const UtilsPage());
   }
 
   void _pushCubitPage(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) {
-        return const CubitDemoPage();
-      }),
-    );
+    FRouter().pushPage(context, const CubitDemoPage());
   }
 
   void _pushRouteDemoPage(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return const RouteHomePage();
-    }));
+    FRouter().pushPage(context, const RouteHomePage());
   }
 
   void _pushLanguageSettingPage(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return const LanguageSettingPage();
-    }));
+    FRouter().pushPage(context, const LanguageSettingPage());
   }
 }

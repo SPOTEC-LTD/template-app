@@ -1,43 +1,44 @@
 import 'package:fluro/fluro.dart';
-import 'package:flutter/material.dart';
 
+import '../../basic/extensions/string_extension.dart';
 import '../../basic/router/f_router.dart';
-import '../../basic/utils/type_util.dart';
-import '../../basic/views/base/base_app_bar.dart';
+import '../../business/common/views/path_not_found_page.dart';
+import '../../business/common/views/route_param_null_page.dart';
 import '../../business/common/views/web_view_page.dart';
 import 'f_router_common.dart.dart';
 
 class CommonRoutesHandler {
   static void configureRouter() {
-    _configureNotFoundPage();
     final appRouter = FluroRouter.appRouter;
     appRouter.define(FRouter().webViewPage, handler: webViewPageHandler);
+    _configureExceptionPage();
   }
 
-  static void _configureNotFoundPage() {
-    FluroRouter.appRouter.notFoundHandler = Handler(handlerFunc: (context, _) {
-      return Scaffold(
-        appBar: BaseAppBar(
-          titleText: 'Not Found Page',
-          brightness: Brightness.light,
-        ),
-        body: const Center(
-          child: Text('Please Check'),
-        ),
-      );
+  static void _configureExceptionPage() {
+    final appRouter = FluroRouter.appRouter;
+    appRouter.notFoundHandler = Handler(handlerFunc: (context, _) {
+      return const PathNotFoundPage();
     });
+    appRouter.define(FRouter().routeParamNullPage,
+        handler: routeParamNullPageHandler);
   }
 }
 
-Handler webViewPageHandler = Handler(handlerFunc: (context, _) {
-  final params = TypeUtil.safeCast<Map>(context?.settings?.arguments) ?? {};
+Handler routeParamNullPageHandler = Handler(handlerFunc: (context, _) {
+  return const RouteParamNullPage();
+});
 
+Handler webViewPageHandler = Handler(handlerFunc: (context, _) {
+  final params = context?.settings?.arguments as Map<String, String>?;
+  if (params == null || params.isEmpty) {
+    return const RouteParamNullPage();
+  }
   return WebViewPage(
-    type: WebViewPageType.values[int.tryParse(params['typeIndex']) ?? 0],
+    type: WebViewPageType.values[params['typeIndex'].toInt()],
     url: params['url'],
     richText: params['richText'],
     title: params['title'],
-    showAppBar: params['showAppBar'],
-    showShareButton: params['showShareButton'],
+    showAppBar: params['showAppBar'].toBool(),
+    showShareButton: params['showShareButton'].toBool(),
   );
 });

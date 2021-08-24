@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import '../../basic/utils/type_util.dart';
 
 class HttpErrorHandler {
   // static Future handlerError(DioError error) {}
@@ -9,7 +8,7 @@ class HttpErrorHandler {
   static String getMessageFromHttpError(DioError error) {
     // e.error为SocketException时，e.message过长，应测试要求特别处理
     if (error.error is SocketException) {
-      return TypeUtil.safeCast(error.error.message) ?? '';
+      return error.error.message as String? ?? '';
     }
     if (error.response == null) {
       // return S.of(Global.context).httpError;

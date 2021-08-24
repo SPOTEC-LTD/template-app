@@ -8,7 +8,16 @@ extension StringExtension on String? {
     return this?.replaceAll('', '\u200B');
   }
 
-  /// string 转 bool
+  /// String 转 int
+  int toInt() {
+    if (this == null) {
+      return 0;
+    } else {
+      return int.tryParse(this!) ?? 0;
+    }
+  }
+
+  /// String 转 bool
   bool toBool() {
     if (this == null) {
       return false;

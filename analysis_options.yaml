@@ -17,3 +17,4 @@ linter:
     avoid_positional_boolean_parameters: false
     sort_pub_dependencies: false
     type_annotate_public_apis: false
+    sort_child_properties_last: false
