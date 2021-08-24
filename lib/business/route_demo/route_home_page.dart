@@ -8,36 +8,42 @@ import '../../basic/views/base/base_app_bar.dart';
 import '../../common/views/title_action_item.dart';
 import '../../routes/common/f_router_common.dart.dart';
 import '../../routes/route_demo/f_router_route_demo.dart';
+import 'nested_route_home_page.dart';
 
 class RouteHomePage extends StatelessWidget {
   const RouteHomePage({Key? key}) : super(key: key);
 
-  void _pushWebPage(BuildContext context) {
-    final params = FRouter()
-        .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
-    FRouter().push(
-      context,
-      FRouter().webViewPage,
-      routeSettings: RouteSettings(arguments: params),
-    );
+  void _pushPathNestedRouteHome(BuildContext context) {
+    FRouter().pushPath(context, FRouter().nestedRouteHomePage);
   }
 
-  void _presentNestedNavigator(BuildContext context) {
-    FRouter().present(context, FRouter().nestedRouteNavigatorPath);
+  void _pushPageNestedRouteHome(BuildContext context) {
+    FRouter().pushPage(context, const NestedRouteHomePage());
   }
 
-  void _presentNotFullscreen(BuildContext context) {
-    final params = FRouter()
-        .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
-    FRouter().present(
-      context,
-      'Invalid Path',
-      isFullScreen: false,
-      routeSettings: RouteSettings(arguments: params),
-    );
+  void _pushPathInvalidPath(BuildContext context) {
+    FRouter().pushPath(context, 'Invalid Path');
   }
 
-  void _pushRemoteWebPage(BuildContext context) {
+  void _presentPathNestedRouteHome(BuildContext context) {
+    FRouter().presentPath(context, FRouter().nestedRouteNavigatorPath);
+  }
+
+  void _presentPathBottomSheet(BuildContext context) {
+    FRouter().presentPath(context, FRouter().nestedRouteNavigatorPath,
+        isFullscreen: false);
+  }
+
+  void _presentPageNestedRouteHome(BuildContext context) {
+    FRouter().presentPage(context, const NestedRouteHomePage());
+  }
+
+  void _presentPageBottomSheet(BuildContext context) {
+    FRouter()
+        .presentPage(context, const NestedRouteHomePage(), isFullscreen: false);
+  }
+
+  void _pushRemotePath(BuildContext context) {
     final params = FRouter()
         .webViewPageParams(typeIndex: 1, url: 'https://www.baidu.com/');
     params.removeWhere((key, value) => value == null);
@@ -48,7 +54,7 @@ class RouteHomePage extends StatelessWidget {
       path: 'webView/webViewPage',
       queryParameters: params,
     );
-    FRouter().navigateRemote(uri.toString());
+    FRouter().pushRemotePath(uri.toString());
   }
 
   @override
@@ -58,20 +64,36 @@ class RouteHomePage extends StatelessWidget {
       body: ListView(
         children: [
           TitleActionItem(
-            title: 'Push WebView',
-            onTap: () => _pushWebPage(context),
+            title: 'Push Path: NestedRouteHomePage',
+            onTap: () => _pushPathNestedRouteHome(context),
           ),
           TitleActionItem(
-            title: 'Fullscreen Present NestedNavigator',
-            onTap: () => _presentNestedNavigator(context),
+            title: 'Push Page: NestedRouteHomePage',
+            onTap: () => _pushPageNestedRouteHome(context),
           ),
           TitleActionItem(
-            title: 'Not Fullscreen Present Invalid Path',
-            onTap: () => _presentNotFullscreen(context),
+            title: 'Push Path: Invalid Path',
+            onTap: () => _pushPathInvalidPath(context),
           ),
           TitleActionItem(
-            title: 'Remote Push',
-            onTap: () => _pushRemoteWebPage(context),
+            title: 'Present Path Fullscreen: NestedRouteHomePage',
+            onTap: () => _presentPathNestedRouteHome(context),
+          ),
+          TitleActionItem(
+            title: 'Present Path Bottom Sheet: NestedRouteHomePage',
+            onTap: () => _presentPathBottomSheet(context),
+          ),
+          TitleActionItem(
+            title: 'Present Page Fullscreen: NestedRouteHomePage',
+            onTap: () => _presentPageNestedRouteHome(context),
+          ),
+          TitleActionItem(
+            title: 'Present Page Bottom Sheet: NestedRouteHomePage',
+            onTap: () => _presentPageBottomSheet(context),
+          ),
+          TitleActionItem(
+            title: 'Push Remote Path',
+            onTap: () => _pushRemotePath(context),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../basic/router/f_router.dart';
 import '../../basic/views/base/base_app_bar.dart';
 import '../../common/views/title_action_item.dart';
 import 'hud_page.dart';
@@ -30,18 +31,10 @@ class UtilsPage extends StatelessWidget {
   }
 
   void _pushHudPage(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) {
-        return const HudPage();
-      }),
-    );
+    FRouter().pushPage(context, const HudPage());
   }
 
   void _pushToastPage(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) {
-        return const ToastPage();
-      }),
-    );
+    FRouter().pushPage(context, const ToastPage());
   }
 }

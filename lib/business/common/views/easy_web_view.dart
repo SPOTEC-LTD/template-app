@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../basic/basic_instances.dart';
 import '../../../basic/router/f_router.dart';
-import '../../../basic/utils/type_util.dart';
 import '../../../common/extension/string_business.dart';
 
 enum WebViewPageType {
@@ -101,8 +100,8 @@ class _EasyWebViewState extends State<EasyWebView> {
     _webViewController?.addJavaScriptHandler(
       handlerName: 'navigate',
       callback: (args) {
-        final url = TypeUtil.safeCast<String>(args.first) ?? '';
-        FRouter().navigateRemote(url);
+        final url = args.first as String? ?? '';
+        FRouter().pushRemotePath(url);
       },
     );
   }
