@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../basic/basic_instances.dart';
 import '../basic/router/f_router.dart';
 import '../basic/views/base/base_app_bar.dart';
-import '../basic/views/base/base_button.dart';
 import '../common/views/title_action_item.dart';
 import '../generated/l10n.dart';
 import 'cubit_demo/views/cubit_demo_page.dart';
@@ -30,9 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
-        titleText: S.of(context).homeTitle,
-      ),
+      appBar: BaseAppBar(titleText: S.of(context).homeTitle),
       body: ListView(
         children: [
           TitleActionItem(
@@ -51,14 +48,6 @@ class _HomePageState extends State<HomePage> {
             title: 'Language Setting',
             onTap: () => _pushLanguageSettingPage(context),
           ),
-          BaseButton(
-            // color: Colors.red,
-            child: const Text(
-              'test',
-              style: TextStyle(color: Colors.orange),
-            ),
-            onPressed: () {},
-          )
         ],
       ),
     );
