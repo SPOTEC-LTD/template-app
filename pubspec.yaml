@@ -37,6 +37,7 @@ dependencies:
   flutter_bloc: ^7.1.0
   equatable: ^2.0.3
   event_bus: ^2.0.0
+  flutter_hooks: ^0.18.0
   # 网络
   dio: ^4.0.0
   # 路由

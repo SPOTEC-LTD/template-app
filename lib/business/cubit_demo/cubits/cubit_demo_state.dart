@@ -1,6 +1,6 @@
 part of 'cubit_demo_cubit.dart';
 
-class CubitDemoState implements Refreshable {
+class CubitDemoState with RefreshableMixin {
   final int index;
   final List<PostEntity> posts;
 
@@ -8,7 +8,7 @@ class CubitDemoState implements Refreshable {
   bool get isListEmpty => posts.isEmpty;
 
   @override
-  bool noMore;
+  bool noMore = true;
 
   @override
   RefreshStatus refreshStatus;
