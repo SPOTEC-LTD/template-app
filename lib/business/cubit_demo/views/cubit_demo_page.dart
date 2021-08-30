@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:template/common/views/title_action_item.dart';
 
 import '../../../basic/views/base/base_app_bar.dart';
 import '../../../basic/views/refresher/refresher.dart';
@@ -23,6 +24,15 @@ class CubitDemoView extends StatelessWidget {
 
   CubitDemoView({Key? key}) : super(key: key);
 
+  Widget _buildListView(List<PostEntity> posts) {
+    return ListView.builder(
+      itemCount: posts.length,
+      itemBuilder: (context, index) {
+        return TitleActionItem(title: posts[index].title);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<CubitDemoCubit>();
@@ -42,38 +52,6 @@ class CubitDemoView extends StatelessWidget {
           child: _buildListView(state.posts),
         );
       }),
-    );
-  }
-
-  Widget _buildListView(List<PostEntity> posts) {
-    return ListView.builder(
-      itemCount: posts.length,
-      itemBuilder: (context, index) {
-        return _CubitListItem(title: posts[index].title);
-      },
-    );
-  }
-}
-
-class _CubitListItem extends StatelessWidget {
-  final String title;
-
-  const _CubitListItem({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 60,
-          alignment: Alignment.centerLeft,
-          child: Text(title),
-        ),
-        const Divider(),
-      ],
     );
   }
 }

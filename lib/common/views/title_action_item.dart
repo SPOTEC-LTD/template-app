@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class TitleActionItem extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const TitleActionItem({
     Key? key,
     required this.title,
-    required this.onTap,
+    this.onTap,
   }) : super(key: key);
 
   @override
