@@ -1,15 +1,14 @@
-import 'package:bloc/bloc.dart';
-
-import '../../../basic/views/refresher/refresh_mixin.dart';
 import '../../../basic/views/refresher/refresh_status.dart';
+import '../../../basic/views/refresher/refreshable.dart';
 import '../apis/cubit_apis.dart';
 import '../models/post_entity.dart';
 
 part 'cubit_demo_state.dart';
 
-class CubitDemoCubit extends Cubit<CubitDemoState> {
+class CubitDemoCubit extends RefreshableCubit<CubitDemoState> {
   CubitDemoCubit() : super(CubitDemoState());
 
+  @override
   void refresh() {
     CubitApis.getPosts(0).then((posts) {
       final newState = state.copyWith(
@@ -28,6 +27,7 @@ class CubitDemoCubit extends Cubit<CubitDemoState> {
     });
   }
 
+  @override
   void loadMore() {
     CubitApis.getPosts(state.index + 5).then((posts) {
       final newState = state.copyWith(

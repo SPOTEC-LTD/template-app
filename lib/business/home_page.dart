@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:template/business/hook_demo/hook_page.dart';
 
 import '../basic/basic_instances.dart';
 import '../basic/router/f_router.dart';
@@ -47,6 +48,12 @@ class _HomePageState extends State<HomePage> {
           TitleActionItem(
             title: 'Language Setting',
             onTap: () => _pushLanguageSettingPage(context),
+          ),
+          TitleActionItem(
+            title: 'Hook Demo',
+            onTap: () {
+              FRouter().pushPage(context, const HookPage());
+            },
           ),
         ],
       ),
