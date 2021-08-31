@@ -4,12 +4,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../basic/hooks/refresh_hook.dart';
-import '../../basic/views/base/base_app_bar.dart';
-import '../../basic/views/refresher/refresher.dart';
-import '../../common/views/title_action_item.dart';
-import '../cubit_demo/apis/cubit_apis.dart';
-import '../cubit_demo/models/post_entity.dart';
+import '../../../basic/hooks/refresh_hook.dart';
+import '../../../basic/views/base/base_app_bar.dart';
+import '../../../basic/views/refresher/refresher.dart';
+import '../../../common/views/title_action_item.dart';
+import '../../cubit_demo/apis/cubit_apis.dart';
+import '../../cubit_demo/models/post_entity.dart';
 
 class NativeHookPage extends HookWidget {
   const NativeHookPage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class NativeHookPage extends HookWidget {
     final refreshHook = useRefreshHook<PostEntity>(request: _requestPsots);
     return Scaffold(
       appBar: BaseAppBar(
-        titleText: 'Native Hook Refresh',
+        titleText: 'Native Hook Page',
       ),
       body: Refresher(
         controller: refreshHook.controller,

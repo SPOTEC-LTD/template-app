@@ -10,6 +10,25 @@ import 'refresh_status.dart';
 export 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class Refresher extends StatelessWidget {
+  const Refresher({
+    Key? key,
+    required this.child,
+    required this.controller,
+    required this.status,
+    required this.isListEmpty,
+    this.noMore = false,
+    this.scrollController,
+    this.headerTextColor,
+    this.footerTextColor,
+    this.header,
+    this.footer,
+    this.placeholder,
+    this.onRefresh,
+    this.onLoad,
+    this.enableInfiniteLoad,
+    this.bottomPadding = 0.0,
+  }) : super(key: key);
+
   /// 子控件
   final Widget child;
 
@@ -54,25 +73,6 @@ class Refresher extends StatelessWidget {
 
   /// 尾部缩进
   final double bottomPadding;
-
-  const Refresher({
-    Key? key,
-    required this.child,
-    required this.controller,
-    required this.status,
-    required this.isListEmpty,
-    this.noMore = false,
-    this.scrollController,
-    this.headerTextColor,
-    this.footerTextColor,
-    this.header,
-    this.footer,
-    this.placeholder,
-    this.onRefresh,
-    this.onLoad,
-    this.enableInfiniteLoad,
-    this.bottomPadding = 0.0,
-  }) : super(key: key);
 
   void _finishAnimate() {
     switch (status) {
