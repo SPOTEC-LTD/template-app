@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/common/views/title_action_item.dart';
 
 import '../../../basic/views/base/base_app_bar.dart';
 import '../../../basic/views/refresher/refresher.dart';
+import '../../../common/views/title_action_item.dart';
 import '../cubits/cubit_demo_cubit.dart';
 import '../models/post_entity.dart';
 

@@ -1,8 +1,9 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
+
 import '../../basic/utils/hud_util.dart';
 import '../consts/service_urls.dart';
-
 import 'http_error_handler.dart';
 import 'http_wrap_entity.dart';
 
@@ -30,7 +31,7 @@ class HttpService {
     dio.options.connectTimeout = 30000;
     dio.options.sendTimeout = 30000;
     dio.options.receiveTimeout = 30000;
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors.add(LogInterceptor());
     return dio;
   }();
 
