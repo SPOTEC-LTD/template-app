@@ -8,7 +8,8 @@ import '../basic/views/base/base_app_bar.dart';
 import '../common/views/title_action_item.dart';
 import '../generated/l10n.dart';
 import 'cubit_demo/views/cubit_demo_page.dart';
-import 'hook_demo/hook_page.dart';
+import 'hook_demo/views/easy_hook_page.dart';
+import 'hook_demo/views/native_hook_page.dart';
 import 'language_setting/views/language_setting_page.dart';
 import 'route_demo/route_home_page.dart';
 import 'util_demo/utils_page.dart';
@@ -46,12 +47,16 @@ class _HomePageState extends State<HomePage> {
             onTap: () => _pushRouteDemoPage(context),
           ),
           TitleActionItem(
-            title: 'Language Setting',
-            onTap: () => _pushLanguageSettingPage(context),
+            title: 'Native Hook Page',
+            onTap: () => _pushNativeHookDemoPage(context),
           ),
           TitleActionItem(
-            title: 'Native Hook Refresh',
-            onTap: () => _pushNativeHookDemoPage(context),
+            title: 'Easy Hook Page',
+            onTap: () => _pushEasyHookDemoPage(context),
+          ),
+          TitleActionItem(
+            title: 'Language Setting',
+            onTap: () => _pushLanguageSettingPage(context),
           ),
         ],
       ),
@@ -72,6 +77,10 @@ class _HomePageState extends State<HomePage> {
 
   void _pushNativeHookDemoPage(BuildContext context) {
     FRouter().pushPage(context, const NativeHookPage());
+  }
+
+  void _pushEasyHookDemoPage(BuildContext context) {
+    FRouter().pushPage(context, EasyHookPage());
   }
 
   void _pushLanguageSettingPage(BuildContext context) {
