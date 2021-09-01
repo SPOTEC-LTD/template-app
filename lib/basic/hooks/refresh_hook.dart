@@ -71,6 +71,12 @@ class RefreshHookState<E>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   RefreshHookEntity<E> build(BuildContext context) {
     return RefreshHookEntity(
       _controller,
@@ -80,12 +86,6 @@ class RefreshHookState<E>
       refresh: refresh,
       loadMore: loadMore,
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   /// 下拉刷新

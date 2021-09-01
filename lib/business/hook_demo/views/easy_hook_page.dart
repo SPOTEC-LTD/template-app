@@ -5,38 +5,42 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../basic/hooks/refresh_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
+import '../../../basic/views/base/base_bloc_widget.dart';
+import '../../../basic/views/refresher/refresher.dart';
+import '../../../common/views/title_action_item.dart';
 import '../blocs/easy_hook_cubit.dart';
 
-abstract class BaseStlessPage extends StatelessWidget {
-  const BaseStlessPage({
-    Key? key,
-    required this.cubit,
-    // required this.child,
-  }) : super(key: key);
-
-  final Cubit<Object> cubit;
-  // final Widget child;
-
-  Widget buildView();
+class EasyHookPage extends BaseBlocWidget<EasyHookCubit, EasyHookState> {
+  const EasyHookPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => cubit,
-      child: buildView(),
-    );
+  EasyHookCubit createBloc(BuildContext context) {
+    return EasyHookCubit();
   }
-}
-
-class EasyHookPage extends BaseStlessPage {
-  EasyHookPage({Key? key}) : super(key: key, cubit: EasyHookCubit());
 
   @override
-  Widget buildView() {
+  Widget buildView(BuildContext context, EasyHookState state) {
+    final cubit = context.read<EasyHookCubit>();
+    final refreshHook = useRefreshHook(request: cubit.requestPsots);
     return Scaffold(
       appBar: BaseAppBar(
         titleText: 'Easy Hook Page',
+      ),
+      body: Refresher(
+        controller: refreshHook.controller,
+        status: refreshHook.status,
+        isListEmpty: refreshHook.values.isEmpty,
+        noMore: refreshHook.noMore,
+        onRefresh: () async => refreshHook.refresh(),
+        onLoad: () async => refreshHook.loadMore(),
+        child: ListView.builder(
+          itemCount: refreshHook.values.length,
+          itemBuilder: (context, index) {
+            return TitleActionItem(title: refreshHook.values[index].title);
+          },
+        ),
       ),
     );
   }

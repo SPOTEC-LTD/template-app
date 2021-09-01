@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pushEasyHookDemoPage(BuildContext context) {
-    FRouter().pushPage(context, EasyHookPage());
+    FRouter().pushPage(context, const EasyHookPage());
   }
 
   void _pushLanguageSettingPage(BuildContext context) {
