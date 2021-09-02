@@ -28,14 +28,15 @@ class NativeHookPage extends HookWidget {
       body: Refresher(
         controller: refreshHook.controller,
         status: refreshHook.status,
-        isListEmpty: refreshHook.values.isEmpty,
+        isListEmpty: refreshHook.values.value.isEmpty,
         noMore: refreshHook.noMore,
         onRefresh: () async => refreshHook.refresh(),
         onLoad: () async => refreshHook.loadMore(),
         child: ListView.builder(
-          itemCount: refreshHook.values.length,
+          itemCount: refreshHook.values.value.length,
           itemBuilder: (context, index) {
-            return TitleActionItem(title: refreshHook.values[index].title);
+            return TitleActionItem(
+                title: refreshHook.values.value[index].title);
           },
         ),
       ),

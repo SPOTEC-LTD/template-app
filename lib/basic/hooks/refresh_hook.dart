@@ -15,7 +15,7 @@ class RefreshHookEntity<T> {
   final EasyRefreshController controller;
 
   /// 列表数据源
-  final List<T> values;
+  final ValueNotifier<List<T>> values;
 
   /// 当前列表的刷新状态
   final RefreshStatus status;
@@ -58,7 +58,7 @@ class _RefreshHook<T> extends Hook<RefreshHookEntity<T>> {
 class RefreshHookState<E>
     extends HookState<RefreshHookEntity<E>, _RefreshHook<E>> {
   final _controller = EasyRefreshController();
-  var _values = <E>[];
+  late final _values = ValueNotifier<List<E>>([])..addListener(_listenValues);
   var _status = RefreshStatus.initial;
   var _noMore = false;
   late int _index;
@@ -73,7 +73,12 @@ class RefreshHookState<E>
   @override
   void dispose() {
     _controller.dispose();
+    _values.dispose();
     super.dispose();
+  }
+
+  void _listenValues() {
+    setState(() {});
   }
 
   @override
@@ -90,11 +95,11 @@ class RefreshHookState<E>
 
   /// 下拉刷新
   void refresh() {
-    hook.request(_index).then((value) {
-      _values = value;
+    _index = 1;
+    hook.request(_index).then((values) {
       _status = RefreshStatus.refreshSuccess;
-      _noMore = value.isEmpty;
-      setState(() {});
+      _noMore = values.isEmpty;
+      _values.value = values;
     }).catchError((error) {
       _status = RefreshStatus.refreshFailure;
       setState(() {});
@@ -104,12 +109,11 @@ class RefreshHookState<E>
   /// 上拉加载
   void loadMore() {
     final index = _index + 5;
-    hook.request(_index).then((value) {
+    hook.request(_index).then((values) {
       _index = index;
-      _values.addAll(value);
       _status = RefreshStatus.refreshSuccess;
-      _noMore = value.isEmpty;
-      setState(() {});
+      _noMore = values.isEmpty;
+      _values.value = List.from(_values.value)..addAll(values);
     }).catchError((error) {
       _status = RefreshStatus.refreshFailure;
       setState(() {});

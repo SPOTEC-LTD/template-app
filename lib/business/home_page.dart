@@ -8,8 +8,7 @@ import '../basic/views/base/base_app_bar.dart';
 import '../common/views/title_action_item.dart';
 import '../generated/l10n.dart';
 import 'cubit_demo/views/cubit_demo_page.dart';
-import 'hook_demo/views/easy_hook_page.dart';
-import 'hook_demo/views/native_hook_page.dart';
+import 'hook_demo/views/hook_home_page.dart';
 import 'language_setting/views/language_setting_page.dart';
 import 'route_demo/route_home_page.dart';
 import 'util_demo/utils_page.dart';
@@ -26,6 +25,26 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     logger.i('Home Pahe Init');
+  }
+
+  void _pushUtilsPage(BuildContext context) {
+    FRouter().pushPage(context, const UtilsPage());
+  }
+
+  void _pushCubitPage(BuildContext context) {
+    FRouter().pushPage(context, const CubitDemoPage());
+  }
+
+  void _pushRouteDemoPage(BuildContext context) {
+    FRouter().pushPage(context, const RouteHomePage());
+  }
+
+  void _pushHooksPage(BuildContext context) {
+    FRouter().pushPage(context, const HookHomePage());
+  }
+
+  void _pushLanguageSettingPage(BuildContext context) {
+    FRouter().pushPage(context, const LanguageSettingPage());
   }
 
   @override
@@ -47,12 +66,8 @@ class _HomePageState extends State<HomePage> {
             onTap: () => _pushRouteDemoPage(context),
           ),
           TitleActionItem(
-            title: 'Native Hook Page',
-            onTap: () => _pushNativeHookDemoPage(context),
-          ),
-          TitleActionItem(
-            title: 'Easy Hook Page',
-            onTap: () => _pushEasyHookDemoPage(context),
+            title: 'Hook Home Page',
+            onTap: () => _pushHooksPage(context),
           ),
           TitleActionItem(
             title: 'Language Setting',
@@ -61,29 +76,5 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }
-
-  void _pushUtilsPage(BuildContext context) {
-    FRouter().pushPage(context, const UtilsPage());
-  }
-
-  void _pushCubitPage(BuildContext context) {
-    FRouter().pushPage(context, const CubitDemoPage());
-  }
-
-  void _pushRouteDemoPage(BuildContext context) {
-    FRouter().pushPage(context, const RouteHomePage());
-  }
-
-  void _pushNativeHookDemoPage(BuildContext context) {
-    FRouter().pushPage(context, const NativeHookPage());
-  }
-
-  void _pushEasyHookDemoPage(BuildContext context) {
-    FRouter().pushPage(context, const EasyHookPage());
-  }
-
-  void _pushLanguageSettingPage(BuildContext context) {
-    FRouter().pushPage(context, const LanguageSettingPage());
   }
 }

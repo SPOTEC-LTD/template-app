@@ -9,16 +9,4 @@ abstract class BaseStfulWidget extends StatefulHookWidget {
 }
 
 abstract class BaseStfulWidgetState<T extends BaseStfulWidget>
-    extends State<T> {
-  @override
-  void initState() {
-    super.initState();
-    print('initState');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    print('dispose');
-  }
-}
+    extends State<T> {}

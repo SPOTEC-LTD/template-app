@@ -3,17 +3,17 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../basic/hooks/refresh_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
+import '../../../basic/views/base/base_button.dart';
 import '../../../basic/views/base/bloc_stless_widget.dart';
 import '../../../basic/views/refresher/refresher.dart';
 import '../../../common/views/title_action_item.dart';
 import '../blocs/easy_hook_cubit.dart';
 
-class EasyHookPage extends BlocStlessWidget<EasyHookCubit, EasyHookState> {
-  const EasyHookPage({Key? key}) : super(key: key);
+class BlocStleeHookPage extends BlocStlessWidget<EasyHookCubit, EasyHookState> {
+  const BlocStleeHookPage({Key? key}) : super(key: key);
 
   @override
   EasyHookCubit createBloc(BuildContext context) {
@@ -26,19 +26,29 @@ class EasyHookPage extends BlocStlessWidget<EasyHookCubit, EasyHookState> {
     final refreshHook = useRefreshHook(request: cubit.requestPsots);
     return Scaffold(
       appBar: BaseAppBar(
-        titleText: 'Easy Hook Page',
+        titleText: 'BlocStlessHookPage',
+        actions: [
+          BaseButton(
+            text: 'Clear',
+            textColor: Colors.white,
+            onPressed: () {
+              refreshHook.values.value = [];
+            },
+          ),
+        ],
       ),
       body: Refresher(
         controller: refreshHook.controller,
         status: refreshHook.status,
-        isListEmpty: refreshHook.values.isEmpty,
+        isListEmpty: refreshHook.values.value.isEmpty,
         noMore: refreshHook.noMore,
         onRefresh: () async => refreshHook.refresh(),
         onLoad: () async => refreshHook.loadMore(),
         child: ListView.builder(
-          itemCount: refreshHook.values.length,
+          itemCount: refreshHook.values.value.length,
           itemBuilder: (context, index) {
-            return TitleActionItem(title: refreshHook.values[index].title);
+            return TitleActionItem(
+                title: refreshHook.values.value[index].title);
           },
         ),
       ),
