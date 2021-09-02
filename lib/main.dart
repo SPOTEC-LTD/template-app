@@ -5,6 +5,7 @@ import 'basic/router/f_router.dart';
 import 'basic/utils/hud_util.dart';
 import 'basic/utils/intl_util.dart';
 import 'basic/utils/sp_util.dart';
+import 'basic/utils/ume_util.dart';
 import 'common/consts/service_urls.dart';
 import 'my_app.dart';
 import 'routes/f_router_setup.dart';
@@ -20,7 +21,7 @@ void main() {
     FRouter().configureRoutes();
     runApp(BlocProvider(
       create: (context) => LocaleCubit(),
-      child: const MyApp(),
+      child: UmeUtil.injectedUmeWidget(const MyApp()),
     ));
   });
 }

@@ -25,6 +25,8 @@ class HttpError {
 }
 
 class HttpService {
+  static Dio get dio => _dio;
+
   static final Dio _dio = () {
     final dio = Dio();
     dio.options.baseUrl = baseAPIURL;

@@ -7,9 +7,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'base_stless_widget.dart';
 
-abstract class BaseBlocWidget<B extends BlocBase<S>, S>
+abstract class BlocStlessWidget<B extends BlocBase<S>, S>
     extends BaseStlessWidget {
-  const BaseBlocWidget({Key? key}) : super(key: key);
+  const BlocStlessWidget({Key? key}) : super(key: key);
 
   /// 生成页面的视图
   Widget buildView(BuildContext context, S state);
