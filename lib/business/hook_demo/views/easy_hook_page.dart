@@ -7,12 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../basic/hooks/refresh_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
-import '../../../basic/views/base/base_bloc_widget.dart';
+import '../../../basic/views/base/bloc_stless_widget.dart';
 import '../../../basic/views/refresher/refresher.dart';
 import '../../../common/views/title_action_item.dart';
 import '../blocs/easy_hook_cubit.dart';
 
-class EasyHookPage extends BaseBlocWidget<EasyHookCubit, EasyHookState> {
+class EasyHookPage extends BlocStlessWidget<EasyHookCubit, EasyHookState> {
   const EasyHookPage({Key? key}) : super(key: key);
 
   @override

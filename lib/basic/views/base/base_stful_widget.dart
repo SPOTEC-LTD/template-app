@@ -8,7 +8,8 @@ abstract class BaseStfulWidget extends StatefulHookWidget {
   const BaseStfulWidget({Key? key}) : super(key: key);
 }
 
-abstract class BaseStfulWidgetState extends State<BaseStfulWidget> {
+abstract class BaseStfulWidgetState<T extends BaseStfulWidget>
+    extends State<T> {
   @override
   void initState() {
     super.initState();
