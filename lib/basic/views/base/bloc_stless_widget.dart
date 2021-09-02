@@ -7,6 +7,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'base_stless_widget.dart';
 
+export 'package:flutter_bloc/flutter_bloc.dart';
+
 abstract class BlocStlessWidget<B extends BlocBase<S>, S>
     extends BaseStlessWidget {
   const BlocStlessWidget({Key? key}) : super(key: key);
