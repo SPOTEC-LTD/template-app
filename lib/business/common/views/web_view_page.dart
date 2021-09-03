@@ -5,8 +5,6 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../../../basic/utils/size_util.dart';
 import '../../../basic/views/base/base_app_bar.dart';
 import '../../../common/consts/color_names.dart';
-import '../../../common/consts/icon_names.dart';
-import '../../../common/extension/string_business.dart';
 import 'easy_web_view.dart';
 
 export 'package:template/business/common/views/easy_web_view.dart';
@@ -43,7 +41,7 @@ class WebViewPageState extends State<WebViewPage> {
   InAppWebViewController? _webViewController;
   double _progress = 0;
 
-  String get _localUrl => widget.url?.getIntlUrlString(context) ?? '';
+  // String get _localUrl => widget.url?.getIntlUrlString(context) ?? '';
 
   @override
   void initState() {
@@ -51,9 +49,9 @@ class WebViewPageState extends State<WebViewPage> {
     _title = widget.title ?? 'WebView';
   }
 
-  void _share(String url) {
-    // Share.text(S.of(context).webShareLink, url, 'text/plain');
-  }
+  // void _share(String url) {
+  //   Share.text(S.of(context).webShareLink, url, 'text/plain');
+  // }
 
   void _onWebViewCreated(InAppWebViewController controller) {
     _webViewController = controller;
@@ -104,7 +102,11 @@ class WebViewPageState extends State<WebViewPage> {
     final appBar = BaseAppBar(
       backgroundColor: ColorNames.lineD8D8D8,
       titleText: _title,
-      backImage: IconNames.nav_icon_back_white,
+      backImage: Image.asset(
+        'assets/icons/nav_icon_back_white.png',
+        width: 12,
+        height: 21,
+      ),
       backCallback: _popIfNeeded,
       actions: [
         _buildShareButton(),
