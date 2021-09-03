@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../common/consts/image_names.dart';
 
 class NoDataPlaceholder extends StatelessWidget {
   final int bottomTopRatio;
@@ -15,7 +14,7 @@ class NoDataPlaceholder extends StatelessWidget {
       children: [
         const Spacer(),
         Image.asset(
-          ImageNames.common_img_no_data,
+          'assets/images/common_img_no_data.png',
           width: 178,
           height: 151,
         ),

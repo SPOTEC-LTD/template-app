@@ -34,8 +34,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// 设置导航栏底部阴影范围
   final double? elevation;
 
-  /// 返回按钮图片地址
-  final String? backImage;
+  /// 返回按钮图片控件
+  final Widget? backImage;
 
   /// 返回按钮事件
   final VoidCallback? backCallback;
@@ -76,11 +76,10 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isNestedNavigatorFirstRoute = !isInRootNavigator && !canPop;
     return IconButton(
       padding: EdgeInsets.zero,
-      icon: backImage == null
-          ? isNestedNavigatorFirstRoute
+      icon: backImage ??
+          (isNestedNavigatorFirstRoute
               ? const Icon(Icons.close)
-              : const Icon(Icons.arrow_back_ios)
-          : Image.asset(backImage!),
+              : const Icon(Icons.arrow_back_ios)),
       onPressed: () {
         if (backCallback == null) {
           if (isNestedNavigatorFirstRoute) {
