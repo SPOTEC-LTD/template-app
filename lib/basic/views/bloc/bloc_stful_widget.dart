@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'base_stful_widget.dart';
+import '../base/base_stful_widget.dart';
 
 export 'package:flutter_bloc/flutter_bloc.dart';
 
