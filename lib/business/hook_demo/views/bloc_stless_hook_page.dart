@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../basic/hooks/refresh_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
 import '../../../basic/views/base/base_button.dart';
-import '../../../basic/views/base/bloc_stless_widget.dart';
+import '../../../basic/views/bloc/bloc_stless_widget.dart';
 import '../../../basic/views/refresher/refresher.dart';
 import '../../../common/views/title_action_item.dart';
 import '../blocs/easy_hook_cubit.dart';
