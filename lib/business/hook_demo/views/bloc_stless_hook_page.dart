@@ -4,12 +4,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../basic/hooks/refresh_hook.dart';
+import '../../../basic/hooks/load_more_entity.dart';
+import '../../../basic/hooks/load_more_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
 import '../../../basic/views/base/base_button.dart';
 import '../../../basic/views/bloc/bloc_stless_widget.dart';
-import '../../../basic/views/refresher/refresher.dart';
+import '../../../basic/views/refresher/hook_refresher.dart';
 import '../../../common/views/title_action_item.dart';
+import '../../cubit_demo/models/post_entity.dart';
 import '../blocs/easy_hook_cubit.dart';
 
 class BlocStleeHookPage extends BlocStlessWidget<EasyHookCubit, EasyHookState> {
@@ -20,37 +22,52 @@ class BlocStleeHookPage extends BlocStlessWidget<EasyHookCubit, EasyHookState> {
     return EasyHookCubit();
   }
 
+  Widget _buildActions(
+      LoadMoreHookEntity<PostEntity> loadMoreHook, EasyHookState state) {
+    return Row(
+      children: [
+        BaseButton(
+          text: 'Clear',
+          textColor: Colors.white,
+          color: Colors.cyan,
+          onPressed: () {
+            loadMoreHook.entities.value = [];
+          },
+        ),
+        BaseButton(
+          text: 'Refresh',
+          textColor: Colors.white,
+          color: Colors.cyan,
+          onPressed: () {
+            loadMoreHook.controller.callRefresh();
+          },
+        ),
+      ],
+    );
+  }
+
   @override
   Widget buildView(BuildContext context, EasyHookState state) {
     final cubit = context.read<EasyHookCubit>();
-    final refreshHook = useRefreshHook(request: cubit.requestPsots);
+    final loadMoreHook = useLoadMoreHook(request: cubit.requestPsots);
     return Scaffold(
-      appBar: BaseAppBar(
-        titleText: 'BlocStlessHookPage',
-        actions: [
-          BaseButton(
-            text: 'Clear',
-            textColor: Colors.white,
-            onPressed: () {
-              refreshHook.values.value = [];
-            },
+      appBar: BaseAppBar(titleText: 'BlocStlessHookPage'),
+      body: Column(
+        children: [
+          _buildActions(loadMoreHook, state),
+          Expanded(
+            child: HookRefresher(
+              refreshHook: loadMoreHook,
+              child: ListView.builder(
+                itemCount: loadMoreHook.entities.value.length,
+                itemBuilder: (context, index) {
+                  return TitleActionItem(
+                      title: loadMoreHook.entities.value[index].title);
+                },
+              ),
+            ),
           ),
         ],
-      ),
-      body: Refresher(
-        controller: refreshHook.controller,
-        status: refreshHook.status,
-        isListEmpty: refreshHook.values.value.isEmpty,
-        noMore: refreshHook.noMore,
-        onRefresh: () async => refreshHook.refresh(),
-        onLoad: () async => refreshHook.loadMore(),
-        child: ListView.builder(
-          itemCount: refreshHook.values.value.length,
-          itemBuilder: (context, index) {
-            return TitleActionItem(
-                title: refreshHook.values.value[index].title);
-          },
-        ),
       ),
     );
   }

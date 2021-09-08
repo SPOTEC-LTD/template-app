@@ -6,50 +6,20 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../views/refresher/refresh_status.dart';
+import 'refresh_hook_entity.dart';
 
-typedef RefreshHookRequest<T> = Future<List<T>> Function(int index);
-
-/// 刷新列表需要的所有元素的容器类
-class RefreshHookEntity<T> {
-  /// [EasyRefresh] 控件的控制器
-  final EasyRefreshController controller;
-
-  /// 列表数据源
-  final ValueNotifier<List<T>> values;
-
-  /// 当前列表的刷新状态
-  final RefreshStatus status;
-
-  /// 是否还有更多数据
-  final bool noMore;
-
-  /// 下拉刷新方法
-  final VoidCallback refresh;
-
-  /// 上拉加载方法
-  final VoidCallback loadMore;
-
-  RefreshHookEntity(
-    this.controller,
-    this.values,
-    this.status, {
-    required this.noMore,
-    required this.refresh,
-    required this.loadMore,
-  });
-}
+typedef RefreshHookRequest<T> = Future<List<T>> Function();
 
 /// 给刷新列表添加钩子，[T] 为列表数据源的类型
 RefreshHookEntity<T> useRefreshHook<T>(
-    {required RefreshHookRequest<T> request, int startIndex = 0}) {
-  return use(_RefreshHook<T>(request: request, startIndex: startIndex));
+    {required RefreshHookRequest<T> request}) {
+  return use(_RefreshHook<T>(request: request));
 }
 
 class _RefreshHook<T> extends Hook<RefreshHookEntity<T>> {
   final RefreshHookRequest<T> request;
-  final int startIndex;
 
-  const _RefreshHook({required this.request, required this.startIndex});
+  const _RefreshHook({required this.request});
 
   @override
   RefreshHookState<T> createState() => RefreshHookState<T>();
@@ -61,12 +31,10 @@ class RefreshHookState<E>
   late final _values = ValueNotifier<List<E>>([])..addListener(_listenValues);
   var _status = RefreshStatus.initial;
   var _noMore = false;
-  late int _index;
 
   @override
   void initHook() {
     super.initHook();
-    _index = hook.startIndex;
     refresh();
   }
 
@@ -89,31 +57,15 @@ class RefreshHookState<E>
       _status,
       noMore: _noMore,
       refresh: refresh,
-      loadMore: loadMore,
     );
   }
 
   /// 下拉刷新
   void refresh() {
-    _index = 1;
-    hook.request(_index).then((values) {
+    hook.request().then((values) {
       _status = RefreshStatus.refreshSuccess;
       _noMore = values.isEmpty;
       _values.value = values;
-    }).catchError((error) {
-      _status = RefreshStatus.refreshFailure;
-      setState(() {});
-    });
-  }
-
-  /// 上拉加载
-  void loadMore() {
-    final index = _index + 5;
-    hook.request(_index).then((values) {
-      _index = index;
-      _status = RefreshStatus.refreshSuccess;
-      _noMore = values.isEmpty;
-      _values.value = List.from(_values.value)..addAll(values);
     }).catchError((error) {
       _status = RefreshStatus.refreshFailure;
       setState(() {});

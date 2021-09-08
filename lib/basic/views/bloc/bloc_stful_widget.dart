@@ -9,6 +9,9 @@ import '../base/base_stful_widget.dart';
 
 export 'package:flutter_bloc/flutter_bloc.dart';
 
+/// 对 [BlocProvider] 的封装，减少组件层级
+///
+/// 项目配合 flutter_hooks 使用，应该不会用到该类，先定义在这以防万一
 abstract class BlocStfulWidget extends BaseStfulWidget {
   const BlocStfulWidget({Key? key}) : super(key: key);
 
