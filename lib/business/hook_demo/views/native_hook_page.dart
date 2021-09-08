@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../basic/hooks/refresh_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
-import '../../../basic/views/refresher/refresher.dart';
+import '../../../basic/views/refresher/hook_refresher.dart';
 import '../../../common/views/title_action_item.dart';
 import '../../cubit_demo/apis/cubit_apis.dart';
 import '../../cubit_demo/models/post_entity.dart';
@@ -14,8 +14,8 @@ import '../../cubit_demo/models/post_entity.dart';
 class NativeHookPage extends HookWidget {
   const NativeHookPage({Key? key}) : super(key: key);
 
-  Future<List<PostEntity>> _requestPsots(int start) {
-    return CubitApis.getPosts(start);
+  Future<List<PostEntity>> _requestPsots() {
+    return CubitApis.getPosts(0);
   }
 
   @override
@@ -25,18 +25,13 @@ class NativeHookPage extends HookWidget {
       appBar: BaseAppBar(
         titleText: 'Native Hook Page',
       ),
-      body: Refresher(
-        controller: refreshHook.controller,
-        status: refreshHook.status,
-        isListEmpty: refreshHook.values.value.isEmpty,
-        noMore: refreshHook.noMore,
-        onRefresh: () async => refreshHook.refresh(),
-        onLoad: () async => refreshHook.loadMore(),
+      body: HookRefresher(
+        refreshHook: refreshHook,
         child: ListView.builder(
-          itemCount: refreshHook.values.value.length,
+          itemCount: refreshHook.entities.value.length,
           itemBuilder: (context, index) {
             return TitleActionItem(
-                title: refreshHook.values.value[index].title);
+                title: refreshHook.entities.value[index].title);
           },
         ),
       ),

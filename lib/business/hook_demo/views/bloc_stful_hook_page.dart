@@ -3,11 +3,11 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../basic/hooks/refresh_hook.dart';
+import '../../../basic/hooks/load_more_hook.dart';
 import '../../../basic/views/base/base_app_bar.dart';
 import '../../../basic/views/base/base_button.dart';
 import '../../../basic/views/bloc/bloc_stful_widget.dart';
-import '../../../basic/views/refresher/refresher.dart';
+import '../../../basic/views/refresher/hook_refresher.dart';
 import '../../../common/views/title_action_item.dart';
 import '../blocs/easy_hook_cubit.dart';
 
@@ -30,7 +30,7 @@ class _BlocStfulHookPageState extends BlocStfulWidgetState<BlocStfulHookPage,
   @override
   Widget buildView(BuildContext context, EasyHookState state) {
     final cubit = context.read<EasyHookCubit>();
-    final refreshHook = useRefreshHook(request: cubit.requestPsots);
+    final loadMoreHook = useLoadMoreHook(request: cubit.requestPsots);
     return Scaffold(
       appBar: BaseAppBar(
         titleText: 'BlocStfulHookPage',
@@ -46,18 +46,13 @@ class _BlocStfulHookPageState extends BlocStfulWidgetState<BlocStfulHookPage,
           ),
         ],
       ),
-      body: Refresher(
-        controller: refreshHook.controller,
-        status: refreshHook.status,
-        isListEmpty: refreshHook.values.value.isEmpty,
-        noMore: refreshHook.noMore,
-        onRefresh: () async => refreshHook.refresh(),
-        onLoad: () async => refreshHook.loadMore(),
+      body: HookRefresher(
+        refreshHook: loadMoreHook,
         child: ListView.builder(
-          itemCount: refreshHook.values.value.length,
+          itemCount: loadMoreHook.entities.value.length,
           itemBuilder: (context, index) {
             return TitleActionItem(
-                title: refreshHook.values.value[index].title);
+                title: loadMoreHook.entities.value[index].title);
           },
         ),
       ),

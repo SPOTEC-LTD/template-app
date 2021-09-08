@@ -9,6 +9,7 @@ import '../base/base_stless_widget.dart';
 
 export 'package:flutter_bloc/flutter_bloc.dart';
 
+/// 对 [BlocProvider] 的封装，减少组件层级
 abstract class BlocStlessWidget<B extends BlocBase<S>, S>
     extends BaseStlessWidget {
   const BlocStlessWidget({Key? key}) : super(key: key);
