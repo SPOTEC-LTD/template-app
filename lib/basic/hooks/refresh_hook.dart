@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 import '../views/refresher/refresh_status.dart';
 import 'refresh_hook_entity.dart';
@@ -55,6 +56,7 @@ class RefreshHookState<E>
       _controller,
       _values,
       _status,
+      ThemeProvider.controllerOf(context).theme.data.indicatorColor,
       noMore: _noMore,
       refresh: refresh,
     );

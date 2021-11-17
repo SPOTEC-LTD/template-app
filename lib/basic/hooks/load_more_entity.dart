@@ -3,8 +3,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import '../views/refresher/refresh_status.dart';
 
+import '../views/refresher/refresh_status.dart';
 import 'refresh_hook_entity.dart';
 
 /// 刷新列表需要的所有元素的容器类
@@ -15,7 +15,8 @@ class LoadMoreHookEntity<T> extends RefreshHookEntity<T> {
   LoadMoreHookEntity(
     EasyRefreshController controller,
     ValueNotifier<List<T>> entities,
-    RefreshStatus status, {
+    RefreshStatus status,
+    Color textColor, {
     required bool noMore,
     required VoidCallback refresh,
     required this.loadMore,
@@ -23,6 +24,7 @@ class LoadMoreHookEntity<T> extends RefreshHookEntity<T> {
           controller,
           entities,
           status,
+          textColor,
           noMore: noMore,
           refresh: refresh,
         );

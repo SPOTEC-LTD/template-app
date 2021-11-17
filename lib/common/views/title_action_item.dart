@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class TitleActionItem extends StatelessWidget {
   final String title;
@@ -12,6 +13,7 @@ class TitleActionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = ThemeProvider.themeOf(context);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -21,7 +23,15 @@ class TitleActionItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             height: 60,
             alignment: Alignment.centerLeft,
-            child: Text(title),
+            child: Row(
+              children: [
+                Image.asset('assets/images/common_img_no_data_small.png'),
+                Text(
+                  title,
+                  style: controller.data.textTheme.subtitle1,
+                ),
+              ],
+            ),
           ),
           const Divider(),
         ],

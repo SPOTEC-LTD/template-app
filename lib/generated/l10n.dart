@@ -89,6 +89,16 @@ class S {
       args: [],
     );
   }
+
+  /// `主题设置`
+  String get themeSetting {
+    return Intl.message(
+      '主题设置',
+      name: 'themeSetting',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

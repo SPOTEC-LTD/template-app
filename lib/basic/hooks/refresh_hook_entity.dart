@@ -3,6 +3,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+
 import '../views/refresher/refresh_status.dart';
 
 /// 刷新列表需要的所有元素的容器类
@@ -22,10 +23,14 @@ class RefreshHookEntity<T> {
   /// 下拉刷新方法
   final VoidCallback refresh;
 
+  /// 字体颜色
+  final Color textColor;
+
   RefreshHookEntity(
     this.controller,
     this.entities,
-    this.status, {
+    this.status,
+    this.textColor, {
     required this.noMore,
     required this.refresh,
   });

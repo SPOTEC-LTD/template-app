@@ -10,6 +10,8 @@ import 'refresher.dart';
 class HookRefresher extends Refresher {
   HookRefresher({required this.refreshHook, required Widget child})
       : super(
+          footerTextColor: refreshHook.textColor,
+          headerTextColor: refreshHook.textColor,
           controller: refreshHook.controller,
           status: refreshHook.status,
           isListEmpty: refreshHook.entities.value.isEmpty,

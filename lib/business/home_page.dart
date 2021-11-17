@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 import '../basic/basic_instances.dart';
 import '../basic/router/f_router.dart';
@@ -11,6 +12,7 @@ import 'cubit_demo/views/cubit_demo_page.dart';
 import 'hook_demo/views/hook_home_page.dart';
 import 'language_setting/views/language_setting_page.dart';
 import 'route_demo/route_home_page.dart';
+import 'theme_setting/views/theme_setting_page.dart';
 import 'util_demo/utils_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -47,10 +49,18 @@ class _HomePageState extends State<HomePage> {
     FRouter().pushPage(context, const LanguageSettingPage());
   }
 
+  void _pushThemeSettingPage(BuildContext context) {
+    FRouter().pushPage(context, const ThemeSettingPage());
+  }
+
   @override
   Widget build(BuildContext context) {
+    final controller = ThemeProvider.controllerOf(context);
     return Scaffold(
-      appBar: BaseAppBar(titleText: S.of(context).homeTitle),
+      appBar: BaseAppBar(
+        titleText: S.of(context).homeTitle,
+        backgroundColor: controller.theme.data.primaryColor,
+      ),
       body: ListView(
         children: [
           TitleActionItem(
@@ -72,6 +82,10 @@ class _HomePageState extends State<HomePage> {
           TitleActionItem(
             title: 'Language Setting',
             onTap: () => _pushLanguageSettingPage(context),
+          ),
+          TitleActionItem(
+            title: 'Theme Setting',
+            onTap: () => _pushThemeSettingPage(context),
           ),
         ],
       ),
