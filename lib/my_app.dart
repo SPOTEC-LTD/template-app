@@ -21,10 +21,8 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return ThemeProvider(
           saveThemesOnChange: true,
-          loadThemeOnInit: false,
           onInitCallback: (controller, previouslySavedThemeFuture) async {
             final String? savedTheme = await previouslySavedThemeFuture;
-            print('=====savedTheme}=$savedTheme====');
             if (savedTheme != null) {
               controller.setTheme(savedTheme);
             } else {

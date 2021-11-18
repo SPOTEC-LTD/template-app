@@ -60,7 +60,7 @@ class CustomTheme {
       ),
       subtitle1: TextStyle(color: Colors.black, fontSize: 18),
       subtitle2: TextStyle(color: Colors.amberAccent, fontSize: 16),
-    ), // 文本主题为黑色
+    ),
     iconTheme: const IconThemeData(color: Colors.amberAccent),
   );
 
@@ -113,7 +113,7 @@ class CustomTheme {
       ),
       subtitle1: TextStyle(color: Colors.amber, fontSize: 18),
       subtitle2: TextStyle(color: Colors.amberAccent, fontSize: 16),
-    ), // 文本主题色为红色
+    ),
     iconTheme: const IconThemeData(color: Colors.white),
   );
 
