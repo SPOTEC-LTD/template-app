@@ -23,30 +23,52 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  dio: ^4.0.0
-  fluro: ^2.0.3
-  modal_bottom_sheet: ^2.0.0
-  flutter_bloc: ^7.0.1
-  flutter_easyrefresh: ^2.2.1
+
+  # 工程相关
+  logger: ^1.0.0
+  # 架构
+  flutter_bloc: ^7.1.0
   equatable: ^2.0.3
-  loading_indicator: ^3.0.1
-  intl: ^0.17.0
+  event_bus: ^2.0.0
+  flutter_hooks: ^0.18.0
+  # 网络
+  dio: ^4.0.0
+  # 路由
+  fluro: ^2.0.3
+  url_launcher: ^6.0.9
+  # 存储
   shared_preferences: ^2.0.6
   path_provider: ^2.0.2
-  flutter_easyloading: ^3.0.0
+  # 网页
   flutter_inappwebview: ^5.3.2
   flutter_html: ^2.1.0
-  url_launcher: ^6.0.9
+  # 国际化
+  intl: ^0.17.0
+  # 主题
+  theme_provider: ^0.5.0
+  # UI控件
+  modal_bottom_sheet: ^2.0.0
+  flutter_easyrefresh: ^2.2.1
+  loading_indicator: ^3.0.1
+  flutter_easyloading: ^3.0.0
+  fluttertoast: ^8.0.8
   expand_tap_area: ^1.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lint: ^1.5.3
+  flutter_ume: ^0.2.1
+  flutter_ume_kit_ui: ^0.2.1
+  flutter_ume_kit_perf: ^0.2.1
+  flutter_ume_kit_dio: ^0.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -89,3 +111,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_intl:
+  enabled: true
+  main_locale: zh

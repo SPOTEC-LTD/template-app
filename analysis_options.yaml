@@ -1,0 +1,20 @@
+include: package:lint/analysis_options.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: true
+  exclude: 
+    - lib/generated
+    
+# 规则详情 https://dart.dev/tools/linter-rules
+linter:
+  rules:
+    prefer_relative_imports: true
+    use_setters_to_change_properties: false
+    parameter_assignments: false
+    avoid_classes_with_only_static_members: false
+    join_return_with_assignment: false
+    avoid_positional_boolean_parameters: false
+    sort_pub_dependencies: false
+    type_annotate_public_apis: false
+    sort_child_properties_last: false
